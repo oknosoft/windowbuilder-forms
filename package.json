@@ -1,0 +1,57 @@
+{
+  "name": "windowbuilder-forms",
+  "version": "0.0.1",
+  "description": "Order dealer forms",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unpete/windowbuilder-forms.git"
+  },
+  "engines": {
+    "node": "^8.15",
+    "npm": "^6.12"
+  },
+  "keywords": [
+    "metadata",
+    "order dealer",
+    "cad",
+    "crm",
+    "window builder",
+    "windows calculator"
+  ],
+  "author": "Evgeniy Malyarov <info@oknosoft.ru> (http://www.oknosoft.ru)",
+  "license": "SEE LICENSE IN LICENSE",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/oknosoft/windowbuilder/issues"
+  },
+  "homepage": "https://light.oknosoft.ru/",
+  "proxy": "http://localhost:3016/",
+  "dependencies": {
+    "@material-ui/core": "^4.10.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.54",
+    "md5-file": "^4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      "> 5%"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
+}
