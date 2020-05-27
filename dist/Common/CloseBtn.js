@@ -1,26 +1,15 @@
-"use strict";
+import React from 'react';
+import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Tip from './Tip';
 
-var _interopRequireDefault = require("D:\\WORK\\0KNOSOFT\\UniServer\\www\\builder2\\windowbuilder-forms\\node_modules\\babel-preset-react-app\\node_modules\\@babel\\runtime/helpers/interopRequireDefault");
+var _ref = /*#__PURE__*/React.createElement(CloseIcon, null);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = CloseBtn;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _IconButton = _interopRequireDefault(require("@material-ui/core/IconButton"));
-
-var _Close = _interopRequireDefault(require("@material-ui/icons/Close"));
-
-var _Tip = _interopRequireDefault(require("./Tip"));
-
-var _ref = /*#__PURE__*/_react.default.createElement(_Close.default, null);
-
-function CloseBtn(props) {
-  return /*#__PURE__*/_react.default.createElement(_Tip.default, {
+export default function CloseBtn(props) {
+  return /*#__PURE__*/React.createElement(Tip, {
     title: "Закрыть форму"
-  }, /*#__PURE__*/_react.default.createElement(_IconButton.default, {
+  }, /*#__PURE__*/React.createElement(IconButton, {
     onClick: props.handleClose
   }, _ref));
 }

@@ -31,26 +31,27 @@ module.exports = {
   env: {
     es: {
       plugins: [
-        // ['react-remove-properties', { properties: ['data-mui-test'] }],
-        // ['transform-react-remove-prop-types',{mode: 'wrap'}],
-        // [
-        //   'babel-plugin-import',
-        //   {
-        //     'libraryName': '@material-ui/core',
-        //     'libraryDirectory': 'esm',
-        //     'camel2DashComponentName': false
-        //   },
-        //   'core'
-        // ],
-        // [
-        //   'babel-plugin-import',
-        //   {
-        //     'libraryName': '@material-ui/icons',
-        //     'libraryDirectory': 'esm',
-        //     'camel2DashComponentName': false
-        //   },
-        //   'icons'
-        // ],
+        'transform-react-constant-elements',
+        ['react-remove-properties', { properties: ['data-mui-test'] }],
+        ['transform-react-remove-prop-types'],
+        [
+          'babel-plugin-import',
+          {
+            'libraryName': '@material-ui/core',
+            'libraryDirectory': 'esm',
+            'camel2DashComponentName': false
+          },
+          'core'
+        ],
+        [
+          'babel-plugin-import',
+          {
+            'libraryName': '@material-ui/icons',
+            'libraryDirectory': 'esm',
+            'camel2DashComponentName': false
+          },
+          'icons'
+        ],
       ],
       // It's most likely a babel bug.
       // We are using this ignore option in the CLI command but that has no effect.
@@ -60,7 +61,7 @@ module.exports = {
       plugins: [
         'transform-react-constant-elements',
         ['react-remove-properties', {properties: ['data-mui-test']}],
-        ['transform-react-remove-prop-types', {mode: 'wrap'}],
+        ['transform-react-remove-prop-types'],
         ['babel-plugin-import',
           {
             'libraryName': '@material-ui/core',

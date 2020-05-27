@@ -1,17 +1,9 @@
-"use strict";
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-var _interopRequireDefault = require("D:\\WORK\\0KNOSOFT\\UniServer\\www\\builder2\\windowbuilder-forms\\node_modules\\babel-preset-react-app\\node_modules\\@babel\\runtime/helpers/interopRequireDefault");
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _Tooltip = _interopRequireDefault(require("@material-ui/core/Tooltip"));
-
-var _styles = require("@material-ui/core/styles");
+import React from 'react';
+import PropTypes from 'prop-types';
+import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
 
 const styles = ({
   typography
@@ -32,16 +24,14 @@ function Tip({
   classes,
   ...others
 }) {
-  return /*#__PURE__*/_react.default.createElement(_Tooltip.default, Object.assign({
+  return /*#__PURE__*/React.createElement(Tooltip, _extends({
     title: title,
     classes: {
       tooltip: classes.tooltip
     },
     enterTouchDelay: 600,
     leaveTouchDelay: 2000
-  }, others), /*#__PURE__*/_react.default.createElement("span", null, children));
+  }, others), /*#__PURE__*/React.createElement("span", null, children));
 }
 
-var _default = (0, _styles.withStyles)(styles)(Tip);
-
-exports.default = _default;
+export default withStyles(styles)(Tip);
