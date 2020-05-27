@@ -4,7 +4,7 @@ import { withIface } from 'metadata-redux';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
 import Tab from '@material-ui/core/Tab';
-import { Tabs } from '../AntTabs';
+import { Tabs } from '../Common/AntTabs';
 import TabContent from './TabContent';
 
 var _ref = /*#__PURE__*/React.createElement(Tab, {
