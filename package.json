@@ -29,12 +29,28 @@
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.54",
+    "@material-ui/lab": "^4.0.0-alpha.54"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.10.0",
+    "@babel/preset-react": "^7.10.0",
+    "babel-plugin-import": "^1.13.0",
+    "babel-plugin-react-remove-properties": "^0.3.0",
+    "babel-plugin-transform-react-constant-elements": "^6.23.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "babel-preset-react-app": "^9.1.2",
+    "cross-env": "^7.0.2",
     "md5-file": "^4.0"
   },
-  "devDependencies": {},
+  "files": [
+    "dist/**",
+    "LICENSE",
+    "LICENSE.ru.md"
+  ],
   "scripts": {
-    "build": "node scripts/build.js"
+    "build": "cross-env NODE_ENV=production BABEL_ENV=production babel --config-file ./babel.config.js ./src --out-dir ./dist && node ./copy-files"
   },
   "eslintConfig": {
     "extends": "react-app"
