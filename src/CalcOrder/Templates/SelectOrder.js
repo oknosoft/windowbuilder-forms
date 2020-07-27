@@ -19,6 +19,7 @@ const schemas = {};
 $p.cat.scheme_settings.find_rows({obj: 'doc.calc_order'}, (scheme) => {
   if(scheme.name.endsWith('main')) {
     schemas.list = scheme;
+    scheme.set_standard_period(true);
   }
   else if(scheme.name.endsWith('templates')) {
     schemas.templates = scheme;

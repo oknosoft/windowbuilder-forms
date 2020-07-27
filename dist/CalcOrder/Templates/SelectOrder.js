@@ -18,6 +18,7 @@ $p.cat.scheme_settings.find_rows({
 }, scheme => {
   if (scheme.name.endsWith('main')) {
     schemas.list = scheme;
+    scheme.set_standard_period(true);
   } else if (scheme.name.endsWith('templates')) {
     schemas.templates = scheme;
   }
