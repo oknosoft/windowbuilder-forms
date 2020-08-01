@@ -47,8 +47,11 @@ var _ref4 = /*#__PURE__*/React.createElement(CircularProgress, {
   color: "inherit"
 });
 
-export default function SelectOrder() {
-  const [list, set_list] = React.useState('');
+export default function SelectOrder({
+  list,
+  set_list,
+  handleNext
+}) {
   const [backdrop, set_backdrop] = React.useState(false);
   const {
     calc_order
@@ -92,7 +95,7 @@ export default function SelectOrder() {
         $p.doc.calc_order.create(doc).then(doc => {
           _obj.calc_order = doc;
           return doc.load_linked_refs();
-        }).then(reset_list).catch(reset_list);
+        }).then(reset_list).then(handleNext).catch(reset_list);
       }
 
     },

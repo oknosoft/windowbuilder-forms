@@ -28,6 +28,7 @@ function TemplateRow({
   } = $p.utils;
   return /*#__PURE__*/React.createElement(ListItem, {
     className: classes.hovered,
+    onClick: handleSelect,
     onDoubleClick: () => {
       handleSelect();
       handleNext();

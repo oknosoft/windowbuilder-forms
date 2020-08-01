@@ -28,7 +28,14 @@ const prm = () => qs.parse(location.search.replace('?', ''));
 
 function TemplatesFrame(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  let {
+    order,
+    ref,
+    step,
+    action = 'refill'
+  } = prm();
+  const [activeStep, setActiveStep] = React.useState(step ? 1 : 0);
+  const [list, set_list] = React.useState('');
 
   const handleNext = () => {
     const {
@@ -63,12 +70,6 @@ function TemplatesFrame(props) {
         });
       }
 
-      let {
-        order,
-        ref,
-        action = 'refill'
-      } = prm();
-
       if (!order) {
         return dialogs.alert({
           text: `Не задан заказ назначения в url`,
@@ -100,11 +101,13 @@ function TemplatesFrame(props) {
     orientation: "vertical"
   }, steps.map((label, index) => /*#__PURE__*/React.createElement(Step, {
     key: label
-  }, /*#__PURE__*/React.createElement(StepLabel, null, label), /*#__PURE__*/React.createElement(StepContent, null, stepContent(index, Object.assign({
+  }, /*#__PURE__*/React.createElement(StepLabel, null, label), /*#__PURE__*/React.createElement(StepContent, null, stepContent(index, {
     handleNext,
     handleBack,
+    list,
+    set_list,
     props
-  })), /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("div", {
     className: classes.actionsContainer
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {
     onClick: handleBack,
@@ -113,7 +116,8 @@ function TemplatesFrame(props) {
     variant: "contained",
     color: "primary",
     onClick: handleNext,
-    className: classes.button
+    className: classes.button,
+    disabled: Boolean(list)
   }, activeStep === steps.length - 1 ? 'Завершить' : 'Далее')))))));
 }
 

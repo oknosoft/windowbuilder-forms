@@ -36,8 +36,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SelectOrder() {
-  const [list, set_list] = React.useState('');
+export default function SelectOrder({list, set_list, handleNext}) {
+
   const [backdrop, set_backdrop] = React.useState(false);
   const {calc_order} = _obj;
   const text = `${calc_order.number_doc} (${calc_order.note})`;
@@ -84,6 +84,7 @@ export default function SelectOrder() {
                 return doc.load_linked_refs();
               })
               .then(reset_list)
+              .then(handleNext)
               .catch(reset_list);
           }
         }}

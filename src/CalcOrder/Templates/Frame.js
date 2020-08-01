@@ -30,7 +30,9 @@ const prm = () => qs.parse(location.search.replace('?',''));
 
 function TemplatesFrame(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  let {order, ref, step, action = 'refill'} = prm();
+  const [activeStep, setActiveStep] = React.useState(step ? 1 : 0);
+  const [list, set_list] = React.useState('');
 
   const handleNext = () => {
     const {cat: {templates}, ui: {dialogs}, utils} = $p;
@@ -44,7 +46,6 @@ function TemplatesFrame(props) {
       if(templates._select_template.refill && templates._select_template.base_block.empty()) {
         return dialogs.alert({text: `Взведён признак перезаполнить по системе, но система не выбрана`, title: 'Пустая система'});
       }
-      let {order, ref, action = 'refill'} = prm();
       if(!order) {
         return dialogs.alert({text: `Не задан заказ назначения в url`, title: 'Пустой заказ'});
       }
@@ -70,7 +71,7 @@ function TemplatesFrame(props) {
         <Step key={label}>
           <StepLabel>{label}</StepLabel>
           <StepContent>
-            {stepContent(index, Object.assign({handleNext, handleBack, props}))}
+            {stepContent(index, {handleNext, handleBack, list, set_list, props})}
             <div className={classes.actionsContainer}>
               <div>
                 <Button
@@ -84,6 +85,7 @@ function TemplatesFrame(props) {
                   color="primary"
                   onClick={handleNext}
                   className={classes.button}
+                  disabled={Boolean(list)}
                 >
                   {activeStep === steps.length - 1 ? 'Завершить' : 'Далее'}
                 </Button>
