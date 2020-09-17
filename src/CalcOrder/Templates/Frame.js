@@ -24,6 +24,9 @@ const useStyles = makeStyles(theme => ({
   resetContainer: {
     padding: theme.spacing(3),
   },
+  pointer: {
+    cursor: 'pointer !important'
+  },
 }));
 
 const prm = () => qs.parse(location.search.replace('?',''));
@@ -39,7 +42,7 @@ function TemplatesFrame(props) {
     if(activeStep === 0 && templates._select_template.calc_order.empty()) {
       return dialogs.alert({text: `Не выбран заказ-шаблон`, title: 'Пустой заказ'});
     }
-    if(activeStep === 1 && templates._select_template.base_block.empty()) {
+    if([1, 2].includes(activeStep) && templates._select_template.base_block.empty()) {
       return dialogs.alert({text: `Не выбрано изделие-шаблон`, title: 'Пустой шаблон'});
     }
     if(activeStep === steps.length - 1) {
@@ -60,6 +63,13 @@ function TemplatesFrame(props) {
 
   const handleBack = () => {
     if(activeStep === 0) {
+      if(action === 'new') {
+        const ox = $p.cat.characteristics.get(ref);
+        if(ox.is_new() && ox.calc_order_row) {
+          ox.calc_order.production.del(ox.calc_order_row);
+          ox.unload();
+        }
+      }
       return props.history.goBack();
     }
     setActiveStep(prevStep => prevStep - 1);
@@ -69,7 +79,10 @@ function TemplatesFrame(props) {
     <Stepper activeStep={activeStep} orientation="vertical">
       {steps.map((label, index) => (
         <Step key={label}>
-          <StepLabel>{label}</StepLabel>
+          <StepLabel
+            className={classes.pointer}
+            onClick={() => setActiveStep(index)}
+          >{label}</StepLabel>
           <StepContent>
             {stepContent(index, {handleNext, handleBack, list, set_list, props})}
             <div className={classes.actionsContainer}>

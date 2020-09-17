@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
   },
   resetContainer: {
     padding: theme.spacing(3)
+  },
+  pointer: {
+    cursor: 'pointer !important'
   }
 }));
 
@@ -55,7 +58,7 @@ function TemplatesFrame(props) {
       });
     }
 
-    if (activeStep === 1 && templates._select_template.base_block.empty()) {
+    if ([1, 2].includes(activeStep) && templates._select_template.base_block.empty()) {
       return dialogs.alert({
         text: `Не выбрано изделие-шаблон`,
         title: 'Пустой шаблон'
@@ -90,6 +93,15 @@ function TemplatesFrame(props) {
 
   const handleBack = () => {
     if (activeStep === 0) {
+      if (action === 'new') {
+        const ox = $p.cat.characteristics.get(ref);
+
+        if (ox.is_new() && ox.calc_order_row) {
+          ox.calc_order.production.del(ox.calc_order_row);
+          ox.unload();
+        }
+      }
+
       return props.history.goBack();
     }
 
@@ -101,7 +113,10 @@ function TemplatesFrame(props) {
     orientation: "vertical"
   }, steps.map((label, index) => /*#__PURE__*/React.createElement(Step, {
     key: label
-  }, /*#__PURE__*/React.createElement(StepLabel, null, label), /*#__PURE__*/React.createElement(StepContent, null, stepContent(index, {
+  }, /*#__PURE__*/React.createElement(StepLabel, {
+    className: classes.pointer,
+    onClick: () => setActiveStep(index)
+  }, label), /*#__PURE__*/React.createElement(StepContent, null, stepContent(index, {
     handleNext,
     handleBack,
     list,
