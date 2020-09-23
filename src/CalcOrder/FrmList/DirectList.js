@@ -496,7 +496,7 @@ class DirectList extends MDNRComponent {
       setting_in_menu: true,
       denyDel: true,
       //btns: _mgr.metadata('partner') && <SearchPartner scheme={scheme} handleFilterChange={handleFilterChange}/>,
-      btns: <QuickFilter scheme={scheme} handleFilterChange={handleFilterChange}/>,
+      btns: <QuickFilter scheme={scheme} _mgr={_mgr} handleFilterChange={handleFilterChange}/>,
       end_btns: <MenuPrint handlePrint={this.handlePrint} scheme={scheme} variant="button"/>,
       handleSelect: this.handleSelect,
       handleAdd: this.handleAdd,

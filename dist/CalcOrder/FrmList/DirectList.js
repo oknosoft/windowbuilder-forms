@@ -692,6 +692,7 @@ class DirectList extends MDNRComponent {
       //btns: _mgr.metadata('partner') && <SearchPartner scheme={scheme} handleFilterChange={handleFilterChange}/>,
       btns: /*#__PURE__*/React.createElement(QuickFilter, {
         scheme: scheme,
+        _mgr: _mgr,
         handleFilterChange: handleFilterChange
       }),
       end_btns: /*#__PURE__*/React.createElement(MenuPrint, {
