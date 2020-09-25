@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1)
   },
   actionsContainer: {
+    marginTop: theme.spacing(),
     marginBottom: theme.spacing(2)
   },
   resetContainer: {
@@ -121,7 +122,8 @@ function TemplatesFrame(props) {
     handleBack,
     list,
     set_list,
-    props
+    props,
+    order
   }), /*#__PURE__*/React.createElement("div", {
     className: classes.actionsContainer
   }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {

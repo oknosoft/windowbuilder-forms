@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
   },
   actionsContainer: {
+    marginTop: theme.spacing(),
     marginBottom: theme.spacing(2),
   },
   resetContainer: {
@@ -84,7 +85,7 @@ function TemplatesFrame(props) {
             onClick={() => setActiveStep(index)}
           >{label}</StepLabel>
           <StepContent>
-            {stepContent(index, {handleNext, handleBack, list, set_list, props})}
+            {stepContent(index, {handleNext, handleBack, list, set_list, props, order})}
             <div className={classes.actionsContainer}>
               <div>
                 <Button
