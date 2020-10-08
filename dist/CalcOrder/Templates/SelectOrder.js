@@ -8,9 +8,9 @@ import WorkIcon from '@material-ui/icons/Work';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
-import Tip from 'wb-forms/dist/Common/Tip';
-import CloseBtn from 'wb-forms/dist/Common/CloseBtn';
-import DirectList from 'wb-forms/dist/CalcOrder/FrmList/DirectList';
+import Tip from '../../Common/Tip';
+import CloseBtn from '../../Common/CloseBtn';
+import DirectList from '../FrmList/DirectList';
 const _obj = $p.cat.templates._select_template;
 const schemas = {};
 $p.cat.scheme_settings.find_rows({

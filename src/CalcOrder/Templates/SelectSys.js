@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
 import SelectSysTree from './SelectSysTree';
 import SelectSysList from './SelectSysList';
+import SelectParams from './SelectParams';
 
 const useStyles = makeStyles({
   label: {
@@ -17,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const {cat: {templates, property_values_hierarchy: vh}} = $p;
+const {cat: {templates, property_values_hierarchy: vh}, utils} = $p;
 const _obj = templates._select_template;
 const empty_hierarchy = vh.get();
 
@@ -44,28 +45,35 @@ export default function SelectSys({handleNext}) {
   const classes = useStyles();
 
   return [
-    <Typography key="descr1" variant="body2" color="primary">
-      Можно перезаполнить параметры по системе, либо сохранить параметры, заданные в изделии-шаблоне
-    </Typography>,
-    <TextField
-      key="base_block"
-      InputProps={{
-        readOnly: true,
-      }}
-      label="Типовой блок"
-      value={_obj.base_block.toString()}
-      fullWidth
-    />,
-    <Typography key="descr2" variant="body2" color="primary" className={classes.top}>
-      Можно сохранить систему типового блока, либо выбрать другую
-    </Typography>,
-    <FormControlLabel
-      key="refill"
-      labelPlacement="start"
-      className={classes.label}
-      control={<Switch checked={refill} onChange={refillChange} value="refill" />}
-      label={`Задействовать параметры ${refill ? 'системы' : 'изделия'}`}
-    />,
+    <Grid key="block" container spacing={1} className={classes.label}>
+      <Grid item xs={3} sm={2}>
+        <div dangerouslySetInnerHTML={{
+          __html: _obj.base_block.svg ? utils.scale_svg(_obj.base_block.svg, {width: 90, height: 90, zoom: 0.2}, 0) : 'нет эскиза'
+        }}/>
+      </Grid>
+      <Grid item xs={9} sm={10}>
+        <Typography variant="body2" color="primary">
+          Можно перезаполнить параметры по системе, либо сохранить параметры, заданные в изделии-шаблоне
+        </Typography>
+        <TextField
+          InputProps={{
+            readOnly: true,
+          }}
+          label="Типовой блок"
+          value={_obj.base_block.toString()}
+          fullWidth
+        />
+        <Typography variant="body2" color="primary" className={classes.top}>
+          Можно сохранить систему типового блока, либо выбрать другую
+        </Typography>
+        <FormControlLabel
+          labelPlacement="start"
+          className={classes.label}
+          control={<Switch checked={refill} onChange={refillChange} value="refill" />}
+          label={`Задействовать параметры ${refill ? 'системы' : 'изделия'}`}
+        />
+      </Grid>
+    </Grid>,
     <TextField
       key="sys"
       InputProps={{
@@ -77,11 +85,14 @@ export default function SelectSys({handleNext}) {
     />,
     refill &&
       <Grid key="select_sys" container spacing={1} className={classes.label}>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <SelectSysTree group={group.valueOf()} set_group={groupChange} />
         </Grid>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={4}>
           <SelectSysList group={group} sys={sys} _obj={_obj} set_sys={sysChange} handleNext={handleNext} />
+        </Grid>
+        <Grid item xs={12} sm={5}>
+          <SelectParams _obj={_obj} />
         </Grid>
       </Grid>,
   ];

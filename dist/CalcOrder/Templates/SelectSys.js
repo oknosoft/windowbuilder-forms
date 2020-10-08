@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 import SelectSysTree from './SelectSysTree';
 import SelectSysList from './SelectSysList';
+import SelectParams from './SelectParams';
 const useStyles = makeStyles({
   label: {
     marginLeft: 0
@@ -19,16 +20,24 @@ const {
   cat: {
     templates,
     property_values_hierarchy: vh
-  }
+  },
+  utils
 } = $p;
 const _obj = templates._select_template;
 const empty_hierarchy = vh.get();
 
 var _ref = /*#__PURE__*/React.createElement(Typography, {
-  key: "descr1",
   variant: "body2",
   color: "primary"
 }, "Можно перезаполнить параметры по системе, либо сохранить параметры, заданные в изделии-шаблоне");
+
+var _ref2 = /*#__PURE__*/React.createElement(Grid, {
+  item: true,
+  xs: 12,
+  sm: 5
+}, /*#__PURE__*/React.createElement(SelectParams, {
+  _obj: _obj
+}));
 
 export default function SelectSys({
   handleNext
@@ -54,8 +63,28 @@ export default function SelectSys({
   };
 
   const classes = useStyles();
-  return [_ref, /*#__PURE__*/React.createElement(TextField, {
-    key: "base_block",
+  return [/*#__PURE__*/React.createElement(Grid, {
+    key: "block",
+    container: true,
+    spacing: 1,
+    className: classes.label
+  }, /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: 3,
+    sm: 2
+  }, /*#__PURE__*/React.createElement("div", {
+    dangerouslySetInnerHTML: {
+      __html: _obj.base_block.svg ? utils.scale_svg(_obj.base_block.svg, {
+        width: 90,
+        height: 90,
+        zoom: 0.2
+      }, 0) : 'нет эскиза'
+    }
+  })), /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: 9,
+    sm: 10
+  }, _ref, /*#__PURE__*/React.createElement(TextField, {
     InputProps: {
       readOnly: true
     },
@@ -63,12 +92,10 @@ export default function SelectSys({
     value: _obj.base_block.toString(),
     fullWidth: true
   }), /*#__PURE__*/React.createElement(Typography, {
-    key: "descr2",
     variant: "body2",
     color: "primary",
     className: classes.top
   }, "Можно сохранить систему типового блока, либо выбрать другую"), /*#__PURE__*/React.createElement(FormControlLabel, {
-    key: "refill",
     labelPlacement: "start",
     className: classes.label,
     control: /*#__PURE__*/React.createElement(Switch, {
@@ -77,7 +104,7 @@ export default function SelectSys({
       value: "refill"
     }),
     label: `Задействовать параметры ${refill ? 'системы' : 'изделия'}`
-  }), /*#__PURE__*/React.createElement(TextField, {
+  }))), /*#__PURE__*/React.createElement(TextField, {
     key: "sys",
     InputProps: {
       readOnly: true
@@ -93,19 +120,19 @@ export default function SelectSys({
   }, /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12,
-    sm: 4
+    sm: 3
   }, /*#__PURE__*/React.createElement(SelectSysTree, {
     group: group.valueOf(),
     set_group: groupChange
   })), /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 12,
-    sm: 8
+    sm: 4
   }, /*#__PURE__*/React.createElement(SelectSysList, {
     group: group,
     sys: sys,
     _obj: _obj,
     set_sys: sysChange,
     handleNext: handleNext
-  })))];
+  })), _ref2)];
 }

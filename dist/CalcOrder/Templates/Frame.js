@@ -35,10 +35,9 @@ function TemplatesFrame(props) {
   let {
     order,
     ref,
-    step,
     action = 'refill'
   } = prm();
-  const [activeStep, setActiveStep] = React.useState(step ? 1 : 0);
+  const [activeStep, setActiveStep] = React.useState(1);
   const [list, set_list] = React.useState('');
 
   const handleNext = () => {
@@ -101,9 +100,11 @@ function TemplatesFrame(props) {
           ox.calc_order.production.del(ox.calc_order_row);
           ox.unload();
         }
+
+        return props.history.goBack();
       }
 
-      return props.history.goBack();
+      return props.handleNavigate(`/builder/${ref}?order=${order}&action=cancel`);
     }
 
     setActiveStep(prevStep => prevStep - 1);
