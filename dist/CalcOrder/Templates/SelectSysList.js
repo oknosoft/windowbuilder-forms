@@ -2,17 +2,6 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import { makeStyles } from '@material-ui/core/styles';
-const useStyles = makeStyles({
-  root: {
-    paddingTop: 0,
-    paddingBottom: 0
-  },
-  list: {
-    maxHeight: '40vh',
-    overflow: 'auto'
-  }
-});
 const {
   cat: {
     production_params
@@ -20,6 +9,7 @@ const {
   utils
 } = $p;
 export default function SelectSysList({
+  classes,
   group,
   sys,
   _obj,
@@ -47,7 +37,6 @@ export default function SelectSysList({
     if (a.name < b.name) return -1;
     return 0;
   });
-  const classes = useStyles();
   return /*#__PURE__*/React.createElement("div", {
     className: classes.list
   }, /*#__PURE__*/React.createElement(List, {

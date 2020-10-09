@@ -2,23 +2,11 @@ import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {makeStyles} from '@material-ui/core/styles';
-
-const useStyles = makeStyles({
-  root: {
-    paddingTop: 0,
-    paddingBottom: 0,
-  },
-  list: {
-    maxHeight: '40vh',
-    overflow: 'auto',
-  },
-});
 
 
 const {cat: {production_params}, utils} = $p;
 
-export default function SelectSysList({group, sys, _obj, set_sys, handleNext}) {
+export default function SelectSysList({classes, group, sys, _obj, set_sys, handleNext}) {
 
   const [cond] = _obj.permitted_sys(_obj.calc_order);
   const rows = [];
@@ -36,8 +24,6 @@ export default function SelectSysList({group, sys, _obj, set_sys, handleNext}) {
     if (a.name < b.name) return -1;
     return 0;
   });
-
-  const classes = useStyles();
 
   return (
     <div className={classes.list}>

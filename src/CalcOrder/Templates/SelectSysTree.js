@@ -17,14 +17,16 @@ const renderItems = (parent) => {
     });
 };
 
-export default function SelectSysTree({group, set_group}) {
-  return <TreeView
-    defaultCollapseIcon={<ExpandMoreIcon />}
-    defaultExpandIcon={<ChevronRightIcon />}
-    defaultExpanded={defaultExpanded}
-    onNodeSelect={set_group}
-    selected={group}
-  >
-    {renderItems()}
-  </TreeView>;
+export default function SelectSysTree({classes, group, set_group}) {
+  return <div className={classes.list}>
+    <TreeView
+      defaultCollapseIcon={<ExpandMoreIcon />}
+      defaultExpandIcon={<ChevronRightIcon />}
+      defaultExpanded={defaultExpanded}
+      onNodeSelect={set_group}
+      selected={group}
+    >
+      {renderItems()}
+    </TreeView>
+  </div>;
 }

@@ -39,14 +39,17 @@ var _ref = /*#__PURE__*/React.createElement(ExpandMoreIcon, null);
 var _ref2 = /*#__PURE__*/React.createElement(ChevronRightIcon, null);
 
 export default function SelectSysTree({
+  classes,
   group,
   set_group
 }) {
-  return /*#__PURE__*/React.createElement(TreeView, {
+  return /*#__PURE__*/React.createElement("div", {
+    className: classes.list
+  }, /*#__PURE__*/React.createElement(TreeView, {
     defaultCollapseIcon: _ref,
     defaultExpandIcon: _ref2,
     defaultExpanded: defaultExpanded,
     onNodeSelect: set_group,
     selected: group
-  }, renderItems());
+  }, renderItems()));
 }

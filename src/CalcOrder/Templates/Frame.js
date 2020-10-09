@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import qs from 'qs';
 
 import {steps, stepContent} from './stepContent';
+import CloseBtn from '../../Common/CloseBtn';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,8 +27,14 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
   pointer: {
-    cursor: 'pointer !important'
+    cursor: 'pointer !important',
   },
+  flex: {
+    display: 'flex',
+  },
+  full: {
+    flex: 1,
+  }
 }));
 
 const prm = () => qs.parse(location.search.replace('?',''));
@@ -35,7 +42,7 @@ const prm = () => qs.parse(location.search.replace('?',''));
 function TemplatesFrame(props) {
   const classes = useStyles();
   let {order, ref, action = 'refill'} = prm();
-  const [activeStep, setActiveStep] = React.useState(1);
+  let [activeStep, setActiveStep] = React.useState(1);
   const [list, set_list] = React.useState('');
 
   const handleNext = () => {
@@ -82,9 +89,15 @@ function TemplatesFrame(props) {
       {steps.map((label, index) => (
         <Step key={label}>
           <StepLabel
-            className={classes.pointer}
+            classes={{root: classes.pointer, label: classes.flex}}
             onClick={() => setActiveStep(index)}
-          >{label}</StepLabel>
+          >
+            <div className={classes.full}>{label}</div>
+            {index === 0 && <CloseBtn handleClose={() => {
+              activeStep = 0;
+              handleBack();
+            }}/>}
+          </StepLabel>
           <StepContent>
             {stepContent(index, {handleNext, handleBack, list, set_list, props, order})}
             <div className={classes.actionsContainer}>

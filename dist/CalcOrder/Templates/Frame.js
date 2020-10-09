@@ -8,6 +8,7 @@ import StepContent from '@material-ui/core/StepContent';
 import Button from '@material-ui/core/Button';
 import qs from 'qs';
 import { steps, stepContent } from './stepContent';
+import CloseBtn from '../../Common/CloseBtn';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
@@ -25,6 +26,12 @@ const useStyles = makeStyles(theme => ({
   },
   pointer: {
     cursor: 'pointer !important'
+  },
+  flex: {
+    display: 'flex'
+  },
+  full: {
+    flex: 1
   }
 }));
 
@@ -37,7 +44,7 @@ function TemplatesFrame(props) {
     ref,
     action = 'refill'
   } = prm();
-  const [activeStep, setActiveStep] = React.useState(1);
+  let [activeStep, setActiveStep] = React.useState(1);
   const [list, set_list] = React.useState('');
 
   const handleNext = () => {
@@ -116,9 +123,19 @@ function TemplatesFrame(props) {
   }, steps.map((label, index) => /*#__PURE__*/React.createElement(Step, {
     key: label
   }, /*#__PURE__*/React.createElement(StepLabel, {
-    className: classes.pointer,
+    classes: {
+      root: classes.pointer,
+      label: classes.flex
+    },
     onClick: () => setActiveStep(index)
-  }, label), /*#__PURE__*/React.createElement(StepContent, null, stepContent(index, {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes.full
+  }, label), index === 0 && /*#__PURE__*/React.createElement(CloseBtn, {
+    handleClose: () => {
+      activeStep = 0;
+      handleBack();
+    }
+  })), /*#__PURE__*/React.createElement(StepContent, null, stepContent(index, {
     handleNext,
     handleBack,
     list,

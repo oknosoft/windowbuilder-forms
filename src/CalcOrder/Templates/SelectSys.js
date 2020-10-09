@@ -16,6 +16,14 @@ const useStyles = makeStyles({
   top: {
     marginTop: 8,
   },
+  root: {
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+  list: {
+    maxHeight: '36vh',
+    overflow: 'auto',
+  },
 });
 
 const {cat: {templates, property_values_hierarchy: vh}, utils} = $p;
@@ -70,7 +78,7 @@ export default function SelectSys({handleNext}) {
           labelPlacement="start"
           className={classes.label}
           control={<Switch checked={refill} onChange={refillChange} value="refill" />}
-          label={`Задействовать параметры ${refill ? 'системы' : 'изделия'}`}
+          label={`Задействовать параметры системы`}
         />
       </Grid>
     </Grid>,
@@ -86,10 +94,10 @@ export default function SelectSys({handleNext}) {
     refill &&
       <Grid key="select_sys" container spacing={1} className={classes.label}>
         <Grid item xs={12} sm={3}>
-          <SelectSysTree group={group.valueOf()} set_group={groupChange} />
+          <SelectSysTree classes={classes} group={group.valueOf()} set_group={groupChange} />
         </Grid>
         <Grid item xs={12} sm={4}>
-          <SelectSysList group={group} sys={sys} _obj={_obj} set_sys={sysChange} handleNext={handleNext} />
+          <SelectSysList classes={classes} group={group} sys={sys} _obj={_obj} set_sys={sysChange} handleNext={handleNext} />
         </Grid>
         <Grid item xs={12} sm={5}>
           <SelectParams _obj={_obj} />

@@ -14,6 +14,14 @@ const useStyles = makeStyles({
   },
   top: {
     marginTop: 8
+  },
+  root: {
+    paddingTop: 0,
+    paddingBottom: 0
+  },
+  list: {
+    maxHeight: '36vh',
+    overflow: 'auto'
   }
 });
 const {
@@ -103,7 +111,7 @@ export default function SelectSys({
       onChange: refillChange,
       value: "refill"
     }),
-    label: `Задействовать параметры ${refill ? 'системы' : 'изделия'}`
+    label: `Задействовать параметры системы`
   }))), /*#__PURE__*/React.createElement(TextField, {
     key: "sys",
     InputProps: {
@@ -122,6 +130,7 @@ export default function SelectSys({
     xs: 12,
     sm: 3
   }, /*#__PURE__*/React.createElement(SelectSysTree, {
+    classes: classes,
     group: group.valueOf(),
     set_group: groupChange
   })), /*#__PURE__*/React.createElement(Grid, {
@@ -129,6 +138,7 @@ export default function SelectSys({
     xs: 12,
     sm: 4
   }, /*#__PURE__*/React.createElement(SelectSysList, {
+    classes: classes,
     group: group,
     sys: sys,
     _obj: _obj,
