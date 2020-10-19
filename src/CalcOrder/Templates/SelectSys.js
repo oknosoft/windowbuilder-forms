@@ -100,7 +100,7 @@ export default function SelectSys({handleNext}) {
           <SelectSysList classes={classes} group={group} sys={sys} _obj={_obj} set_sys={sysChange} handleNext={handleNext} />
         </Grid>
         <Grid item xs={12} sm={5}>
-          <SelectParams _obj={_obj} />
+          <SelectParams _obj={_obj} sys={sys} />
         </Grid>
       </Grid>,
   ];

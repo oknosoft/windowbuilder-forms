@@ -12,11 +12,20 @@ import LinkedProps from '../../Common/LinkedProps';
 export default function SelectParams({
   _obj
 }) {
+  const {
+    _manager,
+    clr
+  } = _obj;
+
+  const _meta = Object.assign({}, _obj._manager.metadata('clr'));
+
+  clr._manager.selection_exclude_service(_meta, _obj.sys);
+
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PropField, {
     key: `prm-clr`,
     _obj: _obj,
-    _fld: "clr" //_meta={_meta}
-
+    _fld: "clr",
+    _meta: _meta
   }), /*#__PURE__*/React.createElement(LinkedProps, {
     ts: _obj.params,
     cnstr: 0,

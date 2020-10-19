@@ -39,14 +39,6 @@ var _ref = /*#__PURE__*/React.createElement(Typography, {
   color: "primary"
 }, "Можно перезаполнить параметры по системе, либо сохранить параметры, заданные в изделии-шаблоне");
 
-var _ref2 = /*#__PURE__*/React.createElement(Grid, {
-  item: true,
-  xs: 12,
-  sm: 5
-}, /*#__PURE__*/React.createElement(SelectParams, {
-  _obj: _obj
-}));
-
 export default function SelectSys({
   handleNext
 }) {
@@ -144,5 +136,12 @@ export default function SelectSys({
     _obj: _obj,
     set_sys: sysChange,
     handleNext: handleNext
-  })), _ref2)];
+  })), /*#__PURE__*/React.createElement(Grid, {
+    item: true,
+    xs: 12,
+    sm: 5
+  }, /*#__PURE__*/React.createElement(SelectParams, {
+    _obj: _obj,
+    sys: sys
+  })))];
 }
