@@ -57,9 +57,18 @@ class LinkedProps extends React.Component {
       const {
         types
       } = param.type;
-      let oselect = types.length === 1 && ['cat.property_values', 'cat.characteristics'].includes(types[0]); // проверим вхождение значения в доступные и при необходимости изменим
+      let oselect = types.length === 1 && ['cat.property_values', 'cat.characteristics'].includes(types[0]);
+      let key = `${prow.row}-${prow.param.valueOf()}`;
+
+      if (ts._owner.sys) {
+        key += ts._owner.sys.valueOf();
+      } // проверим вхождение значения в доступные и при необходимости изменим
+
 
       if (links.length) {
+        links.forEach(link => {
+          key += link.valueOf();
+        });
         const values = [];
 
         if (param.linked_values(links, prow, values)) {
@@ -95,7 +104,7 @@ class LinkedProps extends React.Component {
       }
 
       res.push( /*#__PURE__*/React.createElement(PropField, {
-        key: `prm-${prow.row}`,
+        key: `prm-${$p.utils.crc32(key)}`,
         _obj: prow,
         _fld: "value",
         _meta: _meta,
