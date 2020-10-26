@@ -178,6 +178,7 @@ class DirectList extends MDNRComponent {
         _owner,
       };
       const selector2 = _mgr.mango_selector ? _mgr.mango_selector(scheme, sprm) : scheme.mango_selector(sprm);
+
       for(const el of selector2.selector.$and) {
         const name = Object.keys(el)[0];
         if(name === 'class_name' || name === 'search') {
@@ -209,6 +210,7 @@ class DirectList extends MDNRComponent {
         }
         selector[name] = cond;
       }
+
       // подмешиваем отбор по параметрам
       const {comparison_types: ct} = $p.enm;
       scheme.selection.find_rows({use: true, left_value_type: 'path'}, (srow) => {

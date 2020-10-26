@@ -11,10 +11,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Tip from '../../Common/Tip';
 import CloseBtn from '../../Common/CloseBtn';
-import DirectList from '../FrmList/DirectList'
+//import DirectList from '../FrmList/DirectList';
+import DirectList from 'metadata-react/DynList';
 
 const _obj = $p.cat.templates._select_template;
 const schemas = {};
+const modes = {list: '', templates: 'ram'};
 
 $p.cat.scheme_settings.find_rows({obj: 'doc.calc_order'}, (scheme) => {
   if(scheme.name.endsWith('main')) {
@@ -69,12 +71,14 @@ export default function SelectOrder({list, set_list, handleNext}) {
     Boolean(list) &&
       <DirectList
         key="list"
+        frm_key={`templates-${list}`}
         selectionMode
         denyAddDel
         read_only
         show_variants={false}
         _mgr={$p.doc.calc_order}
         scheme={schemas[list]}
+        source_mode={modes[list]}
         handlers={{
           handleSelect(doc) {
             set_backdrop(true);

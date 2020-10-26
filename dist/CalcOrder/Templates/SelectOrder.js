@@ -9,10 +9,15 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Tip from '../../Common/Tip';
-import CloseBtn from '../../Common/CloseBtn';
-import DirectList from '../FrmList/DirectList';
+import CloseBtn from '../../Common/CloseBtn'; //import DirectList from '../FrmList/DirectList';
+
+import DirectList from 'metadata-react/DynList';
 const _obj = $p.cat.templates._select_template;
 const schemas = {};
+const modes = {
+  list: '',
+  templates: 'ram'
+};
 $p.cat.scheme_settings.find_rows({
   obj: 'doc.calc_order'
 }, scheme => {
@@ -83,12 +88,14 @@ export default function SelectOrder({
     onClick: () => set_list('list')
   }, _ref3))), Boolean(list) && /*#__PURE__*/React.createElement(DirectList, {
     key: "list",
+    frm_key: `templates-${list}`,
     selectionMode: true,
     denyAddDel: true,
     read_only: true,
     show_variants: false,
     _mgr: $p.doc.calc_order,
     scheme: schemas[list],
+    source_mode: modes[list],
     handlers: {
       handleSelect(doc) {
         set_backdrop(true);
