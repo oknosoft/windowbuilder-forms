@@ -11,7 +11,6 @@ import Tip from '../../Common/Tip';
 import Params from './Params';
 import LoadingModal from 'metadata-react/DumbLoader/LoadingModal';
 
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     border: '1px solid',
@@ -20,7 +19,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function QuickFilter({scheme, _mgr, handleFilterChange}) {
+const showReftesh = ({_mgr, frm_key, scheme}) => {
+  if(frm_key !== 'templates') {
+    frm_key = `frm_${_mgr.class_name.replace('.', '_')}_${frm_key}`;
+    const mode = scheme.source_mode(frm_key);
+    if(mode === 'ram') {
+      return  true;
+    }
+  }
+  return false;
+};
+
+export default function QuickFilter({scheme, _mgr, handleFilterChange, frm_key}) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -51,6 +61,9 @@ export default function QuickFilter({scheme, _mgr, handleFilterChange}) {
   }
   const classes = useStyles();
 
+  const show_refresh = showReftesh({_mgr, frm_key, scheme});
+
+
   return <div>
     <LoadingModal open={loading} text="Обмен данными с сервером" />
     <Tip title="Быстрый фильтр>">
@@ -67,7 +80,7 @@ export default function QuickFilter({scheme, _mgr, handleFilterChange}) {
       <div className={classes.paper}>
         <Params scheme={scheme} handleFilterChange={handleFilterChange}/>
         <DialogActions>
-          {_mgr.direct_load ?
+          {_mgr.direct_load && show_refresh ?
             <Button variant="contained" onClick={handleDirectLoad} startIcon={<AutorenewIcon />}>
               Прочитать с сервера
             </Button> : null}

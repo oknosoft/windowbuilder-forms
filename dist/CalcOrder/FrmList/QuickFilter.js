@@ -17,6 +17,23 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const showReftesh = ({
+  _mgr,
+  frm_key,
+  scheme
+}) => {
+  if (frm_key !== 'templates') {
+    frm_key = `frm_${_mgr.class_name.replace('.', '_')}_${frm_key}`;
+    const mode = scheme.source_mode(frm_key);
+
+    if (mode === 'ram') {
+      return true;
+    }
+  }
+
+  return false;
+};
+
 var _ref = /*#__PURE__*/React.createElement("i", {
   className: "fa fa-filter fa-fw"
 });
@@ -26,7 +43,8 @@ var _ref2 = /*#__PURE__*/React.createElement(AutorenewIcon, null);
 export default function QuickFilter({
   scheme,
   _mgr,
-  handleFilterChange
+  handleFilterChange,
+  frm_key
 }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
@@ -58,6 +76,11 @@ export default function QuickFilter({
   };
 
   const classes = useStyles();
+  const show_refresh = showReftesh({
+    _mgr,
+    frm_key,
+    scheme
+  });
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(LoadingModal, {
     open: loading,
     text: "Обмен данными с сервером"
@@ -80,7 +103,7 @@ export default function QuickFilter({
   }, /*#__PURE__*/React.createElement(Params, {
     scheme: scheme,
     handleFilterChange: handleFilterChange
-  }), /*#__PURE__*/React.createElement(DialogActions, null, _mgr.direct_load ? /*#__PURE__*/React.createElement(Button, {
+  }), /*#__PURE__*/React.createElement(DialogActions, null, _mgr.direct_load && show_refresh ? /*#__PURE__*/React.createElement(Button, {
     variant: "contained",
     onClick: handleDirectLoad,
     startIcon: _ref2

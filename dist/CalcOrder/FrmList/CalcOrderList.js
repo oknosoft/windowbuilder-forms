@@ -128,10 +128,13 @@ class CalcOrderList extends Component {
       const {
         state
       } = this;
-      if (state.handleFilterChange !== handleFilterChange || state.scheme !== scheme) this.setState({
-        handleFilterChange,
-        scheme
-      });
+
+      if (state.handleFilterChange !== handleFilterChange || state.scheme !== scheme) {
+        this.setState({
+          handleFilterChange,
+          scheme
+        });
+      }
     };
 
     this.handlers = Object.assign({}, this.props.handlers, {
@@ -185,7 +188,8 @@ class CalcOrderList extends Component {
       btns: /*#__PURE__*/React.createElement(QuickFilter, {
         scheme: scheme,
         _mgr: _mgr,
-        handleFilterChange: handleFilterChange
+        handleFilterChange: handleFilterChange,
+        frm_key: "list"
       }),
       registerFilterChange: this.registerFilterChange,
       show_search: true

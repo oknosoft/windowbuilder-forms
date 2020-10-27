@@ -100,8 +100,9 @@ class CalcOrderList extends Component {
 
   registerFilterChange = (handleFilterChange, scheme) => {
     const {state} = this;
-    if(state.handleFilterChange !== handleFilterChange || state.scheme !== scheme)
-    this.setState({handleFilterChange, scheme});
+    if(state.handleFilterChange !== handleFilterChange || state.scheme !== scheme) {
+      this.setState({handleFilterChange, scheme});
+    }
   };
 
   render() {
@@ -132,7 +133,12 @@ class CalcOrderList extends Component {
         //selectionMode
         //denyAddDel
         //show_variants
-        btns={<QuickFilter scheme={scheme} _mgr={_mgr} handleFilterChange={handleFilterChange}/>}
+        btns={<QuickFilter
+          scheme={scheme}
+          _mgr={_mgr}
+          handleFilterChange={handleFilterChange}
+          frm_key="list"
+        />}
         registerFilterChange={this.registerFilterChange}
         show_search
         {...sizes}
