@@ -27,12 +27,37 @@ const useStyles = makeStyles({
 const {
   cat: {
     templates,
-    property_values_hierarchy: vh
+    property_values_hierarchy: vh,
+    production_params
   },
-  utils
+  utils,
+  job_prm
 } = $p;
 const _obj = templates._select_template;
 const empty_hierarchy = vh.get();
+
+const sys_rows = () => {
+  const [cond] = _obj.permitted_sys(_obj.calc_order);
+
+  const sys = job_prm.builder && job_prm.builder.branch_filter && job_prm.builder.branch_filter.sys;
+  const rows = [];
+  production_params.forEach(v => {
+    if (v.is_folder || cond && !utils._selection(v, {
+      [cond.name]: cond.path
+    })) {
+      return;
+    }
+
+    if (sys && sys.length && !sys.some(bs => {
+      return v === bs || v._hierarchy(bs);
+    })) {
+      return;
+    }
+
+    rows.push(v);
+  });
+  return rows;
+};
 
 var _ref = /*#__PURE__*/React.createElement(Typography, {
   variant: "body2",
@@ -63,6 +88,7 @@ export default function SelectSys({
   };
 
   const classes = useStyles();
+  const rows = sys_rows();
   return [/*#__PURE__*/React.createElement(Grid, {
     key: "block",
     container: true,
@@ -124,6 +150,7 @@ export default function SelectSys({
   }, /*#__PURE__*/React.createElement(SelectSysTree, {
     classes: classes,
     group: group.valueOf(),
+    sys_rows: rows,
     set_group: groupChange
   })), /*#__PURE__*/React.createElement(Grid, {
     item: true,
@@ -131,6 +158,7 @@ export default function SelectSys({
     sm: 4
   }, /*#__PURE__*/React.createElement(SelectSysList, {
     classes: classes,
+    sys_rows: rows,
     group: group,
     sys: sys,
     _obj: _obj,
