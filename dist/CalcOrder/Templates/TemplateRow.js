@@ -54,11 +54,9 @@ function TemplateRow({
     sm: 8
   }, /*#__PURE__*/React.createElement(Typography, {
     variant: "h6"
-  }, nom.name), /*#__PURE__*/React.createElement(Typography, {
+  }, row.note || 'Без названия'), /*#__PURE__*/React.createElement(Typography, {
     variant: "body2"
-  }, `Ширина: ${ox.x}, Высота: ${ox.y}`), /*#__PURE__*/React.createElement(Typography, {
-    variant: "body2"
-  }, ox.note)), /*#__PURE__*/React.createElement(Grid, {
+  }, `Ширина: ${ox.x}, Высота: ${ox.y}, Площадь: ${ox.s}`)), /*#__PURE__*/React.createElement(Grid, {
     item: true,
     xs: 1
   }, /*#__PURE__*/React.createElement(Checkbox, {

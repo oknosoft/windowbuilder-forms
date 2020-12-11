@@ -32,9 +32,8 @@ function TemplateRow({row, classes, handleSelect, handleNext, selected}) {
           <div dangerouslySetInnerHTML={{__html: ox.svg ? scale_svg(ox.svg, {width: 90, height: 90, zoom: 0.2}, 0) : 'нет эскиза'}}/>
         </Grid>
         <Grid item xs={7} sm={8}>
-          <Typography variant="h6">{nom.name}</Typography>
-          <Typography variant="body2">{`Ширина: ${ox.x}, Высота: ${ox.y}`}</Typography>
-          <Typography variant="body2">{ox.note}</Typography>
+          <Typography variant="h6">{row.note || 'Без названия'}</Typography>
+          <Typography variant="body2">{`Ширина: ${ox.x}, Высота: ${ox.y}, Площадь: ${ox.s}`}</Typography>
         </Grid>
         <Grid item xs={1}>
           <Checkbox
