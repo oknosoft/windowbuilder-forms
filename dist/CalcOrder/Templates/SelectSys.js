@@ -8,12 +8,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import SelectSysTree from './SelectSysTree';
 import SelectSysList from './SelectSysList';
 import SelectParams from './SelectParams';
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   label: {
     marginLeft: 0
   },
   top: {
-    marginTop: 8
+    marginTop: theme.spacing()
   },
   root: {
     paddingTop: 0,
@@ -22,8 +22,12 @@ const useStyles = makeStyles({
   list: {
     maxHeight: '36vh',
     overflow: 'auto'
+  },
+  text: {
+    marginTop: theme.spacing(),
+    width: '90%'
   }
-});
+}));
 const {
   cat: {
     templates,

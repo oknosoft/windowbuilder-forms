@@ -9,12 +9,12 @@ import SelectSysTree from './SelectSysTree';
 import SelectSysList from './SelectSysList';
 import SelectParams from './SelectParams';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   label: {
     marginLeft: 0,
   },
   top: {
-    marginTop: 8,
+    marginTop: theme.spacing(),
   },
   root: {
     paddingTop: 0,
@@ -24,7 +24,11 @@ const useStyles = makeStyles({
     maxHeight: '36vh',
     overflow: 'auto',
   },
-});
+  text: {
+    marginTop: theme.spacing(),
+    width: '90%',
+  }
+}));
 
 const {cat: {templates, property_values_hierarchy: vh, production_params}, utils, job_prm} = $p;
 const _obj = templates._select_template;
