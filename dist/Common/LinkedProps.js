@@ -28,7 +28,7 @@ class LinkedProps extends React.Component {
         inset
       }
     };
-    let notify;
+    const notify = new Set();
     ts.find_rows({
       cnstr,
       inset
@@ -72,7 +72,7 @@ class LinkedProps extends React.Component {
         const values = [];
 
         if (param.linked_values(links, prow, values)) {
-          notify = true;
+          notify.add(prow);
         }
 
         if (values.length) {
@@ -96,7 +96,7 @@ class LinkedProps extends React.Component {
 
       if (prow.hide !== hide) {
         prow.hide = hide;
-        notify = true;
+        notify.add(prow);
       }
 
       if (hide) {

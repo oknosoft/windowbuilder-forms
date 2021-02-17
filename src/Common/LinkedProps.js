@@ -17,10 +17,11 @@ class LinkedProps extends React.Component {
     const {fields} = ts._owner._metadata(ts._name);
     const res = [];
     const grid = {selection: {cnstr, inset}};
-    let notify;
+    const notify = new Set();
 
     ts.find_rows({cnstr, inset}, (prow) => {
       const {param} = prow;
+
       const links = param.params_links({grid, obj: prow});
       // вычисляемые скрываем всегда
       let hide = !param.show_calculated && param.is_calculated;
@@ -51,7 +52,7 @@ class LinkedProps extends React.Component {
         });
         const values = [];
         if(param.linked_values(links, prow, values)) {
-          notify = true;
+          notify.add(prow);
         }
         if(values.length) {
           if(values.length < 50) {
@@ -69,7 +70,7 @@ class LinkedProps extends React.Component {
       }
       if (prow.hide !== hide) {
         prow.hide = hide;
-        notify = true;
+        notify.add(prow);
       }
 
       if(hide) {
