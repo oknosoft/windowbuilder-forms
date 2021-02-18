@@ -31,7 +31,8 @@ class LinkedProps extends React.Component {
     const notify = new Set();
     ts.find_rows({
       cnstr,
-      inset
+      inset,
+      hide: false
     }, prow => {
       const {
         param

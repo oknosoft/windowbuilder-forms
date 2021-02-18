@@ -32,9 +32,18 @@ class SelectParams extends React.Component {
 
   render() {
     const {_obj} = this.props;
-    const {_manager, clr} = _obj;
+    const {_manager, clr, sys} = _obj;
     const _meta = Object.assign({}, _manager.metadata('clr'));
-    clr._manager.selection_exclude_service(_meta, _obj.sys);
+    const {utils, cat} = $p;
+
+    const selection = {};
+    clr._manager.selection_exclude_service(_meta, sys);
+    _meta.choice_params.forEach(({name, path}) => {
+      selection[name] = path;
+    });
+    if(clr.empty() || !utils._selection(clr, selection)) {
+      _obj.clr = sys.default_clr.empty() ? cat.clrs.predefined('Белый') : sys.default_clr;
+    }
 
     return <>
       <PropField
@@ -43,7 +52,7 @@ class SelectParams extends React.Component {
         _fld="clr"
         _meta={_meta}
       />
-      <LinkedProps ts={_obj.params} cnstr={0} inset={$p.utils.blank.guid}/>
+      <LinkedProps ts={_obj.params} cnstr={0} inset={utils.blank.guid}/>
     </>;
   }
 }

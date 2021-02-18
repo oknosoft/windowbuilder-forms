@@ -51,12 +51,30 @@ class SelectParams extends React.Component {
     } = this.props;
     const {
       _manager,
-      clr
+      clr,
+      sys
     } = _obj;
 
     const _meta = Object.assign({}, _manager.metadata('clr'));
 
-    clr._manager.selection_exclude_service(_meta, _obj.sys);
+    const {
+      utils,
+      cat
+    } = $p;
+    const selection = {};
+
+    clr._manager.selection_exclude_service(_meta, sys);
+
+    _meta.choice_params.forEach(({
+      name,
+      path
+    }) => {
+      selection[name] = path;
+    });
+
+    if (clr.empty() || !utils._selection(clr, selection)) {
+      _obj.clr = sys.default_clr.empty() ? cat.clrs.predefined('Белый') : sys.default_clr;
+    }
 
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PropField, {
       key: `prm-clr`,
@@ -66,7 +84,7 @@ class SelectParams extends React.Component {
     }), /*#__PURE__*/React.createElement(LinkedProps, {
       ts: _obj.params,
       cnstr: 0,
-      inset: $p.utils.blank.guid
+      inset: utils.blank.guid
     }));
   }
 

@@ -19,7 +19,7 @@ class LinkedProps extends React.Component {
     const grid = {selection: {cnstr, inset}};
     const notify = new Set();
 
-    ts.find_rows({cnstr, inset}, (prow) => {
+    ts.find_rows({cnstr, inset, hide: false}, (prow) => {
       const {param} = prow;
 
       const links = param.params_links({grid, obj: prow});
