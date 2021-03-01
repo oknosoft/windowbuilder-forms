@@ -10,7 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 export default function SelectSysList({classes, sys_rows, group, sys, _obj, set_sys, handleNext}) {
 
   const [filter, set_filter] = React.useState('');
-  const [cond] = _obj.permitted_sys(_obj.calc_order);
+  const [cond] = _obj.permitted_sys();
   const rows = sys_rows.filter((v) => {
     if(filter) {
       const selection = {

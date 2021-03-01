@@ -35,7 +35,7 @@ const _obj = templates._select_template;
 const empty_hierarchy = vh.get();
 
 const sys_rows = () => {
-  const [cond] = _obj.permitted_sys(_obj.calc_order);
+  const [cond] = _obj.permitted_sys();
   const sys = job_prm.builder && job_prm.builder.branch_filter && job_prm.builder.branch_filter.sys;
 
   const rows = [];
@@ -55,6 +55,11 @@ const sys_rows = () => {
 
 export default function SelectSys({handleNext}) {
 
+  const [cond] = _obj.permitted_sys();
+  const lock = cond && cond.path.inh.length === 1;
+  if(lock && _obj.refill) {
+    _obj.refill = false;
+  }
   const [refill, set_refill] = React.useState(_obj.refill);
   const [sys, set_sys] = React.useState(_obj.sys);
   const [group, set_group] = React.useState(_obj.sys._extra('sys_hierarchy') || empty_hierarchy);
@@ -96,13 +101,13 @@ export default function SelectSys({handleNext}) {
           fullWidth
         />
         <Typography variant="body2" color="primary" className={classes.top}>
-          Можно сохранить систему типового блока, либо выбрать другую
+          {lock ? 'Будет использована система и параметры шаблона' : 'Можно сохранить систему типового блока, либо выбрать другую'}
         </Typography>
         <FormControlLabel
           labelPlacement="start"
           className={classes.label}
-          control={<Switch checked={refill} onChange={refillChange} value="refill" />}
-          label={`Задействовать параметры системы`}
+          control={<Switch checked={refill} disabled={lock} onChange={refillChange} value="refill" />}
+          label={'Задействовать параметры системы'}
         />
       </Grid>
     </Grid>,
