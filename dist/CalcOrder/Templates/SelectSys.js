@@ -73,7 +73,11 @@ export default function SelectSys({
 }) {
   const [cond] = _obj.permitted_sys();
 
-  const lock = cond && cond.path.inh.length === 1;
+  let lock = cond && cond.path.inh.length === 1;
+
+  if (!lock && job_prm.builder.templates_lock_sys && job_prm.builder.templates_lock_sys.includes(_obj.calc_order)) {
+    lock = true;
+  }
 
   if (lock && _obj.refill) {
     _obj.refill = false;
