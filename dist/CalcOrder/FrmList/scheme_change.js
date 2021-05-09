@@ -55,7 +55,9 @@ export function apply_ref_filter(left_value, objs, scheme, class_name) {
   if (left_value === 'obj_delivery_state') {
     const tmp = [];
 
-    for (const ref of objs) {
+    for (const {
+      ref
+    } of objs) {
       if (ref === 'draft') {
         tmp.push('Черновик');
         tmp.push('Отозван');
@@ -73,11 +75,6 @@ export function apply_ref_filter(left_value, objs, scheme, class_name) {
     objs = tmp;
   }
 
-  if (objs.length > 1) {
-    row.comparison_type = 'in';
-    row.right_value = objs.join();
-  } else {
-    row.comparison_type = 'eq';
-    row.right_value = objs[0];
-  }
+  row.right_value = objs.map(v => v.ref || v).join();
+  row.comparison_type = objs.length > 1 ? 'in' : 'eq';
 }

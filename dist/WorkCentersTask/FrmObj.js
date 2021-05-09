@@ -191,8 +191,10 @@ class FrmObj extends DataObj {
       this.setState({
         _obj
       }, () => this.shouldComponentUpdate(this.props));
-      return _obj.load_production();
-    }).then(prods => prods.length && this.forceUpdate());
+      return _obj.load_linked_refs();
+    }).then(({
+      planning
+    }) => planning.count() && this.forceUpdate());
 
     _mgr.on('update', this.onDataChange);
 

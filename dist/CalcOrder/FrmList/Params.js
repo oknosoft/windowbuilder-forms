@@ -16,7 +16,8 @@ import { apply_ref_filter } from './scheme_change';
 
 const styles = theme => ({
   group: {
-    marginLeft: theme.spacing()
+    marginLeft: theme.spacing(),
+    marginRight: theme.spacing(2)
   }
 });
 
@@ -82,6 +83,8 @@ class Params extends React.Component {
     } = $p;
     const department = this.department = [];
     department._mgr = cat.divisions;
+    const partner = this.partner = [];
+    partner._mgr = cat.partners;
     const manager = this.manager = [];
     manager._mgr = cat.users;
 
@@ -94,16 +97,20 @@ class Params extends React.Component {
       }, manager.push.bind(manager));
     } else {
       cat.divisions.forEach(v => {
-        !v.is_new() && department.push(v);
+        v.name && department.push(v);
       });
       cat.users.forEach(v => {
-        !v.is_new() && manager.push(v);
+        v.name && manager.push(v);
       });
     }
 
+    cat.partners.forEach(v => {
+      v.name && partner.push(v);
+    });
     this.state = {
       obj_delivery_state: [],
       department: [],
+      partner: [],
       manager: []
     };
     const {
@@ -120,15 +127,26 @@ class Params extends React.Component {
 
         for (const ref of row.right_value.split(',')) {
           if (ref === 'Черновик' || ref === 'Отозван') {
-            !obj_delivery_state.includes('draft') && obj_delivery_state.push('draft');
+            const item = states.find(({
+              ref
+            }) => ref === 'draft');
+            !obj_delivery_state.includes(item) && obj_delivery_state.push(item);
           } else if (ref === 'Отправлен') {
-            obj_delivery_state.push('sent');
+            obj_delivery_state.push(states.find(({
+              ref
+            }) => ref === 'sent'));
           } else if (ref === 'Подтвержден') {
-            obj_delivery_state.push('confirmed');
+            obj_delivery_state.push(states.find(({
+              ref
+            }) => ref === 'confirmed'));
           } else if (ref === 'Отклонен') {
-            obj_delivery_state.push('declined');
+            obj_delivery_state.push(states.find(({
+              ref
+            }) => ref === 'declined'));
           } else if (ref === 'Шаблон') {
-            obj_delivery_state.push('template');
+            obj_delivery_state.push(states.find(({
+              ref
+            }) => ref === 'template'));
           }
         }
       }
@@ -141,6 +159,16 @@ class Params extends React.Component {
         use: true
       }, row => {
         row.right_value && this.state.department.push.apply(this.state.department, row.right_value.split(','));
+      });
+    }
+
+    if (partner.length) {
+      partner.sort(sort);
+      selection.find_rows({
+        left_value: 'partner',
+        use: true
+      }, row => {
+        row.right_value && this.state.partner.push.apply(this.state.partner, row.right_value.split(','));
       });
     }
 
@@ -163,6 +191,7 @@ class Params extends React.Component {
     const {
       obj_delivery_state,
       department,
+      partner,
       manager
     } = this.state;
     return /*#__PURE__*/React.createElement("div", {
@@ -187,6 +216,12 @@ class Params extends React.Component {
       items: this.department,
       selectedItems: department,
       handleChange: this.handleChange('department'),
+      fullWidth: true
+    }), /*#__PURE__*/React.createElement(ChipList, {
+      title: "Контрагенты",
+      items: this.partner,
+      selectedItems: partner,
+      handleChange: this.handleChange('partner'),
       fullWidth: true
     }), /*#__PURE__*/React.createElement(ChipList, {
       title: "Менеджер",
