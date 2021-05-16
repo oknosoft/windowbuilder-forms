@@ -5,7 +5,9 @@ export default {
     }
   }, duration = 300) => ({
     animation: {
-      rotateZ: toggled ? 90 : 0
+      rotateZ: toggled ? 90 : 0,
+      translateX: toggled ? 1 : 0,
+      translateY: toggled ? -2 : 0
     },
     duration: duration
   }),

@@ -53,10 +53,12 @@ const sys_rows = () => {
   return rows;
 };
 
-export default function SelectSys({handleNext}) {
+export default function SelectSys({handleNext, lock}) {
 
   const [cond] = _obj.permitted_sys();
-  let lock = cond && cond.path.inh.length === 1;
+  if(!lock) {
+    lock = cond && cond.path.inh.length === 1;
+  }
   if(!lock && job_prm.builder.templates_lock_sys && job_prm.builder.templates_lock_sys.includes(_obj.calc_order)) {
     lock = true;
   }
