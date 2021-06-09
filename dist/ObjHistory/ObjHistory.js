@@ -7,6 +7,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
+import RevsDetales from './RevsDetales';
 
 class ObjHistory extends React.Component {
   constructor(...args) {
@@ -53,10 +54,41 @@ class ObjHistory extends React.Component {
 
     db.get(`${_mgr.class_name}|${obj.ref}`, {
       revs_info: true
-    }).then(res => {
+    }).then(async res => {
+      const rows = [res];
+      const docs = [];
+
+      for (const {
+        rev,
+        status
+      } of res._revs_info) {
+        if (status === "available" && rev !== res._rev) {
+          docs.push({
+            id: res._id,
+            rev
+          });
+        }
+      }
+
+      if (docs.length) {
+        const {
+          results
+        } = await db.bulkGet({
+          docs
+        });
+
+        for (const {
+          docs
+        } of results) {
+          if (docs[0] && docs[0].ok) {
+            rows.push(docs[0].ok);
+          }
+        }
+      }
+
       this.setState({
         loaded: true,
-        rows: res._revs_info
+        rows
       });
     }).catch(err => {
       this.setState({
@@ -68,11 +100,29 @@ class ObjHistory extends React.Component {
 
   render() {
     const {
-      loaded,
-      rows,
-      err
-    } = this.state;
-    return err ? `err: ${err}` : loaded ? `length: ${rows.length}` : 'loading';
+      props: {
+        _mgr
+      },
+      state: {
+        loaded,
+        rows,
+        err
+      }
+    } = this;
+    const Detales = _mgr.RevsDetales || RevsDetales;
+
+    if (err) {
+      return `err: ${err}`;
+    }
+
+    if (!loaded) {
+      return 'loading...';
+    }
+
+    return /*#__PURE__*/React.createElement(Detales, {
+      rows: rows,
+      _mgr: _mgr
+    });
   }
 
 }
