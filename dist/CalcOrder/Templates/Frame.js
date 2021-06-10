@@ -37,6 +37,8 @@ const useStyles = makeStyles(theme => ({
 
 const prm = () => qs.parse(location.search.replace('?', ''));
 
+var _ref = /*#__PURE__*/React.createElement("small", null, "(Создать пустое)");
+
 function TemplatesFrame(props) {
   const classes = useStyles();
   let {
@@ -117,6 +119,29 @@ function TemplatesFrame(props) {
     setActiveStep(prevStep => prevStep - 1);
   };
 
+  const handleSkip = () => {
+    const {
+      ui: {
+        dialogs
+      },
+      utils
+    } = $p;
+
+    if (!order) {
+      return dialogs.alert({
+        text: `Не задан заказ назначения в url`,
+        title: 'Пустой заказ'
+      });
+    }
+
+    if (!utils.is_guid(ref)) {
+      action = 'new';
+      ref = utils.generate_guid();
+    }
+
+    props.handleNavigate(`/builder/${ref}?order=${order}&action=${action}&skip=true`);
+  };
+
   return /*#__PURE__*/React.createElement(Stepper, {
     activeStep: activeStep,
     orientation: "vertical"
@@ -144,7 +169,9 @@ function TemplatesFrame(props) {
     order
   }), /*#__PURE__*/React.createElement("div", {
     className: classes.actionsContainer
-  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Button, {
+  }, /*#__PURE__*/React.createElement("div", {
+    className: classes.flex
+  }, /*#__PURE__*/React.createElement(Button, {
     onClick: handleBack,
     className: classes.button
   }, activeStep === 0 ? 'Отмена' : 'Назад'), /*#__PURE__*/React.createElement(Button, {
@@ -153,7 +180,15 @@ function TemplatesFrame(props) {
     onClick: handleNext,
     className: classes.button,
     disabled: Boolean(list)
-  }, activeStep === steps.length - 1 ? 'Завершить' : 'Далее')))))));
+  }, activeStep === steps.length - 1 ? 'Завершить' : 'Далее'), /*#__PURE__*/React.createElement("div", {
+    className: classes.full
+  }), /*#__PURE__*/React.createElement(Button, {
+    variant: "contained",
+    color: "primary",
+    onClick: handleSkip,
+    className: classes.button,
+    title: "Создать пустое изделие без шаблона"
+  }, 'Пропустить\u00A0', " ", _ref)))))));
 }
 
 export default TemplatesFrame;

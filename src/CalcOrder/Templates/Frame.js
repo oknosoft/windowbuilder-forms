@@ -84,6 +84,18 @@ function TemplatesFrame(props) {
     setActiveStep(prevStep => prevStep - 1);
   };
 
+  const handleSkip = () => {
+    const {ui: {dialogs}, utils} = $p;
+    if(!order) {
+      return dialogs.alert({text: `Не задан заказ назначения в url`, title: 'Пустой заказ'});
+    }
+    if(!utils.is_guid(ref)) {
+      action = 'new';
+      ref = utils.generate_guid();
+    }
+    props.handleNavigate(`/builder/${ref}?order=${order}&action=${action}&skip=true`);
+  };
+
   return (
     <Stepper activeStep={activeStep} orientation="vertical">
       {steps.map((label, index) => (
@@ -101,7 +113,7 @@ function TemplatesFrame(props) {
           <StepContent>
             {stepContent(index, {handleNext, handleBack, list, set_list, props, order})}
             <div className={classes.actionsContainer}>
-              <div>
+              <div className={classes.flex}>
                 <Button
                   onClick={handleBack}
                   className={classes.button}
@@ -116,6 +128,16 @@ function TemplatesFrame(props) {
                   disabled={Boolean(list)}
                 >
                   {activeStep === steps.length - 1 ? 'Завершить' : 'Далее'}
+                </Button>
+                <div className={classes.full}/>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSkip}
+                  className={classes.button}
+                  title="Создать пустое изделие без шаблона"
+                >
+                  {'Пропустить\u00A0'} <small>(Создать пустое)</small>
                 </Button>
               </div>
             </div>
