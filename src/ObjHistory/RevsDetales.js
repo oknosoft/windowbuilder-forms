@@ -36,4 +36,5 @@ export default RevsDetales;
 
 RevsDetales.propTypes = {
   rows: PropTypes.array.isRequired,
+  setClose: PropTypes.func.isRequired,
 };

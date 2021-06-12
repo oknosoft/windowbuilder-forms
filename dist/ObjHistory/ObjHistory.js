@@ -10,12 +10,43 @@ import PropTypes from 'prop-types';
 import RevsDetales from './RevsDetales';
 
 class ObjHistory extends React.Component {
-  constructor(...args) {
-    super(...args);
+  constructor(props, context) {
+    super(props, context);
+
+    this.changeObj = ({
+      obj,
+      _mgr,
+      db
+    }) => {
+      this.setState({
+        obj,
+        _mgr,
+        db,
+        loaded: false
+      }, this.componentDidMount.bind(this));
+    };
+
+    this.resetObj = () => {
+      const {
+        obj,
+        _mgr,
+        db
+      } = this.props;
+      this.setState({
+        obj,
+        _mgr,
+        db,
+        loaded: false
+      }, this.componentDidMount.bind(this));
+    };
+
     this.state = {
       loaded: false,
       rows: [],
-      err: ''
+      err: '',
+      obj: props.obj,
+      _mgr: props._mgr,
+      db: props.db
     };
   }
 
@@ -23,30 +54,10 @@ class ObjHistory extends React.Component {
     // читаем историю из couchdb
     // отбрасываем лишние реквизиты
     let {
-      hfields,
-      db,
       obj,
-      _mgr
-    } = this.props;
-
-    if (!hfields) {
-      hfields = _mgr.metadata().history_fields;
-    }
-
-    if (!hfields) {
-      hfields = {};
-
-      for (const fld in _mgr.metadata().fields) {
-        hfields[fld] = true;
-      }
-
-      for (const ts in _mgr.metadata().tabular_sections) {
-        hfields[ts] = {
-          count: true,
-          fields: {}
-        };
-      }
-    }
+      _mgr,
+      db
+    } = this.state;
 
     if (!db) {
       db = _mgr.adapter.db(_mgr);
@@ -100,16 +111,17 @@ class ObjHistory extends React.Component {
 
   render() {
     const {
-      props: {
-        _mgr
-      },
       state: {
         loaded,
         rows,
-        err
-      }
+        err,
+        obj,
+        _mgr
+      },
+      props
     } = this;
     const Detales = _mgr.RevsDetales || RevsDetales;
+    const isRoot = props.obj === obj;
 
     if (err) {
       return `err: ${err}`;
@@ -121,7 +133,12 @@ class ObjHistory extends React.Component {
 
     return /*#__PURE__*/React.createElement(Detales, {
       rows: rows,
-      _mgr: _mgr
+      obj: obj,
+      _mgr: _mgr,
+      isRoot: isRoot,
+      changeObj: this.changeObj,
+      resetObj: this.resetObj,
+      setClose: props.setClose
     });
   }
 

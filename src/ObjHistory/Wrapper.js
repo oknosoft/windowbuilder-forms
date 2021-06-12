@@ -4,13 +4,18 @@ import Button from '@material-ui/core/Button';
 import Dialog from 'metadata-react/App/Dialog';
 import ObjHistory from './ObjHistory';
 
+const defaultCloseText = 'Закрыть';
+
 export default function (props) {
 
   const {dialog: {_mgr, cmd, ref}, handlers}  = props;
   const obj = _mgr.get(ref);
 
+  const [close, setClose] = React.useState({handler: null, text: ''});
+
   function handleCancel() {
-    handlers.handleIfaceState({
+    const stop = close.handler ? close.handler({_mgr, cmd, ref, handlers}) === false : false;
+    !stop && handlers.handleIfaceState({
       component: cmd.area || 'DataObjPage',
       name: 'dialog',
       value: null,
@@ -24,9 +29,9 @@ export default function (props) {
     title={`История изменений '${obj}'`}
     onClose={handleCancel}
     actions={[
-      <Button key="cancel" onClick={handleCancel} color="primary">Закрыть</Button>
+      <Button key="cancel" onClick={handleCancel} color="primary">{close.text || defaultCloseText}</Button>
     ]}
   >
-    <ObjHistory obj={obj} _mgr={_mgr} {...cmd} />
+    <ObjHistory obj={obj} _mgr={_mgr} {...cmd} setClose={setClose}/>
   </Dialog>;
 }

@@ -12,25 +12,24 @@ import RevsDetales from './RevsDetales';
 
 class ObjHistory extends React.Component {
 
-  state = {loaded: false, rows: [], err: ''};
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      loaded: false,
+      rows: [],
+      err: '',
+      obj: props.obj,
+      _mgr: props._mgr,
+      db: props.db,
+    };
+  }
 
   componentDidMount() {
     // читаем историю из couchdb
 
     // отбрасываем лишние реквизиты
-    let {hfields, db, obj, _mgr} = this.props;
-    if(!hfields) {
-      hfields = _mgr.metadata().history_fields;
-    }
-    if(!hfields) {
-      hfields = {};
-      for(const fld in _mgr.metadata().fields) {
-        hfields[fld] = true;
-      }
-      for(const ts in _mgr.metadata().tabular_sections) {
-        hfields[ts] = {count: true, fields: {}};
-      }
-    }
+    let {obj, _mgr, db} = this.state;
+
     if(!db) {
       db = _mgr.adapter.db(_mgr);
     }
@@ -58,24 +57,42 @@ class ObjHistory extends React.Component {
       });
   }
 
+  changeObj = ({obj, _mgr, db}) => {
+    this.setState({obj, _mgr, db, loaded: false}, this.componentDidMount.bind(this));
+  };
+
+  resetObj = () => {
+    const {obj, _mgr, db} = this.props;
+    this.setState({obj, _mgr, db, loaded: false}, this.componentDidMount.bind(this));
+  };
+
   render() {
-    const {props: {_mgr}, state: {loaded, rows, err}} = this;
+    const {state: {loaded, rows, err, obj, _mgr}, props} = this;
     const Detales = _mgr.RevsDetales || RevsDetales;
+    const isRoot = props.obj === obj;
     if(err) {
       return `err: ${err}`;
     }
     if(!loaded) {
       return 'loading...';
     }
-    return <Detales rows={rows} _mgr={_mgr}/>;
+    return <Detales
+      rows={rows}
+      obj={obj}
+      _mgr={_mgr}
+      isRoot={isRoot}
+      changeObj={this.changeObj}
+      resetObj={this.resetObj}
+      setClose={props.setClose}
+    />;
   }
 }
 
 ObjHistory.propTypes = {
   _mgr: PropTypes.object.isRequired,
   obj: PropTypes.object.isRequired,
-  hfields: PropTypes.array,
   db: PropTypes.object,
+  setClose: PropTypes.func.isRequired,
 };
 
 export default ObjHistory;

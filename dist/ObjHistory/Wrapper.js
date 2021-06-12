@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from 'metadata-react/App/Dialog';
 import ObjHistory from './ObjHistory';
+const defaultCloseText = 'Закрыть';
 export default function (props) {
   const {
     dialog: {
@@ -17,8 +18,19 @@ export default function (props) {
 
   const obj = _mgr.get(ref);
 
+  const [close, setClose] = React.useState({
+    handler: null,
+    text: ''
+  });
+
   function handleCancel() {
-    handlers.handleIfaceState({
+    const stop = close.handler ? close.handler({
+      _mgr,
+      cmd,
+      ref,
+      handlers
+    }) === false : false;
+    !stop && handlers.handleIfaceState({
       component: cmd.area || 'DataObjPage',
       name: 'dialog',
       value: null
@@ -36,9 +48,11 @@ export default function (props) {
       key: "cancel",
       onClick: handleCancel,
       color: "primary"
-    }, "Закрыть")]
+    }, close.text || defaultCloseText)]
   }, /*#__PURE__*/React.createElement(ObjHistory, _extends({
     obj: obj,
     _mgr: _mgr
-  }, cmd)));
+  }, cmd, {
+    setClose: setClose
+  })));
 }
