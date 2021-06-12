@@ -35,6 +35,9 @@ class ObjHistory extends React.Component {
     }
     db.get(`${_mgr.class_name}|${obj.ref}`, {revs_info: true})
       .then(async (res) => {
+        if(this.unmounted) {
+          return;
+        }
         const rows = [res];
         const docs = [];
         for(const {rev, status} of res._revs_info) {
@@ -55,6 +58,10 @@ class ObjHistory extends React.Component {
       .catch((err) => {
         this.setState({err: err.message, rows: []});
       });
+  }
+
+  componentWillUnmount() {
+    this.unmounted = true;
   }
 
   changeObj = ({obj, _mgr, db}) => {
