@@ -103,7 +103,7 @@ class SelectOrder extends React.Component {
             _mgr.create(doc)
               .then((doc) => {
                 _obj.calc_order = doc;
-                return doc.load_linked_refs();
+                return list === 'templates' ? doc.load_templates() : doc.load_linked_refs();
               })
               .then(reset_list)
               .then(handleNext)
