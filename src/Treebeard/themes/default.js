@@ -20,7 +20,7 @@ export default {
         whiteSpace: 'nowrap'
       },
       activeLink: {
-        background: '#EEEEEE'
+        background: 'rgba(0, 126, 255, 0.12)'
       },
       toggle: {
         base: {
