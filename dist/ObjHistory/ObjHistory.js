@@ -146,7 +146,8 @@ class ObjHistory extends React.Component {
       isRoot: isRoot,
       changeObj: this.changeObj,
       resetObj: this.resetObj,
-      setClose: props.setClose
+      setClose: props.setClose,
+      setToolBtns: props.setToolBtns
     });
   }
 

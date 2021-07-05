@@ -22,6 +22,7 @@ export default function (props) {
     handler: null,
     text: ''
   });
+  const [toolbtns, setToolBtns] = React.useState(null);
 
   function handleCancel() {
     const stop = close.handler ? close.handler({
@@ -44,6 +45,7 @@ export default function (props) {
     large: true,
     title: `История изменений '${obj}'`,
     onClose: handleCancel,
+    toolbtns: toolbtns,
     actions: [/*#__PURE__*/React.createElement(Button, {
       key: "cancel",
       onClick: handleCancel,
@@ -53,6 +55,7 @@ export default function (props) {
     obj: obj,
     _mgr: _mgr
   }, cmd, {
-    setClose: setClose
+    setClose: setClose,
+    setToolBtns: setToolBtns
   })));
 }

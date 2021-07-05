@@ -91,6 +91,7 @@ class ObjHistory extends React.Component {
       changeObj={this.changeObj}
       resetObj={this.resetObj}
       setClose={props.setClose}
+      setToolBtns={props.setToolBtns}
     />;
   }
 }
@@ -98,8 +99,9 @@ class ObjHistory extends React.Component {
 ObjHistory.propTypes = {
   _mgr: PropTypes.object.isRequired,
   obj: PropTypes.object.isRequired,
-  db: PropTypes.object,
   setClose: PropTypes.func.isRequired,
+  db: PropTypes.object,
+  setToolBtns: PropTypes.func,
 };
 
 export default ObjHistory;
