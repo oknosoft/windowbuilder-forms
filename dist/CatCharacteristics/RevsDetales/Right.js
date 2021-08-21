@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DataGrid from 'react-data-grid';
 import Spec from '../LazySpec';
-
-const PropFormatter = ({
+export const PropFormatter = ({
   value
 }) => value ? value.presentation : '';
 

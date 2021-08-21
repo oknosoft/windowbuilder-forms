@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import DataGrid from 'react-data-grid';
 import Spec from '../LazySpec';
 
-const PropFormatter = ({value}) => value ? value.presentation : '';
+export const PropFormatter = ({value}) => value ? value.presentation : '';
 
 const EmptyRowsView = (classes) => () => <div className={classes.empty}>Укажите строку версии продукции (слева)</div>;
-
 
 const columns_prop = [
   {key: 'cnstr', name: 'Слой', width: 70, resizable: true},

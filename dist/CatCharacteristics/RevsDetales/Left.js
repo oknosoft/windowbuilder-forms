@@ -2,6 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DataGrid from 'react-data-grid';
 import { DateFormatter, NomFormatter } from '../../CalcOrder/RevsDetales';
+
+const ClrFormatter = ({
+  value
+}) => {
+  const clr = $p.cat.clrs.get(value);
+  return clr.presentation;
+};
+
 const columns_doc = [{
   key: 'date',
   name: 'Дата',
@@ -18,19 +26,25 @@ const columns_doc = [{
   resizable: true,
   formatter: NomFormatter
 }, {
+  key: 'clr',
+  name: 'Цвет',
+  width: 90,
+  resizable: true,
+  formatter: ClrFormatter
+}, {
   key: 'x',
   name: 'X',
-  width: 70,
+  width: 60,
   resizable: true
 }, {
   key: 'y',
   name: 'Y',
-  width: 70,
+  width: 60,
   resizable: true
 }, {
   key: 's',
   name: 'S',
-  width: 70,
+  width: 60,
   resizable: true
 }];
 export default function Left({

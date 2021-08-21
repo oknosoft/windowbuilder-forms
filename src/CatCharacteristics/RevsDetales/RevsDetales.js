@@ -60,7 +60,7 @@ class RevsDetales extends Proto {
     const rows = [];
     const tx = $p.cat.characteristics.create({}, false, true);
 
-    for(const {timestamp, _rev, owner, params, specification, x, y, s, svg} of src) {
+    for(const {timestamp, _rev, owner, params, specification, clr, x, y, s, svg} of src) {
       if(timestamp) {
         const row = {
           _rev,
@@ -69,6 +69,7 @@ class RevsDetales extends Proto {
           owner,
           params: this.filter_params(tx, params),
           specification,
+          clr,
           x,
           y,
           s,
