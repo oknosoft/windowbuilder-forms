@@ -4,7 +4,10 @@ import DataGrid from 'react-data-grid';
 import Spec from '../LazySpec';
 export const PropFormatter = ({
   value
-}) => value ? value.presentation : '';
+}) => {
+  const res = value ? value.presentation : '';
+  return res || null;
+};
 
 const EmptyRowsView = classes => () => /*#__PURE__*/React.createElement("div", {
   className: classes.empty

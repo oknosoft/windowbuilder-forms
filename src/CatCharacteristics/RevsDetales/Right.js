@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import DataGrid from 'react-data-grid';
 import Spec from '../LazySpec';
 
-export const PropFormatter = ({value}) => value ? value.presentation : '';
+export const PropFormatter = ({value}) => {
+  const res = value ? value.presentation : '';
+  return res || null;
+};
 
 const EmptyRowsView = (classes) => () => <div className={classes.empty}>Укажите строку версии продукции (слева)</div>;
 
