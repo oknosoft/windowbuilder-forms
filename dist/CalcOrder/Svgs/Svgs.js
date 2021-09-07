@@ -71,17 +71,16 @@ class Svgs extends React.Component {
     }) => {
       const ondblclick = () => handleNavigate(`/builder/${ref}`);
 
+      const __html = svg ? $p.utils.scale_svg(svg, 88, 22) : '';
+
       return /*#__PURE__*/React.createElement("div", {
         key: ref,
         className: cn({
           rsvg_elm: true,
           rsvg_selected: ref === selected
         }),
-        ref: el => {
-          if (el) {
-            el.innerHTML = $p.iface.scale_svg(svg, 88, 22);
-            el.firstChild.ondblclick = ondblclick;
-          }
+        dangerouslySetInnerHTML: {
+          __html
         },
         onClick: () => this.setState({
           selected: ref
