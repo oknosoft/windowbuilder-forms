@@ -5,11 +5,12 @@ import CloseIcon from '@material-ui/icons/Close';
 import Tip from './Tip';
 
 export default function CloseBtn(props) {
-  return <Tip title="Закрыть форму">
+  return <Tip title={props.title || 'Закрыть форму'}>
     <IconButton onClick={props.handleClose}><CloseIcon/></IconButton>
   </Tip>;
 }
 
 CloseBtn.propTypes = {
   handleClose: PropTypes.func.isRequired,
+  title: PropTypes.string,
 };

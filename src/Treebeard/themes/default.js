@@ -7,7 +7,7 @@ export default {
       padding: 0,
       color: '#9DA5AB',
       fontFamily: 'inherit',
-      //fontSize: '14px'
+      userSelect: 'none',
     },
     node: {
       base: {

@@ -8,7 +8,7 @@ var _ref = /*#__PURE__*/React.createElement(CloseIcon, null);
 
 export default function CloseBtn(props) {
   return /*#__PURE__*/React.createElement(Tip, {
-    title: "Закрыть форму"
+    title: props.title || 'Закрыть форму'
   }, /*#__PURE__*/React.createElement(IconButton, {
     onClick: props.handleClose
   }, _ref));
