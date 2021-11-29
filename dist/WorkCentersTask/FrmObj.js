@@ -10,7 +10,7 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tab from '@material-ui/core/Tab';
-import { Tabs } from '../Common/AntTabs';
+import { Tabs } from 'metadata-react/App/AntTabs';
 import { Helmet } from 'react-helmet';
 import FormGroup from '@material-ui/core/FormGroup';
 import IconButton from '@material-ui/core/IconButton';

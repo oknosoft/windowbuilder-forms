@@ -3,7 +3,8 @@ export const defaultMatcher = (filterText, node) => {
   return node.name.toLowerCase().indexOf(filterText.toLowerCase()) !== -1;
 };
 export const findNode = (node, filter, matcher) => {
-  return matcher(filter, node) || node.children && // or i have decendents and one of them match
+  return matcher(filter, node) || // i match
+  node.children && // or i have decendents and one of them match
   node.children.length && !!node.children.find(child => findNode(child, filter, matcher));
 };
 export const filterTree = (node, filter, matcher = defaultMatcher) => {

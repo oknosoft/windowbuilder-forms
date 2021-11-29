@@ -9,8 +9,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {withStyles} from '@material-ui/core/styles';
 
-import Tip from '../../Common/Tip';
-import CloseBtn from '../../Common/CloseBtn';
+import Tip from 'metadata-react/App/Tip';
+import CloseBtn from 'metadata-react/App/CloseButton';
 import DirectList from 'metadata-react/DynList';
 import QuickFilter from '../FrmList/QuickFilter';
 

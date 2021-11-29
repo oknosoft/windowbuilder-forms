@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import qs from 'qs';
 
 import {steps, stepContent} from './stepContent';
-import CloseBtn from '../../Common/CloseBtn';
+import CloseBtn from 'metadata-react/App/CloseButton';
 
 const useStyles = makeStyles(theme => ({
   root: {

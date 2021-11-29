@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Popper from '@material-ui/core/Popper';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogActions from '@material-ui/core/DialogActions';
-import Tip from '../../Common/Tip';
+import Tip from 'metadata-react/App/Tip';
 import Params from './Params';
 import LoadingModal from 'metadata-react/DumbLoader/LoadingModal';
 
