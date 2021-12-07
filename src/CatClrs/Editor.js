@@ -25,6 +25,8 @@ export default function FieldClr({_meta, _obj, _fld, ...other}) {
   const meta_clr = Object.assign({}, _meta, {type, synonym: 'Основной'});
   const meta_in = Object.assign({}, _meta, {type, synonym: 'Изнутри'});
   const meta_out = Object.assign({}, _meta, {type, synonym: 'Снаружи'});
+  $p.cat.clrs.hide_composite(meta_in);
+  $p.cat.clrs.hide_composite(meta_out);
 
   return <Accordion square elevation={0} classes={{expanded: classes.rootExpanded}}>
     <AccordionSummary classes={{

@@ -50,6 +50,8 @@ export default function FieldClr({
     type,
     synonym: 'Снаружи'
   });
+  $p.cat.clrs.hide_composite(meta_in);
+  $p.cat.clrs.hide_composite(meta_out);
   return /*#__PURE__*/React.createElement(Accordion, {
     square: true,
     elevation: 0,
