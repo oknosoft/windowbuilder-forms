@@ -24,7 +24,7 @@ export default function FieldClr({
   _fld,
   ...other
 }) {
-  if (_fld !== 'clr') {
+  if (_fld !== 'clr' || _meta.hide_composite) {
     return /*#__PURE__*/React.createElement(FieldInfinit, _extends({
       _meta: _meta,
       _obj: _obj,
@@ -40,7 +40,7 @@ export default function FieldClr({
   };
   const meta_clr = Object.assign({}, _meta, {
     type,
-    synonym: 'Основной'
+    synonym: 'Общий'
   });
   const meta_in = Object.assign({}, _meta, {
     type,

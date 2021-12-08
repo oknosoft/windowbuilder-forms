@@ -15,14 +15,14 @@ import useStyles from '../Common/stylesAccordion';
 
 export default function FieldClr({_meta, _obj, _fld, ...other}) {
 
-  if(_fld !== 'clr') {
-    return <FieldInfinit _meta={_meta} _obj={_obj} _fld={_fld} {...other}/>
+  if(_fld !== 'clr' || _meta.hide_composite) {
+    return <FieldInfinit _meta={_meta} _obj={_obj} _fld={_fld} {...other}/>;
   }
 
   const value = _obj[_fld];
   const classes = useStyles();
   const type = {is_ref: true, types: ['cat.clrs']};
-  const meta_clr = Object.assign({}, _meta, {type, synonym: 'Основной'});
+  const meta_clr = Object.assign({}, _meta, {type, synonym: 'Общий'});
   const meta_in = Object.assign({}, _meta, {type, synonym: 'Изнутри'});
   const meta_out = Object.assign({}, _meta, {type, synonym: 'Снаружи'});
   $p.cat.clrs.hide_composite(meta_in);
@@ -56,4 +56,10 @@ export default function FieldClr({_meta, _obj, _fld, ...other}) {
     </AccordionDetails>
   </Accordion>;
 
+};
+
+FieldClr.propTypes = {
+  _meta: PropTypes.object.isRequired,
+  _obj: PropTypes.object.isRequired,
+  _fld: PropTypes.string.isRequired,
 };
