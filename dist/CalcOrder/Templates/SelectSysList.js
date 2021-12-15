@@ -6,7 +6,9 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 
-var _ref = /*#__PURE__*/React.createElement(InputAdornment, null, /*#__PURE__*/React.createElement(SearchIcon, null));
+var _ref = /*#__PURE__*/React.createElement(InputAdornment, {
+  position: "end"
+}, /*#__PURE__*/React.createElement(SearchIcon, null));
 
 export default function SelectSysList({
   classes,

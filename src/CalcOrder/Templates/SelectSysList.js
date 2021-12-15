@@ -39,7 +39,7 @@ export default function SelectSysList({classes, sys_rows, group, sys, _obj, set_
         label="Фильтр"
         value={filter}
         onChange={({target}) => set_filter(target.value)}
-        InputProps={{endAdornment: <InputAdornment><SearchIcon /></InputAdornment>}}
+        InputProps={{endAdornment: <InputAdornment position="end"><SearchIcon /></InputAdornment>}}
       />
       <div className={classes.list}>
         <List component="nav" >
