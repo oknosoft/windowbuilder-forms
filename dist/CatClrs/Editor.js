@@ -14,25 +14,70 @@ import PropField from 'metadata-react/DataField/PropField';
 import FieldInfinit from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
 import useStyles from '../Common/stylesAccordion';
 
+function clr_proxy(_obj, _fld, handleValueChange) {
+  if (_fld === 'clr' && 'clr_in' in _obj && 'clr_out' in _obj) {
+    return _obj;
+  }
+
+  return {
+    get clr() {
+      return _obj[_fld];
+    },
+
+    set clr(v) {
+      _obj[_fld] = v;
+      handleValueChange && handleValueChange(_obj[_fld]);
+    },
+
+    get clr_in() {
+      return this.clr.clr_in;
+    },
+
+    set clr_in(v) {
+      const {
+        clr
+      } = this;
+      this.clr = $p.cat.clrs.composite_ref('clr_in', clr.clr_out.empty() ? clr : clr.clr_out, v);
+    },
+
+    get clr_out() {
+      return this.clr.clr_out;
+    },
+
+    set clr_out(v) {
+      const {
+        clr
+      } = this;
+      this.clr = $p.cat.clrs.composite_ref('clr_out', clr.clr_in.empty() ? clr : clr.clr_in, v);
+    }
+
+  };
+}
+
 var _ref = /*#__PURE__*/React.createElement(ArrowDropDownIcon, null);
 
 var _ref2 = /*#__PURE__*/React.createElement(ArrowDropDownIcon, null);
+
+var _ref3 = /*#__PURE__*/React.createElement(ArrowDropDownIcon, null);
 
 export default function FieldClr({
   _meta,
   _obj,
   _fld,
+  handleValueChange,
   ...other
 }) {
-  if (_fld !== 'clr' || _meta.hide_composite) {
+  if (_meta.hide_composite || !_meta.type.str_len) {
     return /*#__PURE__*/React.createElement(FieldInfinit, _extends({
       _meta: _meta,
       _obj: _obj,
-      _fld: _fld
+      _fld: _fld,
+      handleValueChange: handleValueChange
     }, other));
   }
 
-  const value = _obj[_fld];
+  const proxy = clr_proxy(_obj, _fld, handleValueChange);
+  const value = proxy.clr;
   const classes = useStyles();
   const type = {
     is_ref: true,
@@ -66,7 +111,16 @@ export default function FieldClr({
       expandIcon: classes.icon
     },
     expandIcon: _ref
-  }, /*#__PURE__*/React.createElement(FormControl, {
+  }, other.label_position == 'hide' ? /*#__PURE__*/React.createElement(Input, {
+    readOnly: true,
+    value: value && value.name,
+    endAdornment: /*#__PURE__*/React.createElement(InputAdornment, {
+      position: "end",
+      classes: {
+        root: classes.input
+      }
+    }, _ref2)
+  }) : /*#__PURE__*/React.createElement(FormControl, {
     classes: {
       root: classes.control
     }
@@ -87,24 +141,25 @@ export default function FieldClr({
       classes: {
         root: classes.input
       }
-    }, _ref2)
+    }, _ref3)
   }))), /*#__PURE__*/React.createElement(AccordionDetails, {
     classes: {
       root: classes.details
     }
   }, /*#__PURE__*/React.createElement(PropField, _extends({
     _meta: meta_clr,
-    _obj: _obj,
+    _obj: proxy,
     _fld: "clr",
-    ctrl_type: FieldInfinit
+    ctrl_type: FieldInfinit,
+    handleValueChange: handleValueChange
   }, other)), /*#__PURE__*/React.createElement(PropField, _extends({
     _meta: meta_in,
-    _obj: _obj,
+    _obj: proxy,
     _fld: "clr_in",
     ctrl_type: FieldInfinit
   }, other)), /*#__PURE__*/React.createElement(PropField, _extends({
     _meta: meta_out,
-    _obj: _obj,
+    _obj: proxy,
     _fld: "clr_out",
     ctrl_type: FieldInfinit
   }, other))));
