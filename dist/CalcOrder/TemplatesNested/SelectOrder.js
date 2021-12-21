@@ -31,11 +31,15 @@ export default function SelectOrder({
     return null;
   }
 
+  if (!templates_nested.includes(_obj.calc_order)) {
+    _obj.calc_order = templates_nested[0];
+  }
+
   return /*#__PURE__*/React.createElement(FormControl, {
     fullWidth: true,
     title: "Укажите заказ"
   }, _ref2, /*#__PURE__*/React.createElement(Select, {
-    value: templates_nested.includes(_obj.calc_order.ref) ? _obj.calc_order.ref : '',
+    value: templates_nested.includes(_obj.calc_order) ? _obj.calc_order.ref : '',
     onChange: ({
       target
     }) => {

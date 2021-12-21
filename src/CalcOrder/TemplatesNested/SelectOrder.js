@@ -24,10 +24,14 @@ export default function SelectOrder({onChange, _obj, templates_nested}) {
     }
     return null;
   }
+  if(!templates_nested.includes(_obj.calc_order)) {
+    _obj.calc_order = templates_nested[0];
+  }
+
   return <FormControl fullWidth title="Укажите заказ">
     <InputLabel>Расчет-заказ шаблонов</InputLabel>
     <Select
-      value={templates_nested.includes(_obj.calc_order.ref) ? _obj.calc_order.ref : ''}
+      value={templates_nested.includes(_obj.calc_order) ? _obj.calc_order.ref : ''}
       onChange={({target}) => {
         _obj.calc_order = target.value;
         onChange(_obj.calc_order);
