@@ -15,7 +15,7 @@ class TemplatesFrame extends Lazy {
 
       if (templates_nested && templates_nested.length) {
         for (const tmp of templates_nested) {
-          res = res.then(() => tmp.load_linked_refs());
+          res = res.then(() => tmp.load_templates());
         }
       }
 

@@ -10,7 +10,7 @@ class TemplatesFrame extends Lazy {
         let res = Promise.resolve();
         if(templates_nested && templates_nested.length) {
           for(const tmp of templates_nested) {
-            res = res.then(() => tmp.load_linked_refs());
+            res = res.then(() => tmp.load_templates());
           }
         }
         res.then(fin).catch(fin);
