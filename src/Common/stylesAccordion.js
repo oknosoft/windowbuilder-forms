@@ -34,6 +34,15 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     transform: 'translate(0, 12px)',
     cursor: 'pointer',
+    width: '40%',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    '&:hover': {
+      whiteSpace: 'normal',
+      background: 'white',
+      transform: 'translate(0, 10px)',
+    },
   },
   iroot: {
     marginLeft: '40%',
