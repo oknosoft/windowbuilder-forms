@@ -59,6 +59,7 @@ class LinkedProps extends React.Component {
         types
       } = param.type;
       let oselect = types.length === 1 && ['cat.property_values', 'cat.characteristics'].includes(types[0]);
+      const bool = types.includes('boolean') && (typeof prow.value === 'boolean' || types.length === 1);
       let key = `${prow.row}-${prow.param.valueOf()}`;
 
       if (ts._owner.sys) {
@@ -76,7 +77,7 @@ class LinkedProps extends React.Component {
           notify.add(prow);
         }
 
-        if (values.length) {
+        if (!bool && values.length) {
           if (values.length < 50) {
             oselect = true;
           }
@@ -109,7 +110,7 @@ class LinkedProps extends React.Component {
         _obj: prow,
         _fld: "value",
         _meta: _meta,
-        ctrl_type: oselect ? 'oselect' : void 0
+        ctrl_type: oselect ? 'oselect' : bool ? 'ch' : void 0
       }));
     });
     return res;
