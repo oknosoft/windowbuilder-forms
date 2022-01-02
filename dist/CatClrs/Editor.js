@@ -67,6 +67,18 @@ export default function FieldClr({
   handleValueChange,
   ...other
 }) {
+  if (_meta.single_value) {
+    const read_only = other.read_only || _meta.single_value === _obj[_fld];
+    return /*#__PURE__*/React.createElement(FieldInfinit, _extends({
+      _meta: _meta,
+      _obj: _obj,
+      _fld: _fld,
+      handleValueChange: handleValueChange
+    }, other, {
+      read_only: read_only
+    }));
+  }
+
   if (_meta.hide_composite || !_meta.type.str_len) {
     return /*#__PURE__*/React.createElement(FieldInfinit, _extends({
       _meta: _meta,

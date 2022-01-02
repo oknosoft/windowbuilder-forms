@@ -46,6 +46,10 @@ function clr_proxy(_obj, _fld, handleValueChange) {
 
 export default function FieldClr({_meta, _obj, _fld, handleValueChange, ...other}) {
 
+  if(_meta.single_value) {
+    const read_only = other.read_only || _meta.single_value === _obj[_fld];
+    return <FieldInfinit _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
+  }
   if(_meta.hide_composite || !_meta.type.str_len) {
     return <FieldInfinit _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other}/>;
   }
