@@ -1,22 +1,5 @@
 
-import Lazy from 'metadata-react/DumbLoader/Lazy';
-
-class TemplatesFrame extends Lazy {
-  componentDidMount() {
-    import('./Frame')
-      .then((module) => {
-        const {templates_nested} = $p.job_prm.builder;
-        const fin = () => this.setState({Component: module.default});
-        let res = Promise.resolve();
-        if(templates_nested && templates_nested.length) {
-          for(const tmp of templates_nested) {
-            res = res.then(() => tmp.load_templates());
-          }
-        }
-        res.then(fin).catch(fin);
-      });
-  }
-}
+import TemplatesFrame from './index';
 
 export default function ({ui}) {
   const {dialogs} = ui;
