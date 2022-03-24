@@ -39,6 +39,7 @@ class Container extends PureComponent {
       terminal,
       onClick,
       onClickHeader,
+      onClickCheck,
       onRightClickHeader,
       node
     } = this.props;
@@ -51,7 +52,8 @@ class Container extends PureComponent {
       node: node,
       style: style.header,
       onClick: onClickHeader,
-      onRightClick: onRightClickHeader
+      onRightClick: onRightClickHeader,
+      onClickCheck: onClickCheck
     }));
   }
 

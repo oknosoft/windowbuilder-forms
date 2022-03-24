@@ -1,5 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Checkbox from '@material-ui/core/Checkbox';
+import { makeStyles } from '@material-ui/core/styles';
+const useStyles = makeStyles({
+  root: {
+    padding: 0
+  }
+});
 
 function prevent(e) {
   e.preventDefault();
@@ -9,6 +16,7 @@ const Header = ({
   node,
   style,
   onClick,
+  onClickCheck,
   onRightClick
 }) => /*#__PURE__*/React.createElement("div", {
   style: node.children ? style.base : Object.assign({
@@ -26,7 +34,18 @@ const Header = ({
 }, /*#__PURE__*/React.createElement("div", {
   style: style.title,
   className: `dsn-hover`
-}, /*#__PURE__*/React.createElement("div", {
+}, node.hasOwnProperty('checked') ? /*#__PURE__*/React.createElement(Checkbox, {
+  checked: node.checked,
+  size: "small",
+  color: "primary",
+  onChange: ({
+    target
+  }) => {
+    node.checked = target.checked;
+    onClickCheck(node);
+  },
+  classes: useStyles()
+}) : /*#__PURE__*/React.createElement("div", {
   className: `dsn-treeview-icon ${node.icon}`
 }), node.name));
 

@@ -26,7 +26,7 @@ class Container extends PureComponent {
     }
 
     render() {
-        const {style, decorators, terminal, onClick, onClickHeader, onRightClickHeader, node} = this.props;
+        const {style, decorators, terminal, onClick, onClickHeader, onClickCheck, onRightClickHeader, node} = this.props;
         return (
             <div
                 onClick={onClick ? () => onClick() : null}
@@ -38,6 +38,7 @@ class Container extends PureComponent {
                     style={style.header}
                     onClick={onClickHeader}
                     onRightClick={onRightClickHeader}
+                    onClickCheck={onClickCheck}
                 />
             </div>
         );
@@ -45,18 +46,19 @@ class Container extends PureComponent {
 }
 
 Container.propTypes = {
-    style: PropTypes.object.isRequired,
-    decorators: PropTypes.object.isRequired,
-    terminal: PropTypes.bool.isRequired,
-    onClick: PropTypes.func,
-    onClickToggle: PropTypes.func,
-    onClickHeader: PropTypes.func,
-    onRightClickHeader: PropTypes.func,
-    animations: PropTypes.oneOfType([
-        PropTypes.object,
-        PropTypes.bool,
-    ]).isRequired,
-    node: PropTypes.object.isRequired,
+  style: PropTypes.object.isRequired,
+  decorators: PropTypes.object.isRequired,
+  terminal: PropTypes.bool.isRequired,
+  onClick: PropTypes.func,
+  onClickToggle: PropTypes.func,
+  onClickHeader: PropTypes.func,
+  onClickCheck: PropTypes.func,
+  onRightClickHeader: PropTypes.func,
+  animations: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]).isRequired,
+  node: PropTypes.object.isRequired,
 };
 
 export default Container;
