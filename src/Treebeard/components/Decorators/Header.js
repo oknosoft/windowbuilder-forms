@@ -34,7 +34,7 @@ const Header = ({node, style, onClick, onClickCheck, onRightClick}) => (
           color="primary"
           onChange={({target}) => {
             node.checked = target.checked;
-            onClickCheck(node);
+            onClickCheck?.(node);
           }}
           classes={useStyles()}
         />

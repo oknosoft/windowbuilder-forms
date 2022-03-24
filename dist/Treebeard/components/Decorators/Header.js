@@ -42,7 +42,7 @@ const Header = ({
     target
   }) => {
     node.checked = target.checked;
-    onClickCheck(node);
+    onClickCheck?.(node);
   },
   classes: useStyles()
 }) : /*#__PURE__*/React.createElement("div", {
