@@ -8,7 +8,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PropField from 'metadata-react/DataField/PropField';
 import FieldSelect from 'metadata-react/DataField/FieldSelect';
-import FieldInfinit from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
 import useStyles from 'wb-forms/dist/Common/stylesAccordion';
 import withStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
 
@@ -34,36 +33,42 @@ function FieldFurn({
     furn,
     _ox,
     cnstr,
-    furn_cache: cache
+    furn_cache: cache,
+    sys,
+    level
   } = _obj;
   const list = [];
-  const bool = true; // учтём связи параметров
+  const bool = true;
+  const read_only = sys.furn_level > level;
 
-  const furns = _ox.sys.furns(_ox, _obj).map(({
-    furn
-  }) => furn);
+  if (!read_only) {
+    // учтём связи параметров
+    const furns = sys.furns(_ox, _obj).map(({
+      furn
+    }) => furn);
+    const all = furns.length ? furns : furn._manager; // получим список доступных
 
-  const all = furns.length ? furns : furn._manager; // получим список доступных
+    for (const furn of all) {
+      if (furn.is_folder || furn.is_set || _obj.open_restrictions_err({
+        furn,
+        cache,
+        bool
+      })) {
+        continue;
+      }
 
-  for (const furn of all) {
-    if (furn.is_folder || furn.is_set || _obj.open_restrictions_err({
-      furn,
-      cache,
-      bool
-    })) {
-      continue;
+      const weight_max = furn.furn_set.flap_weight_max;
+
+      if (weight_max && weight_max < _ox.elm_weight(-cnstr)) {
+        continue;
+      }
+
+      list.push(furn);
     }
 
-    const weight_max = furn.furn_set.flap_weight_max;
-
-    if (weight_max && weight_max < _ox.elm_weight(-cnstr)) {
-      continue;
-    }
-
-    list.push(furn);
+    list.sort(compare);
   }
 
-  list.sort(compare);
   _meta = Object.assign({}, _obj._metadata('furn'), {
     list
   });
@@ -75,7 +80,8 @@ function FieldFurn({
     isTabular: false,
     _obj: _obj,
     _meta: _meta,
-    error: !list.includes(furn)
+    error: !read_only && !list.includes(furn),
+    read_only: read_only
   }, props));
 }
 
