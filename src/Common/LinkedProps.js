@@ -13,16 +13,17 @@ import PropField from 'metadata-react/DataField/PropField';
 class LinkedProps extends React.Component {
 
   render() {
-    const {ts, cnstr, inset} = this.props;
+    const {ts, cnstr, inset, layer} = this.props;
     const {fields} = ts._owner._metadata(ts._name);
     const res = [];
     const grid = {selection: {cnstr, inset}};
     const notify = new Set();
+    const sys = layer ? layer.sys : ts?._owner.sys
 
     ts.find_rows({cnstr, inset, hide: false}, (prow) => {
       const {param} = prow;
 
-      const links = param.params_links({grid, obj: prow});
+      const links = param.params_links({grid, obj: prow, layer});
       // вычисляемые скрываем всегда
       let hide = !param.show_calculated && param.is_calculated;
       // если для параметра есть связи - сокрытие по связям
@@ -42,8 +43,8 @@ class LinkedProps extends React.Component {
       let oselect = types.length === 1 && ['cat.property_values', 'cat.characteristics'].includes(types[0]);
       const bool = types.includes('boolean') && (typeof prow.value === 'boolean' || types.length === 1);
       let key = `${prow.row}-${prow.param.valueOf()}`;
-      if(ts._owner.sys) {
-        key += ts._owner.sys.valueOf();
+      if(sys) {
+        key += sys.valueOf();
       }
 
       // проверим вхождение значения в доступные и при необходимости изменим
@@ -95,6 +96,7 @@ LinkedProps.propTypes = {
   ts: PropTypes.object.isRequired,
   cnstr: PropTypes.number,
   inset: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  layer: PropTypes.object,
 };
 
 export default LinkedProps;

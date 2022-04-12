@@ -14,7 +14,8 @@ class LinkedProps extends React.Component {
     const {
       ts,
       cnstr,
-      inset
+      inset,
+      layer
     } = this.props;
 
     const {
@@ -29,6 +30,7 @@ class LinkedProps extends React.Component {
       }
     };
     const notify = new Set();
+    const sys = layer ? layer.sys : ts?._owner.sys;
     ts.find_rows({
       cnstr,
       inset,
@@ -39,7 +41,8 @@ class LinkedProps extends React.Component {
       } = prow;
       const links = param.params_links({
         grid,
-        obj: prow
+        obj: prow,
+        layer
       }); // вычисляемые скрываем всегда
 
       let hide = !param.show_calculated && param.is_calculated; // если для параметра есть связи - сокрытие по связям
@@ -62,8 +65,8 @@ class LinkedProps extends React.Component {
       const bool = types.includes('boolean') && (typeof prow.value === 'boolean' || types.length === 1);
       let key = `${prow.row}-${prow.param.valueOf()}`;
 
-      if (ts._owner.sys) {
-        key += ts._owner.sys.valueOf();
+      if (sys) {
+        key += sys.valueOf();
       } // проверим вхождение значения в доступные и при необходимости изменим
 
 
