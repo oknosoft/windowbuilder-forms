@@ -18,10 +18,16 @@ class LinkedProps extends React.Component {
     const res = [];
     const grid = {selection: {cnstr, inset}};
     const notify = new Set();
-    const sys = layer ? layer.sys : ts?._owner.sys
+    const sys = layer ? layer.sys : ts?._owner.sys;
+
+    const {utils, job_prm: {properties}} = $p;
 
     ts.find_rows({cnstr, inset, hide: false}, (prow) => {
       const {param} = prow;
+
+      if(param === properties.auto_align) {
+        return;
+      }
 
       const links = param.params_links({grid, obj: prow, layer});
       // вычисляемые скрываем всегда
@@ -80,7 +86,7 @@ class LinkedProps extends React.Component {
       }
 
       res.push(<PropField
-        key={`prm-${$p.utils.crc32(key)}`}
+        key={`prm-${utils.crc32(key)}`}
         _obj={prow}
         _fld="value"
         _meta={_meta}

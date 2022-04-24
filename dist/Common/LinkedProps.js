@@ -31,6 +31,12 @@ class LinkedProps extends React.Component {
     };
     const notify = new Set();
     const sys = layer ? layer.sys : ts?._owner.sys;
+    const {
+      utils,
+      job_prm: {
+        properties
+      }
+    } = $p;
     ts.find_rows({
       cnstr,
       inset,
@@ -39,6 +45,11 @@ class LinkedProps extends React.Component {
       const {
         param
       } = prow;
+
+      if (param === properties.auto_align) {
+        return;
+      }
+
       const links = param.params_links({
         grid,
         obj: prow,
@@ -109,7 +120,7 @@ class LinkedProps extends React.Component {
       }
 
       res.push( /*#__PURE__*/React.createElement(PropField, {
-        key: `prm-${$p.utils.crc32(key)}`,
+        key: `prm-${utils.crc32(key)}`,
         _obj: prow,
         _fld: "value",
         _meta: _meta,
