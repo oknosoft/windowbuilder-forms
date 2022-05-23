@@ -68,7 +68,7 @@ class LinkedProps extends React.Component {
 
       const _meta = Object.assign({}, fields.value);
 
-      _meta.synonym = param.caption || param.name;
+      _meta.synonym = param.name || param.caption;
       const {
         types
       } = param.type;

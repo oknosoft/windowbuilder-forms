@@ -43,7 +43,7 @@ class LinkedProps extends React.Component {
       }
 
       const _meta = Object.assign({}, fields.value);
-      _meta.synonym = param.caption || param.name;
+      _meta.synonym = param.name || param.caption;
 
       const {types} = param.type;
       let oselect = types.length === 1 && ['cat.property_values', 'cat.characteristics'].includes(types[0]);
