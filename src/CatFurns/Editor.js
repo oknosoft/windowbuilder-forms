@@ -1,13 +1,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import PropField from 'metadata-react/DataField/PropField';
 import FieldSelect from 'metadata-react/DataField/FieldSelect';
-import useStyles from 'wb-forms/dist/Common/stylesAccordion';
 import withStyles, {extClasses} from 'metadata-react/DataField/stylesPropertyGrid';
 
 const compare = (a, b) => {

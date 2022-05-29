@@ -1,14 +1,8 @@
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import PropField from 'metadata-react/DataField/PropField';
 import FieldSelect from 'metadata-react/DataField/FieldSelect';
-import useStyles from 'wb-forms/dist/Common/stylesAccordion';
 import withStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
 
 const compare = (a, b) => {
