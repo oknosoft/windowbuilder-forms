@@ -85,15 +85,23 @@ class LinkedProps extends React.Component {
         return;
       }
 
-      res.push(<PropField
+      res.push({
+        key,
+        prow,
+        _meta,
+        ctrl_type: oselect ? 'oselect' : (bool ? 'ch' : void 0),
+        sorting_field: param.sorting_field,
+      });
+    });
+
+    return res.sort(utils.sort('sorting_field'))
+      .map(({key, prow, _meta, ctrl_type}) => <PropField
         key={`prm-${utils.crc32(key)}`}
         _obj={prow}
         _fld="value"
         _meta={_meta}
-        ctrl_type={oselect ? 'oselect' : (bool ? 'ch' : void 0)}
+        ctrl_type={ctrl_type}
       />);
-    });
-    return res;
   }
 
 }
