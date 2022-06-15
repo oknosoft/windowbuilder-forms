@@ -10,9 +10,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TabularSection from 'metadata-react/TabularSection';
 import Dialog from 'metadata-react/App/Dialog';
-import FrmObj from 'metadata-react/FrmObj';
+import DataObj from 'metadata-react/FrmObj/DataObj';
+import withStyles from 'metadata-react/styles/paper600';
 import BtnOrigin from './BtnOrigin';
 
+const FrmObj = withStyles(DataObj);
 
 class Spec extends React.Component {
 
