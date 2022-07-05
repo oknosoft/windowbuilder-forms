@@ -24,7 +24,6 @@ import DataField from 'metadata-react/DataField';
 import TabularSection from 'metadata-react/TabularSection';
 
 import withStyles from 'metadata-react/styles/paper600';
-import {withIface} from 'metadata-redux';
 
 import SelectOrder from './SelectOrder';
 import MenuFillCutting from './MenuFillCutting';
@@ -265,4 +264,4 @@ FrmObj.propTypes = {
 
 FrmObj.rname = 'FrmObj';
 
-export default withStyles(withIface(FrmObj));
+export default withStyles(FrmObj);

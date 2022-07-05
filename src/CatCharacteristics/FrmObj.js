@@ -1,7 +1,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withIface} from 'metadata-redux';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
 import Tab from '@material-ui/core/Tab';
@@ -62,4 +61,4 @@ CatCharacteristicsObj.propTypes = {
   windowHeight: PropTypes.number.isRequired,
 };
 
-export default withStyles600(withIface(CatCharacteristicsObj));
+export default withStyles600(CatCharacteristicsObj);
