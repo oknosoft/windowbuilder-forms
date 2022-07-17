@@ -10,7 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 import Tip from 'metadata-react/App/Tip';
 import CloseBtn from 'metadata-react/App/CloseButton';
-import DirectList from 'metadata-react/DynList';
+import DirectList from 'metadata-react/DynList/DynList';
 import QuickFilter from '../FrmList/QuickFilter';
 const {
   cat: {

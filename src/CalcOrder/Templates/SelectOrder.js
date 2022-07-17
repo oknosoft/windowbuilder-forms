@@ -11,7 +11,7 @@ import {withStyles} from '@material-ui/core/styles';
 
 import Tip from 'metadata-react/App/Tip';
 import CloseBtn from 'metadata-react/App/CloseButton';
-import DirectList from 'metadata-react/DynList';
+import DirectList from 'metadata-react/DynList/DynList';
 import QuickFilter from '../FrmList/QuickFilter';
 
 const {cat: {templates, scheme_settings}, doc: {calc_order: _mgr}} = $p;
