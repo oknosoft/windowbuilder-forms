@@ -51,7 +51,13 @@ class SelectOrder extends React.Component {
   };
 
   render() {
-    const {props: {list, set_list, handleNext, classes}, state: {backdrop, handleFilterChange}} = this;
+    const {props: {
+      list,
+      set_list,
+      handleNext,
+      classes,
+      props: {handleNavigate, handleIfaceState, title},
+    }, state: {backdrop, handleFilterChange}} = this;
 
     const {calc_order} = _obj;
     const text = `${calc_order.number_doc} (${calc_order.note})`;
@@ -108,8 +114,13 @@ class SelectOrder extends React.Component {
               .then(reset_list)
               .then(handleNext)
               .catch(reset_list);
-          }
+          },
+          handleNavigate,
+          handleIfaceState,
         }}
+        handleNavigate={handleNavigate}
+        handleIfaceState={handleIfaceState}
+        title={title}
         registerFilterChange={this.registerFilterChange}
         btns={<QuickFilter
           scheme={schemas[list]}

@@ -85,7 +85,12 @@ class SelectOrder extends React.Component {
         list,
         set_list,
         handleNext,
-        classes
+        classes,
+        props: {
+          handleNavigate,
+          handleIfaceState,
+          title
+        }
       },
       state: {
         backdrop,
@@ -147,9 +152,14 @@ class SelectOrder extends React.Component {
             _obj.calc_order = doc;
             return list === 'templates' ? doc.load_templates() : doc.load_linked_refs();
           }).then(reset_list).then(handleNext).catch(reset_list);
-        }
+        },
 
+        handleNavigate,
+        handleIfaceState
       },
+      handleNavigate: handleNavigate,
+      handleIfaceState: handleIfaceState,
+      title: title,
       registerFilterChange: this.registerFilterChange,
       btns: /*#__PURE__*/React.createElement(QuickFilter, {
         scheme: schemas[list],
