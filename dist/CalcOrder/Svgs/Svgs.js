@@ -18,8 +18,8 @@ const styles = theme => ({
     width: '100%',
     position: 'relative',
     paddingTop: 2,
-    //overflow: 'auto',
-    maxHeight: 180
+    maxHeight: 180,
+    display: 'flex'
   },
   fab: {
     position: 'absolute',

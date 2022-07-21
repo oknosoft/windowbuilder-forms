@@ -14,9 +14,7 @@ import DataList from 'metadata-react/DynList/DynList';
 import handleSchemeChange from './scheme_change';
 import Svgs from '../Svgs';
 import QuickFilter from './QuickFilter';
-const heights = new Map();
-heights.set(true, 24);
-heights.set(false, 90);
+const heights = new Map([[true, 24], [false, 93]]);
 
 class CalcOrderList extends Component {
   constructor(props, context) {
