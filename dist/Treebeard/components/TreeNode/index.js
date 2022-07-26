@@ -113,8 +113,16 @@ class TreeNode extends PureComponent {
       children = children ? [children] : [];
     }
 
+    let {
+      subtree
+    } = style;
+
+    if (node.style?.subtree) {
+      subtree = Object.assign({}, subtree, node.style.subtree);
+    }
+
     return /*#__PURE__*/React.createElement(Ul, {
-      style: style.subtree
+      style: subtree
     }, children.map((child, index) => /*#__PURE__*/React.createElement(TreeNode, {
       separateToggleEvent,
       onToggle,

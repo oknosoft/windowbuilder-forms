@@ -88,8 +88,13 @@ class TreeNode extends PureComponent {
             children = children ? [children] : [];
         }
 
+        let {subtree} = style;
+        if(node.style?.subtree) {
+          subtree = Object.assign({}, subtree, node.style.subtree);
+        }
+
         return (
-            <Ul style={style.subtree}>
+            <Ul style={subtree}>
                 {children.map((child, index) => (
                     <TreeNode
                         {...{separateToggleEvent, onToggle, onClickHeader, onRightClickHeader, animations, style}}
