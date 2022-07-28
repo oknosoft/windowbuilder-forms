@@ -44,7 +44,7 @@ function clr_proxy(_obj, _fld, handleValueChange) {
   }
 }
 
-export default function FieldClr({_meta, _obj, _fld, handleValueChange, ...other}) {
+export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, ...other}) {
 
   if(_meta.single_value) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
@@ -58,11 +58,13 @@ export default function FieldClr({_meta, _obj, _fld, handleValueChange, ...other
   const value = proxy.clr;
   const classes = useStyles();
   const type = {is_ref: true, types: ['cat.clrs']};
-  const meta_clr = Object.assign({}, _meta, {type, synonym: 'Общий'});
-  const meta_in = Object.assign({}, _meta, {type, synonym: 'Изнутри'});
-  const meta_out = Object.assign({}, _meta, {type, synonym: 'Снаружи'});
-  $p.cat.clrs.hide_composite(meta_in);
-  $p.cat.clrs.hide_composite(meta_out);
+  const {cat: {clrs}, utils} = $p;
+  const meta_clr = Object.assign(utils._clone(_meta), {type, synonym: 'Общий'});
+  const meta_in = Object.assign(utils._clone(_meta), {type, synonym: 'Изнутри'});
+  const meta_out = Object.assign(utils._clone(_meta), {type, synonym: 'Снаружи'});
+
+  clrs.hide_composite(meta_in, clr_group, 'inner');
+  clrs.hide_composite(meta_out, clr_group, 'outer');
 
   return <Accordion square elevation={0} classes={{expanded: classes.rootExpanded}}>
     <AccordionSummary classes={{
@@ -106,4 +108,5 @@ FieldClr.propTypes = {
   _meta: PropTypes.object.isRequired,
   _obj: PropTypes.object.isRequired,
   _fld: PropTypes.string.isRequired,
+  clr_group: PropTypes.object,
 };

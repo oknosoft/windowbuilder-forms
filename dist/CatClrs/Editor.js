@@ -64,6 +64,7 @@ export default function FieldClr({
   _meta,
   _obj,
   _fld,
+  clr_group,
   handleValueChange,
   ...other
 }) {
@@ -95,20 +96,26 @@ export default function FieldClr({
     is_ref: true,
     types: ['cat.clrs']
   };
-  const meta_clr = Object.assign({}, _meta, {
+  const {
+    cat: {
+      clrs
+    },
+    utils
+  } = $p;
+  const meta_clr = Object.assign(utils._clone(_meta), {
     type,
     synonym: 'Общий'
   });
-  const meta_in = Object.assign({}, _meta, {
+  const meta_in = Object.assign(utils._clone(_meta), {
     type,
     synonym: 'Изнутри'
   });
-  const meta_out = Object.assign({}, _meta, {
+  const meta_out = Object.assign(utils._clone(_meta), {
     type,
     synonym: 'Снаружи'
   });
-  $p.cat.clrs.hide_composite(meta_in);
-  $p.cat.clrs.hide_composite(meta_out);
+  clrs.hide_composite(meta_in, clr_group, 'inner');
+  clrs.hide_composite(meta_out, clr_group, 'outer');
   return /*#__PURE__*/React.createElement(Accordion, {
     square: true,
     elevation: 0,
