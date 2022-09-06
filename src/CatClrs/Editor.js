@@ -62,6 +62,7 @@ export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChang
   const meta_clr = Object.assign(utils._clone(_meta), {type, synonym: 'Общий'});
   const meta_in = Object.assign(utils._clone(_meta), {type, synonym: 'Изнутри'});
   const meta_out = Object.assign(utils._clone(_meta), {type, synonym: 'Снаружи'});
+  other.isTabular = false;
 
   clrs.hide_composite(meta_in, clr_group, 'inner');
   clrs.hide_composite(meta_out, clr_group, 'outer');

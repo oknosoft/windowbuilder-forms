@@ -114,6 +114,7 @@ export default function FieldClr({
     type,
     synonym: 'Снаружи'
   });
+  other.isTabular = false;
   clrs.hide_composite(meta_in, clr_group, 'inner');
   clrs.hide_composite(meta_out, clr_group, 'outer');
   return /*#__PURE__*/React.createElement(Accordion, {
