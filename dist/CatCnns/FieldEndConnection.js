@@ -19,7 +19,13 @@ const {
       acn
     }
   },
-  utils
+  cat: {
+    cnns
+  },
+  utils,
+  Editor: {
+    Filling
+  }
 } = $p;
 const compare = utils.sort('name');
 
@@ -44,7 +50,7 @@ function FieldEndConnection({
     _fld = node === 'b' ? 'cnn1' : 'cnn2';
   }
 
-  const list = $p.cat.cnns.nom_cnn(elm1, elm2, elm2 ? acn.a : acn.i, false, undefined, cnn_point);
+  const list = cnns.nom_cnn(elm1, elm2, elm2 ? acn.a : acn.i, false, undefined, cnn_point);
   const other = cnn_point.find_other();
 
   if (other && other.profile === elm2) {
@@ -59,7 +65,14 @@ function FieldEndConnection({
   }
 
   list.sort(compare);
-  const p2 = elm2 ? elm2.b.is_nearest(cnn_point.point, true) ? 'b' : elm2.e.is_nearest(cnn_point.point, true) ? 'e' : 't' : 'Пустота';
+  let p2;
+
+  if (elm2 instanceof Filling) {
+    p2 = 't';
+  } else {
+    p2 = elm2 ? elm2.b.is_nearest(cnn_point.point, true) ? 'b' : elm2.e.is_nearest(cnn_point.point, true) ? 'e' : 't' : 'Пустота';
+  }
+
   const synonym = `Соедин ${elm1.elm}${node} -> ${elm2 ? elm2.elm : ''}${p2}`;
 
   const onChange = ({

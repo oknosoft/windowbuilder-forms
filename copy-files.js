@@ -9,7 +9,7 @@
 const path = require('path');
 const fs = require('fs');
 const md5File = require('md5-file');
-const lpath = path.resolve(__dirname, '.');
+const lpath = path.resolve(__dirname, './dist');
 const rpath = path.resolve(__dirname, './src');;
 
 function fromDir(startPath, filter, callback) {
