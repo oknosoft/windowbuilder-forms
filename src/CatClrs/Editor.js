@@ -47,7 +47,7 @@ function clr_proxy(_obj, _fld, handleValueChange) {
 
 export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, ...other}) {
 
-  if(_meta.single_value) {
+  if(_meta.single_value || other.read_only) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
     return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
   }

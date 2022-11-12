@@ -68,7 +68,7 @@ export default function FieldClr({
   handleValueChange,
   ...other
 }) {
-  if (_meta.single_value) {
+  if (_meta.single_value || other.read_only) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
     return /*#__PURE__*/React.createElement(FieldSelect, _extends({
       _meta: _meta,
