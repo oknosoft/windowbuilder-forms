@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import ReactDataGrid from 'react-data-grid';
 import { withStyles } from '@material-ui/styles';
-import Proto from 'wb-forms/dist/ObjHistory/RevsDetales';
+import Proto from '../ObjHistory/RevsDetales';
 export const styles = theme => ({
   root: {
     flexGrow: 1,

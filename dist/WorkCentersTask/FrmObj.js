@@ -10,13 +10,13 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tab from '@material-ui/core/Tab';
-import { Tabs } from 'metadata-react/App/AntTabs';
 import { Helmet } from 'react-helmet';
 import FormGroup from '@material-ui/core/FormGroup';
 import IconButton from '@material-ui/core/IconButton';
 import IconEvent from '@material-ui/icons/Event';
 import IconRotate from '@material-ui/icons/RotateRight';
 import IconClose from '@material-ui/icons/Close';
+import { Tabs } from 'metadata-react/App/AntTabs';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import LoadingMessage from 'metadata-react/DumbLoader/LoadingMessage';
 import DataObjToolbar from 'metadata-react/FrmObj/DataObjToolbar';

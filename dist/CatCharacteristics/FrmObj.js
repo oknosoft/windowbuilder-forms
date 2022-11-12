@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Tab from '@material-ui/core/Tab';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles600 from 'metadata-react/styles/paper600';
-import Tab from '@material-ui/core/Tab';
 import { Tabs } from 'metadata-react/App/AntTabs';
 import TabContent from './TabContent';
 

@@ -11,8 +11,8 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PropField from 'metadata-react/DataField/PropField';
-import FieldInfinit from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
 import useStyles from '../Common/stylesAccordion';
+import FieldSelect from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
 
 function clr_proxy(_obj, _fld, handleValueChange) {
   if (_fld === 'clr' && 'clr_in' in _obj && 'clr_out' in _obj) {
@@ -70,7 +70,7 @@ export default function FieldClr({
 }) {
   if (_meta.single_value) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
-    return /*#__PURE__*/React.createElement(FieldInfinit, _extends({
+    return /*#__PURE__*/React.createElement(FieldSelect, _extends({
       _meta: _meta,
       _obj: _obj,
       _fld: _fld,
@@ -81,7 +81,7 @@ export default function FieldClr({
   }
 
   if (_meta.hide_composite || !_meta.type.str_len) {
-    return /*#__PURE__*/React.createElement(FieldInfinit, _extends({
+    return /*#__PURE__*/React.createElement(FieldSelect, _extends({
       _meta: _meta,
       _obj: _obj,
       _fld: _fld,
@@ -170,18 +170,17 @@ export default function FieldClr({
     _meta: meta_clr,
     _obj: proxy,
     _fld: "clr",
-    ctrl_type: FieldInfinit,
+    ctrl_type: FieldSelect,
     handleValueChange: handleValueChange
   }, other)), /*#__PURE__*/React.createElement(PropField, _extends({
     _meta: meta_in,
     _obj: proxy,
     _fld: "clr_in",
-    ctrl_type: FieldInfinit
+    ctrl_type: FieldSelect
   }, other)), /*#__PURE__*/React.createElement(PropField, _extends({
     _meta: meta_out,
     _obj: proxy,
     _fld: "clr_out",
-    ctrl_type: FieldInfinit
+    ctrl_type: FieldSelect
   }, other))));
 }
-;

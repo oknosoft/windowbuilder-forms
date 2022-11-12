@@ -9,7 +9,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tab from '@material-ui/core/Tab';
-import {Tabs} from 'metadata-react/App/AntTabs';
 import {Helmet} from 'react-helmet';
 import FormGroup from '@material-ui/core/FormGroup';
 import IconButton from '@material-ui/core/IconButton';
@@ -17,12 +16,12 @@ import IconEvent from '@material-ui/icons/Event';
 import IconRotate from '@material-ui/icons/RotateRight';
 import IconClose from '@material-ui/icons/Close';
 
+import {Tabs} from 'metadata-react/App/AntTabs';
 import DataObj from 'metadata-react/FrmObj/DataObj';
 import LoadingMessage from 'metadata-react/DumbLoader/LoadingMessage';
 import DataObjToolbar from 'metadata-react/FrmObj/DataObjToolbar';
 import DataField from 'metadata-react/DataField';
 import TabularSection from 'metadata-react/TabularSection';
-
 import withStyles from 'metadata-react/styles/paper600';
 
 import SelectOrder from './SelectOrder';

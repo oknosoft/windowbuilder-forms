@@ -10,8 +10,9 @@ import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import PropField from 'metadata-react/DataField/PropField';
-import FieldInfinit from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
 import useStyles from '../Common/stylesAccordion';
+
+import FieldSelect from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
 
 function clr_proxy(_obj, _fld, handleValueChange) {
   if(_fld === 'clr' && 'clr_in' in _obj && 'clr_out' in _obj) {
@@ -41,17 +42,17 @@ function clr_proxy(_obj, _fld, handleValueChange) {
       const {clr} = this;
       this.clr = $p.cat.clrs.composite_ref('clr_out', clr.clr_in.empty() ? clr : clr.clr_in, v);
     },
-  }
+  };
 }
 
 export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, ...other}) {
 
   if(_meta.single_value) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
-    return <FieldInfinit _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
+    return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
   }
   if(_meta.hide_composite || !_meta.type.str_len) {
-    return <FieldInfinit _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other}/>;
+    return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other}/>;
   }
 
   const proxy = clr_proxy(_obj, _fld, handleValueChange);
@@ -97,13 +98,13 @@ export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChang
       }
     </AccordionSummary>
     <AccordionDetails classes={{root: classes.details}}>
-      <PropField _meta={meta_clr} _obj={proxy} _fld="clr" ctrl_type={FieldInfinit} handleValueChange={handleValueChange} {...other}/>
-      <PropField _meta={meta_in} _obj={proxy} _fld="clr_in" ctrl_type={FieldInfinit} {...other}/>
-      <PropField _meta={meta_out} _obj={proxy} _fld="clr_out" ctrl_type={FieldInfinit} {...other}/>
+      <PropField _meta={meta_clr} _obj={proxy} _fld="clr" ctrl_type={FieldSelect} handleValueChange={handleValueChange} {...other}/>
+      <PropField _meta={meta_in} _obj={proxy} _fld="clr_in" ctrl_type={FieldSelect} {...other}/>
+      <PropField _meta={meta_out} _obj={proxy} _fld="clr_out" ctrl_type={FieldSelect} {...other}/>
     </AccordionDetails>
   </Accordion>;
 
-};
+}
 
 FieldClr.propTypes = {
   _meta: PropTypes.object.isRequired,

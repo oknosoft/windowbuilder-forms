@@ -7,8 +7,8 @@ import Popper from '@material-ui/core/Popper';
 import { makeStyles } from '@material-ui/core/styles';
 import DialogActions from '@material-ui/core/DialogActions';
 import Tip from 'metadata-react/App/Tip';
-import Params from './Params';
 import LoadingModal from 'metadata-react/DumbLoader/LoadingModal';
+import Params from './Params';
 const useStyles = makeStyles(theme => ({
   paper: {
     border: '1px solid',
