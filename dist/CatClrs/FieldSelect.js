@@ -10,9 +10,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Typography from '@material-ui/core/Typography';
-import AbstractField, { suggestionText } from 'metadata/react/dist/DataField/AbstractField';
-import InputEditable from 'metadata-react/dist/DataField/FieldInfinit/InputEditable';
-import withStyles from 'metadata-react/dist/DataField/styles';
+import AbstractField, { suggestionText } from 'metadata/react/DataField/AbstractField';
+import InputEditable from 'metadata-react/DataField/FieldInfinit/InputEditable';
+import withStyles from 'metadata-react/DataField/styles';
 import cn from 'classnames';
 
 class FieldSelect extends AbstractField {

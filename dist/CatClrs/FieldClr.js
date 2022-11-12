@@ -3,7 +3,7 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
 import React from 'react';
 import PropTypes from 'prop-types';
 import DataField from './Editor';
-import withStyles, { extClasses } from 'metadata-react/dist/DataField/stylesPropertyGrid';
+import withStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
 
 function FieldClr({
   classes,

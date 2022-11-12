@@ -14,7 +14,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import withStyles, { extClasses } from 'metadata-react/dist/DataField/stylesPropertyGrid';
+import withStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
 const _fld = 'inset';
 
 const onKeyDown = evt => {
