@@ -63,7 +63,7 @@ class SelectParams extends React.Component {
     } = $p;
     const selection = {};
 
-    clr._manager.selection_exclude_service(_meta, sys);
+    clr._manager.selection_exclude_service(_meta, sys, _obj);
 
     _meta.choice_params.forEach(({
       name,
