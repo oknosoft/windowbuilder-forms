@@ -9,10 +9,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import PropField from 'metadata-react/DataField/PropField';
 import useStyles from '../Common/stylesAccordion';
 
-import FieldSelect from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
+//import FieldSelect from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
+import FieldSelect from './FieldSelect';
 
 function clr_proxy(_obj, _fld, handleValueChange) {
   if(_fld === 'clr' && 'clr_in' in _obj && 'clr_out' in _obj) {
@@ -98,9 +98,9 @@ export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChang
       }
     </AccordionSummary>
     <AccordionDetails classes={{root: classes.details}}>
-      <PropField _meta={meta_clr} _obj={proxy} _fld="clr" ctrl_type={FieldSelect} handleValueChange={handleValueChange} {...other}/>
-      <PropField _meta={meta_in} _obj={proxy} _fld="clr_in" ctrl_type={FieldSelect} {...other}/>
-      <PropField _meta={meta_out} _obj={proxy} _fld="clr_out" ctrl_type={FieldSelect} {...other}/>
+      <FieldSelect _meta={meta_clr} _obj={proxy} _fld="clr" handleValueChange={handleValueChange} {...other}/>
+      <FieldSelect _meta={meta_in} _obj={proxy} _fld="clr_in" {...other}/>
+      <FieldSelect _meta={meta_out} _obj={proxy} _fld="clr_out" {...other}/>
     </AccordionDetails>
   </Accordion>;
 

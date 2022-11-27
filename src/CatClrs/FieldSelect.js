@@ -11,9 +11,10 @@ import PropTypes from 'prop-types';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Typography from '@material-ui/core/Typography';
 
-import AbstractField, {suggestionText} from 'metadata/react/DataField/AbstractField';
+import AbstractField, {suggestionText} from 'metadata-react/DataField/AbstractField';
 import InputEditable from 'metadata-react/DataField/FieldInfinit/InputEditable';
 import withStyles from 'metadata-react/DataField/styles';
+import propStyles, {extClasses} from 'metadata-react/DataField/stylesPropertyGrid';
 import cn from 'classnames';
 
 class FieldSelect extends AbstractField {
@@ -98,17 +99,18 @@ class FieldSelect extends AbstractField {
     const v = this.masked_value({_obj, _fld});
     const _manager = v && v._manager || _meta.type._mgr;
 
-    const select = _manager ? _manager.get_search_selector({_obj, _meta, top: 999, skip: 0}) : {};
+    const select = _manager ? _manager.get_search_selector({_obj, _meta, top: 2999, skip: 0}) : {};
 
     _manager
       .get_option_list(select)
       .then(options => {
-        const sortedByMachineTools = options.filter(el => el.machine_tools_clr).sort((a, b) => {
-          const result = Number(b.machine_tools_clr) - Number(a.machine_tools_clr);
-          return result ? result : a.name.localeCompare(b.name);
-        });
-        const sortedByName = options.filter(el => !el.machine_tools_clr).sort((a, b) => a.name.localeCompare(b.name));
-        return sortedByMachineTools.concat(sortedByName);
+        // const sortedByMachineTools = options.filter(el => el.machine_tools_clr).sort((a, b) => {
+        //   const result = Number(b.machine_tools_clr) - Number(a.machine_tools_clr);
+        //   return result ? result : a.name.localeCompare(b.name);
+        // });
+        // const sortedByName = options.filter(el => !el.machine_tools_clr).sort((a, b) => a.name.localeCompare(b.name));
+        // return sortedByMachineTools.concat(sortedByName);
+        return options.sort((a, b) => a.name.localeCompare(b.name));
       })
       .then((options) => {
         this.setOptions(options, v);
@@ -183,5 +185,9 @@ class FieldSelect extends AbstractField {
     />;
   }
 }
+const StyledSelect = withStyles(FieldSelect);
 
-export default withStyles(FieldSelect);
+function PropFieldSelect({classes, ...props}) {
+  return <StyledSelect extClasses={extClasses(classes)} fullWidth isTabular={false} {...props}/>;
+}
+export default withStyles(PropFieldSelect);
