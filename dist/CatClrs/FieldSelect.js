@@ -12,9 +12,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import Typography from '@material-ui/core/Typography';
 import AbstractField, { suggestionText } from 'metadata-react/DataField/AbstractField';
 import InputEditable from 'metadata-react/DataField/FieldInfinit/InputEditable';
-import withStyles from 'metadata-react/DataField/styles';
 import propStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
-import cn from 'classnames';
 
 class FieldSelect extends AbstractField {
   constructor(_props, context) {
@@ -293,17 +291,16 @@ class FieldSelect extends AbstractField {
 
 }
 
-const StyledSelect = withStyles(FieldSelect);
-
 function PropFieldSelect({
   classes,
   ...props
 }) {
-  return /*#__PURE__*/React.createElement(StyledSelect, _extends({
+  return /*#__PURE__*/React.createElement(FieldSelect, _extends({
+    classes: classes,
     extClasses: extClasses(classes),
     fullWidth: true,
     isTabular: false
   }, props));
 }
 
-export default withStyles(PropFieldSelect);
+export default propStyles(PropFieldSelect);
