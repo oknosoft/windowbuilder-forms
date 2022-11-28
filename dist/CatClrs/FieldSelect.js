@@ -14,6 +14,11 @@ import AbstractField, { suggestionText } from 'metadata-react/DataField/Abstract
 import InputEditable from 'metadata-react/DataField/FieldInfinit/InputEditable';
 import propStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
 
+const clrSort = (a, b) => {
+  const cmp = Number(b.machine_tools_clr || 0) - Number(a.machine_tools_clr || 0);
+  return cmp || a.name.localeCompare(b.name);
+};
+
 class FieldSelect extends AbstractField {
   constructor(_props, context) {
     super(_props, context);
@@ -136,8 +141,6 @@ class FieldSelect extends AbstractField {
       options.unshift(v);
     }
 
-    options = Array.from(new Set(options.filter(v => v)));
-
     if (this._mounted) {
       this.setState({
         options
@@ -175,15 +178,7 @@ class FieldSelect extends AbstractField {
       skip: 0
     }) : {};
 
-    _manager.get_option_list(select).then(options => {
-      // const sortedByMachineTools = options.filter(el => el.machine_tools_clr).sort((a, b) => {
-      //   const result = Number(b.machine_tools_clr) - Number(a.machine_tools_clr);
-      //   return result ? result : a.name.localeCompare(b.name);
-      // });
-      // const sortedByName = options.filter(el => !el.machine_tools_clr).sort((a, b) => a.name.localeCompare(b.name));
-      // return sortedByMachineTools.concat(sortedByName);
-      return options.sort((a, b) => a.name.localeCompare(b.name));
-    }).then(options => {
+    _manager.get_option_list(select).then(options => options.sort(clrSort)).then(options => {
       this.setOptions(options, v);
     });
   }
