@@ -10,8 +10,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import useStyles from '../Common/stylesAccordion'; //import FieldSelect from 'metadata-react/DataField/FieldInfinit/FieldAutocomplete';
-
+import useStyles from '../Common/stylesAccordion';
 import FieldSelect from './FieldSelect';
 
 function clr_proxy(_obj, _fld, handleValueChange) {

@@ -84,7 +84,8 @@ class SelectParams extends React.Component {
     }), /*#__PURE__*/React.createElement(LinkedProps, {
       ts: _obj.params,
       cnstr: 0,
-      inset: utils.blank.guid
+      inset: utils.blank.guid,
+      project: _obj
     }));
   }
 

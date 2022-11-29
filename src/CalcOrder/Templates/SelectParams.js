@@ -52,7 +52,7 @@ class SelectParams extends React.Component {
         _fld="clr"
         _meta={_meta}
       />
-      <LinkedProps ts={_obj.params} cnstr={0} inset={utils.blank.guid}/>
+      <LinkedProps ts={_obj.params} cnstr={0} inset={utils.blank.guid} project={_obj}/>
     </>;
   }
 }
