@@ -84,7 +84,8 @@ class FieldSelect extends AbstractField {
 
   shouldComponentUpdate({
     _obj,
-    _meta
+    _meta,
+    dyn_meta
   }) {
     if (this.props._obj !== _obj) {
       this.loadOptions(_obj);
@@ -92,7 +93,10 @@ class FieldSelect extends AbstractField {
     }
 
     if (_meta && this.props._meta !== _meta) {
-      this._meta = _meta;
+      if (!dyn_meta) {
+        this._meta = _meta;
+      }
+
       this.loadOptions(_obj);
       return false;
     }
