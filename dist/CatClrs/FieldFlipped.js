@@ -30,6 +30,10 @@ function FieldFlipped({
   onClick,
   ...props
 }) {
+  if ($p.job_prm.builder.hide_flipped) {
+    return null;
+  }
+
   const ext = extClasses(classes);
   _fld = 'flipped';
 
