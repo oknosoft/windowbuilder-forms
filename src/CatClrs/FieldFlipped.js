@@ -13,6 +13,10 @@ import withStyles, {extClasses} from 'metadata-react/DataField/stylesPropertyGri
 
 function FieldFlipped({classes, _obj, _fld, _meta, onClick, ...props}) {
 
+  if($p.job_prm.builder.hide_flipped) {
+    return null;
+  }
+
   const ext = extClasses(classes);
 
   _fld = 'flipped';
