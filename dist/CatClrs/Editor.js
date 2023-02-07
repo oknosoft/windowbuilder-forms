@@ -67,6 +67,22 @@ export default function FieldClr({
   handleValueChange,
   ...other
 }) {
+  const {
+    cat: {
+      clrs
+    },
+    utils,
+    CatCharacteristicsInsertsRow
+  } = $p; // если не задан отбор и это строка вставок, формируем отбор по вставке
+
+  if (_obj instanceof CatCharacteristicsInsertsRow && (!_meta.choice_params || !_meta.choice_params.length)) {
+    _meta = utils._clone(_meta);
+    clrs.selection_exclude_service(_meta, _obj.inset, {
+      ox: _obj._owner._owner
+    });
+  } // для одиночного значения, редактор не показываем
+
+
   if (_meta.single_value || other.read_only) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
     return /*#__PURE__*/React.createElement(FieldSelect, _extends({
@@ -77,7 +93,8 @@ export default function FieldClr({
     }, other, {
       read_only: read_only
     }));
-  }
+  } // если сказано скрыть составные - показываем редактор с единственным полем
+
 
   if (_meta.hide_composite || !_meta.type.str_len) {
     return /*#__PURE__*/React.createElement(FieldSelect, _extends({
@@ -95,12 +112,6 @@ export default function FieldClr({
     is_ref: true,
     types: ['cat.clrs']
   };
-  const {
-    cat: {
-      clrs
-    },
-    utils
-  } = $p;
   const meta_clr = Object.assign(utils._clone(_meta), {
     type,
     synonym: 'Общий'

@@ -46,10 +46,20 @@ function clr_proxy(_obj, _fld, handleValueChange) {
 
 export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, ...other}) {
 
+  const {cat: {clrs}, utils, CatCharacteristicsInsertsRow} = $p;
+
+  // если не задан отбор и это строка вставок, формируем отбор по вставке
+  if(_obj instanceof CatCharacteristicsInsertsRow && (!_meta.choice_params || !_meta.choice_params.length)) {
+    _meta = utils._clone(_meta);
+    clrs.selection_exclude_service(_meta, _obj.inset, {ox: _obj._owner._owner});
+  }
+
+  // для одиночного значения, редактор не показываем
   if(_meta.single_value || other.read_only) {
     const read_only = other.read_only || _meta.single_value === _obj[_fld];
     return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
   }
+  // если сказано скрыть составные - показываем редактор с единственным полем
   if(_meta.hide_composite || !_meta.type.str_len) {
     return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other}/>;
   }
@@ -58,7 +68,7 @@ export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChang
   const value = proxy.clr;
   const classes = useStyles();
   const type = {is_ref: true, types: ['cat.clrs']};
-  const {cat: {clrs}, utils} = $p;
+
   const meta_clr = Object.assign(utils._clone(_meta), {type, synonym: 'Общий'});
   const meta_in = Object.assign(utils._clone(_meta), {type, synonym: 'Изнутри'});
   const meta_out = Object.assign(utils._clone(_meta), {type, synonym: 'Снаружи'});
