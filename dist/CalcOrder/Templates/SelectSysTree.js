@@ -1,3 +1,4 @@
+var _ExpandMoreIcon, _ChevronRightIcon;
 import React from 'react';
 import TreeView from '@material-ui/lab/TreeView';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -16,12 +17,10 @@ const defaultExpanded = vh.find_rows({
   owner: hierarchy,
   parent: vh.get()
 }).map(v => v.ref);
-
 const renderItems = parent => {
   if (!parent) {
     parent = vh.get();
   }
-
   return vh.find_rows({
     owner: hierarchy,
     parent
@@ -39,7 +38,6 @@ const renderItems = parent => {
       });
       return ok;
     }
-
     return groups.has(v);
   }).map(v => {
     return /*#__PURE__*/React.createElement(TreeItem, {
@@ -49,13 +47,7 @@ const renderItems = parent => {
     }, renderItems(v));
   });
 };
-
 const groups = new Set();
-
-var _ref = /*#__PURE__*/React.createElement(ExpandMoreIcon, null);
-
-var _ref2 = /*#__PURE__*/React.createElement(ChevronRightIcon, null);
-
 export default function SelectSysTree({
   classes,
   sys_rows,
@@ -69,7 +61,6 @@ export default function SelectSysTree({
     const row = extra_fields.find({
       property: hierarchy
     });
-
     if (row) {
       groups.add(row.value);
     }
@@ -77,8 +68,8 @@ export default function SelectSysTree({
   return /*#__PURE__*/React.createElement("div", {
     className: classes.list
   }, /*#__PURE__*/React.createElement(TreeView, {
-    defaultCollapseIcon: _ref,
-    defaultExpandIcon: _ref2,
+    defaultCollapseIcon: _ExpandMoreIcon || (_ExpandMoreIcon = /*#__PURE__*/React.createElement(ExpandMoreIcon, null)),
+    defaultExpandIcon: _ChevronRightIcon || (_ChevronRightIcon = /*#__PURE__*/React.createElement(ChevronRightIcon, null)),
     defaultExpanded: defaultExpanded,
     onNodeSelect: set_group,
     selected: group

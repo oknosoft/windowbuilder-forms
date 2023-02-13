@@ -5,18 +5,16 @@
  *
  * Created by Evgeniy Malyarov on 22.04.2019.
  */
+
 export default function handleSchemeChange(scheme) {
   const {
     current_user
   } = $p;
-
   if (current_user) {
     if (scheme._data._inited) {
       return;
     }
-
     scheme._data._inited = true;
-
     if (!current_user.branch.empty()) {
       apply_ref_filter('manager', [current_user.ref], scheme, 'cat.users');
     } else {
@@ -28,33 +26,28 @@ export function apply_ref_filter(left_value, objs, scheme, class_name) {
   const {
     selection
   } = scheme || this.props.scheme || {};
-
   if (!selection) {
     return;
   }
-
   let row = selection.find({
     left_value
   });
-
   if (!row) {
     row = selection.add({
       left_value
     });
   }
-
   if (!objs.length) {
     row.use = false;
     return;
   }
-
   row.use = true;
   row.left_value_type = 'path';
-  row.right_value_type = class_name || this[left_value]._mgr.class_name; // для статусов отбор особый
+  row.right_value_type = class_name || this[left_value]._mgr.class_name;
 
+  // для статусов отбор особый
   if (left_value === 'obj_delivery_state') {
     const tmp = [];
-
     for (const {
       ref
     } of objs) {
@@ -71,10 +64,8 @@ export function apply_ref_filter(left_value, objs, scheme, class_name) {
         tmp.push('Шаблон');
       }
     }
-
     objs = tmp;
   }
-
   row.right_value = objs.map(v => v.ref || v).join();
   row.comparison_type = objs.length > 1 ? 'in' : 'eq';
 }

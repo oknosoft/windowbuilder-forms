@@ -93,15 +93,12 @@ const columns_prod = [{
   width: 80,
   resizable: true
 }];
-
 const EmptyRowsView = classes => () => /*#__PURE__*/React.createElement("div", {
   className: classes.empty
 }, "Укажите строку версии заказа (слева)");
-
 class RevsDetales extends Proto {
   constructor(...args) {
     super(...args);
-
     this.handleCx = (idx, {
       characteristic
     }) => {
@@ -109,7 +106,6 @@ class RevsDetales extends Proto {
       const {
         props
       } = this;
-
       _mgr.get(characteristic, 'promise').then(obj => {
         if (!obj || obj.empty() || obj.calc_order !== props.obj) {
           console.log(characteristic);
@@ -122,10 +118,8 @@ class RevsDetales extends Proto {
       });
     };
   }
-
   revs_rows(src) {
     const rows = [];
-
     for (const {
       timestamp,
       _rev,
@@ -146,10 +140,8 @@ class RevsDetales extends Proto {
         rows.push(row);
       }
     }
-
     return Promise.resolve(rows);
   }
-
   render() {
     let {
       state: {
@@ -160,11 +152,9 @@ class RevsDetales extends Proto {
         classes
       }
     } = this;
-
     if (!production) {
       production = [];
     }
-
     return rows ? /*#__PURE__*/React.createElement("div", {
       className: classes.root
     }, /*#__PURE__*/React.createElement(Grid, {
@@ -197,7 +187,5 @@ class RevsDetales extends Proto {
       emptyRowsView: EmptyRowsView(classes)
     })))) : 'loading...';
   }
-
 }
-
 export default withStyles(styles)(RevsDetales);

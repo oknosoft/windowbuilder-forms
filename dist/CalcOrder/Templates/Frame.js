@@ -1,3 +1,4 @@
+var _small;
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -34,11 +35,7 @@ const useStyles = makeStyles(theme => ({
     flex: 1
   }
 }));
-
 const prm = () => qs.parse(location.search.replace('?', ''));
-
-var _ref = /*#__PURE__*/React.createElement("small", null, "(Создать пустое)");
-
 function TemplatesFrame(props) {
   const classes = useStyles();
   let {
@@ -48,7 +45,6 @@ function TemplatesFrame(props) {
   } = prm();
   let [activeStep, setActiveStep] = React.useState(1);
   const [list, set_list] = React.useState('');
-
   const handleNext = () => {
     const {
       cat: {
@@ -59,21 +55,18 @@ function TemplatesFrame(props) {
       },
       utils
     } = $p;
-
     if (activeStep === 0 && templates._select_template.calc_order.empty()) {
       return dialogs.alert({
         text: `Не выбран заказ-шаблон`,
         title: 'Пустой заказ'
       });
     }
-
     if ([1, 2].includes(activeStep) && templates._select_template.base_block.empty()) {
       return dialogs.alert({
         text: `Не выбрано изделие-шаблон`,
         title: 'Пустой шаблон'
       });
     }
-
     if (activeStep === steps.length - 1) {
       if (templates._select_template.refill && templates._select_template.base_block.empty()) {
         return dialogs.alert({
@@ -81,44 +74,34 @@ function TemplatesFrame(props) {
           title: 'Пустая система'
         });
       }
-
       if (!order) {
         return dialogs.alert({
           text: `Не задан заказ назначения в url`,
           title: 'Пустой заказ'
         });
       }
-
       if (!utils.is_guid(ref)) {
         action = 'new';
         ref = utils.generate_guid();
       }
-
       props.handleNavigate(`/builder/${ref}?order=${order}&action=${action}`);
     }
-
     setActiveStep(prevStep => prevStep + 1);
   };
-
   const handleBack = () => {
     if (activeStep === 0) {
       if (action === 'new') {
         const ox = $p.cat.characteristics.get(ref);
-
         if (ox.is_new() && ox.calc_order_row) {
           ox.calc_order.production.del(ox.calc_order_row);
           ox.unload();
         }
-
         return props.history.goBack();
       }
-
       return props.handleNavigate(`/builder/${ref}?order=${order}&action=cancel`);
     }
-
     setActiveStep(prevStep => prevStep - 1);
   };
-
   const handleSkip = () => {
     const {
       ui: {
@@ -126,22 +109,18 @@ function TemplatesFrame(props) {
       },
       utils
     } = $p;
-
     if (!order) {
       return dialogs.alert({
         text: `Не задан заказ назначения в url`,
         title: 'Пустой заказ'
       });
     }
-
     if (!utils.is_guid(ref)) {
       action = 'new';
       ref = utils.generate_guid();
     }
-
     props.handleNavigate(`/builder/${ref}?order=${order}&action=${action}&skip=true`);
   };
-
   return /*#__PURE__*/React.createElement(Stepper, {
     activeStep: activeStep,
     orientation: "vertical"
@@ -188,7 +167,6 @@ function TemplatesFrame(props) {
     onClick: handleSkip,
     className: classes.button,
     title: "Создать пустое изделие без шаблона"
-  }, 'Пропустить\u00A0', " ", _ref)))))));
+  }, 'Пропустить\u00A0', " ", _small || (_small = /*#__PURE__*/React.createElement("small", null, "(Создать пустое)")))))))));
 }
-
 export default TemplatesFrame;

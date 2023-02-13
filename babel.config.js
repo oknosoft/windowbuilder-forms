@@ -31,7 +31,7 @@ module.exports = {
   env: {
     es: {
       plugins: [
-        'transform-react-constant-elements',
+        '@babel/plugin-transform-react-constant-elements',
         ['react-remove-properties', { properties: ['data-mui-test'] }],
         ['transform-react-remove-prop-types'],
         [
@@ -59,7 +59,7 @@ module.exports = {
     },
     production: {
       plugins: [
-        'transform-react-constant-elements',
+        '@babel/plugin-transform-react-constant-elements',
         ['react-remove-properties', {properties: ['data-mui-test']}],
         ['transform-react-remove-prop-types'],
         ['babel-plugin-import',

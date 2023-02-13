@@ -6,6 +6,7 @@
  *
  * Created by Evgeniy Malyarov on 07.03.2019.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -13,28 +14,23 @@ import DataField from 'metadata-react/DataField';
 import ChipList from 'metadata-react/DataField/ChipList';
 import { withStyles } from '@material-ui/styles';
 import { apply_ref_filter } from './scheme_change';
-
 const styles = theme => ({
   group: {
     marginLeft: theme.spacing(),
     marginRight: theme.spacing(2)
   }
 });
-
 const sort = (a, b) => {
   if (a.name < b.name) {
     return -1;
   } else if (a.name > b.name) {
     return 1;
   }
-
   return 0;
 };
-
 class Params extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this.handleChange = area => ({
       target
     }) => {
@@ -43,7 +39,6 @@ class Params extends React.Component {
       });
       apply_ref_filter.call(this, area, target.value);
     };
-
     const states = this.obj_delivery_state = [{
       ref: 'draft',
       name: 'Черновики'
@@ -74,7 +69,6 @@ class Params extends React.Component {
           }
         }
       },
-
       class_name: 'enm.obj_delivery_states'
     };
     const {
@@ -87,7 +81,6 @@ class Params extends React.Component {
     partner._mgr = cat.partners;
     const manager = this.manager = [];
     manager._mgr = cat.users;
-
     if (current_user && !current_user.branch.empty()) {
       current_user.branch.divisions.forEach(v => {
         department.push(v.acl_obj);
@@ -103,7 +96,6 @@ class Params extends React.Component {
         v.name && manager.push(v);
       });
     }
-
     cat.partners.forEach(v => {
       v.name && partner.push(v);
     });
@@ -124,7 +116,6 @@ class Params extends React.Component {
         const {
           obj_delivery_state
         } = this.state;
-
         for (const ref of row.right_value.split(',')) {
           if (ref === 'Черновик' || ref === 'Отозван') {
             const item = states.find(({
@@ -151,7 +142,6 @@ class Params extends React.Component {
         }
       }
     });
-
     if (department.length) {
       department.sort(sort);
       selection.find_rows({
@@ -161,7 +151,6 @@ class Params extends React.Component {
         row.right_value && this.state.department.push.apply(this.state.department, row.right_value.split(','));
       });
     }
-
     if (partner.length) {
       partner.sort(sort);
       selection.find_rows({
@@ -171,7 +160,6 @@ class Params extends React.Component {
         row.right_value && this.state.partner.push.apply(this.state.partner, row.right_value.split(','));
       });
     }
-
     if (manager.length) {
       manager.sort(sort);
       selection.find_rows({
@@ -182,7 +170,6 @@ class Params extends React.Component {
       });
     }
   }
-
   render() {
     const {
       scheme,
@@ -231,7 +218,5 @@ class Params extends React.Component {
       fullWidth: true
     }));
   }
-
 }
-
 export default withStyles(styles)(Params);

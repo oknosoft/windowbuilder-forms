@@ -1,3 +1,4 @@
+var _InputAdornment;
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -5,11 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
-
-var _ref = /*#__PURE__*/React.createElement(InputAdornment, {
-  position: "end"
-}, /*#__PURE__*/React.createElement(SearchIcon, null));
-
 export default function SelectSysList({
   classes,
   sys_rows,
@@ -20,9 +16,7 @@ export default function SelectSysList({
   handleNext
 }) {
   const [filter, set_filter] = React.useState('');
-
   const [cond] = _obj.permitted_sys();
-
   const rows = sys_rows.filter(v => {
     if (filter) {
       const selection = {
@@ -31,12 +25,10 @@ export default function SelectSysList({
           value: filter.split(' ')
         }
       };
-
       if (!$p.utils._selection.call(this, v, selection)) {
         return false;
       }
     }
-
     return v.extra_fields._obj.find(({
       value
     }) => value == group);
@@ -54,7 +46,9 @@ export default function SelectSysList({
       target
     }) => set_filter(target.value),
     InputProps: {
-      endAdornment: _ref
+      endAdornment: _InputAdornment || (_InputAdornment = /*#__PURE__*/React.createElement(InputAdornment, {
+        position: "end"
+      }, /*#__PURE__*/React.createElement(SearchIcon, null)))
     }
   }), /*#__PURE__*/React.createElement("div", {
     className: classes.list

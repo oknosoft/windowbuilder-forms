@@ -1,5 +1,4 @@
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 /**
  * Форма списка документа Расчет
  *
@@ -7,19 +6,19 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
  *
  * Created by Evgeniy Malyarov on 05.10.2018.
  */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types'; //import IconButton from '@material-ui/core/IconButton';
 
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+//import IconButton from '@material-ui/core/IconButton';
 import DataList from 'metadata-react/DynList/DynList';
 import handleSchemeChange from './scheme_change';
 import Svgs from '../Svgs';
 import QuickFilter from './QuickFilter';
 const heights = new Map([[true, 24], [false, 93]]);
-
 class CalcOrderList extends Component {
   constructor(props, context) {
     super(props, context);
-
     this.handleRowSelect = ({
       selectedRow
     }) => {
@@ -28,11 +27,10 @@ class CalcOrderList extends Component {
         if (selectedRow && this.prev_ref !== selectedRow.ref) {
           if (this.state.hidden) {
             return this.prev_ref = selectedRow.ref;
-          } // Получаем идентификаторы продукций с вложениями
+          }
 
-
+          // Получаем идентификаторы продукций с вложениями
           const keys = [];
-
           if (!$p.utils.is_data_obj(selectedRow)) {
             const {
               doc
@@ -99,7 +97,6 @@ class CalcOrderList extends Component {
         }
       }, 300);
     };
-
     this.reverseHide = () => {
       const hidden = !this.state.hidden;
       $p.wsql.set_user_param('svgs_area_hidden', hidden);
@@ -119,12 +116,10 @@ class CalcOrderList extends Component {
         }
       });
     };
-
     this.registerFilterChange = (handleFilterChange, scheme) => {
       const {
         state
       } = this;
-
       if (state.handleFilterChange !== handleFilterChange || state.scheme !== scheme) {
         this.setState({
           handleFilterChange,
@@ -132,7 +127,6 @@ class CalcOrderList extends Component {
         });
       }
     };
-
     this.handlers = Object.assign({}, this.props.handlers, {
       handleSchemeChange: handleSchemeChange.bind(this)
     });
@@ -145,7 +139,6 @@ class CalcOrderList extends Component {
     this.timer = 0;
     this.prev_ref = '';
   }
-
   render() {
     const {
       props: {
@@ -179,7 +172,8 @@ class CalcOrderList extends Component {
       title: title,
       onRowSelect: this.handleRowSelect,
       find_rows: _mgr.find_rows_custom,
-      setting_in_menu: true //selectionMode
+      setting_in_menu: true
+      //selectionMode
       //denyAddDel
       //show_variants
       ,
@@ -200,8 +194,6 @@ class CalcOrderList extends Component {
       handleNavigate: handlers.handleNavigate
     })];
   }
-
 }
-
 CalcOrderList.rname = 'CalcOrderList';
 export default CalcOrderList;

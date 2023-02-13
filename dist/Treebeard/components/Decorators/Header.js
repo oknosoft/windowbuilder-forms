@@ -7,11 +7,9 @@ const useStyles = makeStyles({
     padding: 0
   }
 });
-
 function prevent(e) {
   e.preventDefault();
 }
-
 const Header = ({
   node,
   style,
@@ -28,9 +26,9 @@ const Header = ({
       prevent(e);
       onRightClick(node, e);
     }
-  } // onMouseUp={prevent}
+  }
+  // onMouseUp={prevent}
   // onMouseDown={prevent}
-
 }, /*#__PURE__*/React.createElement("div", {
   style: style.title,
   className: `dsn-hover`
@@ -48,5 +46,4 @@ const Header = ({
 }) : /*#__PURE__*/React.createElement("div", {
   className: `dsn-treeview-icon ${node.icon}`
 }), node.name));
-
 export default Header;

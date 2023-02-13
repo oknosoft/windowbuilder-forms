@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DataGrid from 'react-data-grid';
 import { DateFormatter, NomFormatter } from '../../CalcOrder/RevsDetales';
-
 const ClrFormatter = ({
   value
 }) => {
   const clr = $p.cat.clrs.get(value);
   return clr.presentation;
 };
-
 const columns_doc = [{
   key: 'date',
   name: 'Дата',
@@ -53,7 +51,6 @@ export default function Left({
   set_params
 }) {
   const __html = svg ? $p.utils.scale_svg(svg, 240, 0) : '';
-
   return /*#__PURE__*/React.createElement("div", {
     style: {
       textAlign: 'center'

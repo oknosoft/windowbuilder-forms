@@ -6,7 +6,6 @@ import defaultAnimations from '../themes/animations';
 import { Ul } from './common';
 import defaultDecorators from './Decorators';
 import TreeNode from './TreeNode';
-
 const TreeBeard = props => {
   const {
     animations,
@@ -18,11 +17,13 @@ const TreeBeard = props => {
     onRightClickHeader,
     style
   } = props;
-  const nodeStyle = { ...defaultTheme.tree.node,
+  const nodeStyle = {
+    ...defaultTheme.tree.node,
     ...style.tree.node
   };
   return /*#__PURE__*/React.createElement(Ul, {
-    style: { ...defaultTheme.tree.base,
+    style: {
+      ...defaultTheme.tree.base,
       ...style.tree.base
     }
   }, castArray(data).map((node, index) => /*#__PURE__*/React.createElement(TreeNode, {
@@ -37,7 +38,6 @@ const TreeBeard = props => {
     style: nodeStyle
   })));
 };
-
 TreeBeard.defaultProps = {
   style: defaultTheme,
   animations: defaultAnimations,

@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 class RevsDetales extends React.Component {
   constructor(...args) {
     super(...args);
     this.state = {};
   }
-
   revs_rows(src) {
     const rows = [];
-
     for (const {
       timestamp,
       _rev
@@ -23,10 +20,8 @@ class RevsDetales extends React.Component {
         rows.push(row);
       }
     }
-
     return Promise.resolve(rows);
   }
-
   componentDidMount() {
     const {
       rows,
@@ -37,14 +32,11 @@ class RevsDetales extends React.Component {
       rows
     }));
   }
-
   render() {
     const {
       rows
     } = this.state;
     return rows ? `length: ${rows.length}` : 'loading...';
   }
-
 }
-
 export default RevsDetales;

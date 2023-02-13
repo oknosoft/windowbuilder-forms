@@ -1,16 +1,15 @@
+var _TableCell, _TableCell2, _TableCell3;
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell'; //import TableHead from '@material-ui/core/TableHead';
-
+import TableCell from '@material-ui/core/TableCell';
+//import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import withStyles from './styles';
 import { stat } from './Progress';
-
 function Report1D({
   hide_head,
   ...props
@@ -23,31 +22,17 @@ function Report1D({
     className: props.classes.data,
     key: "table"
   }, /*#__PURE__*/React.createElement(NomTable, props)));
-} // рисует шапку
+}
 
-
-var _ref = /*#__PURE__*/React.createElement(TableCell, null, /*#__PURE__*/React.createElement(Typography, {
-  variant: "subtitle1"
-}, "Участок"));
-
-var _ref2 = /*#__PURE__*/React.createElement(TableCell, null, /*#__PURE__*/React.createElement(Typography, {
-  variant: "subtitle1"
-}, "Получатель"));
-
-var _ref3 = /*#__PURE__*/React.createElement(TableCell, null, /*#__PURE__*/React.createElement(Typography, {
-  variant: "subtitle1"
-}, "Заказы"));
-
+// рисует шапку
 function Head({
   _obj,
   classes
 }) {
   const orders = new Set();
-
   _obj.planning.forEach(({
     obj
   }) => orders.add(obj.calc_order));
-
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Typography, {
     variant: "headline"
   }, _obj.presentation), /*#__PURE__*/React.createElement(Table, {
@@ -56,14 +41,20 @@ function Head({
     }
   }, /*#__PURE__*/React.createElement(TableBody, null, /*#__PURE__*/React.createElement(TableRow, {
     className: classes.row
-  }, _ref, /*#__PURE__*/React.createElement(TableCell, null, _obj.key.presentation), _ref2, /*#__PURE__*/React.createElement(TableCell, null, _obj.recipient.presentation)), /*#__PURE__*/React.createElement(TableRow, {
+  }, _TableCell || (_TableCell = /*#__PURE__*/React.createElement(TableCell, null, /*#__PURE__*/React.createElement(Typography, {
+    variant: "subtitle1"
+  }, "Участок"))), /*#__PURE__*/React.createElement(TableCell, null, _obj.key.presentation), _TableCell2 || (_TableCell2 = /*#__PURE__*/React.createElement(TableCell, null, /*#__PURE__*/React.createElement(Typography, {
+    variant: "subtitle1"
+  }, "Получатель"))), /*#__PURE__*/React.createElement(TableCell, null, _obj.recipient.presentation)), /*#__PURE__*/React.createElement(TableRow, {
     className: classes.row
-  }, _ref3, /*#__PURE__*/React.createElement(TableCell, {
+  }, _TableCell3 || (_TableCell3 = /*#__PURE__*/React.createElement(TableCell, null, /*#__PURE__*/React.createElement(Typography, {
+    variant: "subtitle1"
+  }, "Заказы"))), /*#__PURE__*/React.createElement(TableCell, {
     colSpan: 3
   }, Array.from(orders).map(v => v.number_doc).sort().join(', '))))));
-} // рисует таблицу по номенклатуре
+}
 
-
+// рисует таблицу по номенклатуре
 function NomTable({
   _obj,
   classes
@@ -71,29 +62,26 @@ function NomTable({
   const res = [];
   const {
     debit_credit_kinds
-  } = $p.enm; // бежим по свёрнутой табчасти раскроя
+  } = $p.enm;
 
+  // бежим по свёрнутой табчасти раскроя
   const fragments = _obj.fragments();
-
   fragments.forEach((characteristics, nom) => {
     for (const [characteristic] of characteristics) {
       const crows = _obj.cutting.find_rows({
         nom,
         characteristic
       });
-
       const cuts_in = _obj.cuts.find_rows({
         record_kind: debit_credit_kinds.credit,
         nom,
         characteristic
       });
-
       const cuts_out = _obj.cuts.find_rows({
         record_kind: debit_credit_kinds.debit,
         nom,
         characteristic
       });
-
       const products_len = crows.reduce((sum, row) => sum + row.len, 0);
       const workpieces_len = cuts_in.reduce((sum, row) => sum + row.len, 0);
       const scraps_len = cuts_out.reduce((sum, row) => sum + row.len, 0);
@@ -138,7 +126,6 @@ function NomTable({
   });
   return res;
 }
-
 class V1D extends paper.Project {
   redraw({
     userData,
@@ -147,8 +134,7 @@ class V1D extends paper.Project {
   }) {
     this.clear();
     let x = 0,
-        h = 88;
-
+      h = 88;
     for (let i = 0; i < cuts_in.length; i++) {
       const workpiece = cuts_in[i];
       const w = workpiece.len;
@@ -186,23 +172,19 @@ class V1D extends paper.Project {
         return sum + curr + userData.knifewidth;
       }, 0);
     }
-
     this.zoom_fit();
     this.view.update();
   }
-
   zoom_fit() {
     var bounds = this.activeLayer && this.activeLayer.strokeBounds;
-
     if (bounds && bounds.height && bounds.width) {
       this.view.zoom = Math.min((this.view.viewSize.height - 8) / bounds.height, (this.view.viewSize.width - 8) / bounds.width);
       this.view.center = bounds.center;
     }
   }
+}
 
-} // рисует результат раскроя
-
-
+// рисует результат раскроя
 function Visualization({
   status,
   classes
@@ -218,7 +200,6 @@ function Visualization({
     }
   });
 }
-
 NomTable.propTypes = {
   _obj: PropTypes.object.isRequired,
   classes: PropTypes.object.isRequired

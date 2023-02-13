@@ -5,12 +5,12 @@
  *
  * Created by Evgeniy Malyarov on 27.09.2018.
  */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ListItemText from '@material-ui/core/ListItemText';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/styles';
-
 const styles = theme => ({
   bottom: {
     marginBottom: theme.spacing(2)
@@ -19,7 +19,6 @@ const styles = theme => ({
     padding: 0
   }
 });
-
 export function stat(status) {
   const {
     rows,
@@ -34,7 +33,6 @@ export function stat(status) {
   } = status;
   return `${(products_len / 1000).toFixed(1)}м, ${rows.length}шт, Заготовок: ${(workpieces_len / 1000).toFixed(1)}м, ${workpieces.length}шт, Обрезь: ${(scraps_len / 1000).toFixed(1)}м, ${workpieces.reduce((sum, val) => val > usefulscrap ? sum + 1 : sum, 0)}шт, Отходы: ${((workpieces_len - products_len - scraps_len) / 1000).toFixed(1)}м, ${scraps_percent.toFixed(1)}%`;
 }
-
 class Progress extends Component {
   render() {
     const {
@@ -57,7 +55,5 @@ class Progress extends Component {
       className: classes.noPadding
     }));
   }
-
 }
-
 export default withStyles(styles)(Progress);

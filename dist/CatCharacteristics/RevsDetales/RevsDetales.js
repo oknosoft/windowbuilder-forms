@@ -7,11 +7,9 @@ import Left from './Left';
 import { styles } from '../../CalcOrder/RevsDetales';
 import Right from './Right';
 import ToolBtns from './ToolBtns';
-
 class RevsDetales extends Proto {
   constructor(...args) {
     super(...args);
-
     this.setTab = tab => {
       this.setState({
         tab
@@ -21,7 +19,6 @@ class RevsDetales extends Proto {
         tab: tab
       }));
     };
-
     this.handleClose = () => {
       const {
         props
@@ -29,7 +26,6 @@ class RevsDetales extends Proto {
       props.resetObj();
       return props.isRoot;
     };
-
     this.set_params = ({
       rowIdx
     }) => {
@@ -44,11 +40,9 @@ class RevsDetales extends Proto {
         specification
       });
     };
-
     this.revs_rows = src => {
       const rows = [];
       const tx = $p.cat.characteristics.create({}, false, true);
-
       for (const {
         timestamp,
         _rev,
@@ -78,12 +72,10 @@ class RevsDetales extends Proto {
           rows.push(row);
         }
       }
-
       tx.unload();
       return Promise.resolve(rows);
     };
   }
-
   componentDidMount() {
     super.componentDidMount();
     const {
@@ -91,42 +83,34 @@ class RevsDetales extends Proto {
       state,
       handleClose
     } = this;
-
     if (!props.isRoot) {
       props.setClose({
         handler: handleClose,
         text: 'Вернуться в заказ'
       });
     }
-
     props.setToolBtns( /*#__PURE__*/React.createElement(ToolBtns, {
       setTab: this.setTab,
       tab: 0
     }));
   }
-
   componentWillUnmount() {
     const {
       props,
       unmounted
     } = this;
-
     if (!unmounted && !props.isRoot) {
       props.setClose({
         handler: null,
         text: ''
       });
     }
-
     props.setToolBtns(null);
   }
-
   filter_params(tx, tparams) {
     const res = [];
-
     if (tparams) {
       tx.params.load(tparams.filter(row => !row.hide));
-
       for (const {
         cnstr,
         inset,
@@ -143,10 +127,8 @@ class RevsDetales extends Proto {
         }
       }
     }
-
     return res;
   }
-
   render() {
     let {
       state: {
@@ -160,11 +142,9 @@ class RevsDetales extends Proto {
         classes
       }
     } = this;
-
     if (!params) {
       params = [];
     }
-
     return rows ? /*#__PURE__*/React.createElement("div", {
       className: classes.root
     }, /*#__PURE__*/React.createElement(Grid, {
@@ -190,7 +170,5 @@ class RevsDetales extends Proto {
       setTab: this.setTab
     })))) : 'loading...';
   }
-
 }
-
 export default withStyles(styles)(RevsDetales);

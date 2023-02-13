@@ -12,7 +12,6 @@ const Li = styled('li', {
 })(({
   style
 }) => style);
-
 class TreeNode extends PureComponent {
   constructor() {
     super();
@@ -20,7 +19,6 @@ class TreeNode extends PureComponent {
     this.onClickToggle = this.onClickToggle.bind(this);
     this.onClickHeader = this.onClickHeader.bind(this);
   }
-
   onClick() {
     const {
       node,
@@ -29,18 +27,15 @@ class TreeNode extends PureComponent {
     const {
       toggled
     } = node;
-
     if (onToggle) {
       onToggle(node, !toggled);
     }
   }
-
   onClickToggle() {
     const {
       node,
       onToggle
     } = this.props;
-
     if (onToggle) {
       const {
         toggled
@@ -48,37 +43,31 @@ class TreeNode extends PureComponent {
       onToggle(node, !toggled);
     }
   }
-
   onClickHeader() {
     const {
       node,
       onClickHeader
     } = this.props;
-
     if (onClickHeader) {
       onClickHeader(node);
     }
   }
-
   animations() {
     const {
       animations,
       node
     } = this.props;
-
     if (!animations) {
       return {
         toggle: defaultAnimations.toggle(this.props, 0)
       };
     }
-
     const animation = Object.assign({}, animations, node.animations);
     return {
       toggle: animation.toggle(this.props),
       drawer: animation.drawer(this.props)
     };
   }
-
   decorators() {
     const {
       decorators,
@@ -87,7 +76,6 @@ class TreeNode extends PureComponent {
     let nodeDecorators = node.decorators || {};
     return Object.assign({}, decorators, nodeDecorators);
   }
-
   renderChildren(decorators) {
     const {
       animations,
@@ -99,28 +87,22 @@ class TreeNode extends PureComponent {
       onClickHeader,
       onRightClickHeader
     } = this.props;
-
     if (node.loading) {
       return /*#__PURE__*/React.createElement(Loading, {
         decorators,
         style
       });
     }
-
     let children = node.children;
-
     if (!isArray(children)) {
       children = children ? [children] : [];
     }
-
     let {
       subtree
     } = style;
-
     if (node.style?.subtree) {
       subtree = Object.assign({}, subtree, node.style.subtree);
     }
-
     return /*#__PURE__*/React.createElement(Ul, {
       style: subtree
     }, children.map((child, index) => /*#__PURE__*/React.createElement(TreeNode, {
@@ -135,7 +117,6 @@ class TreeNode extends PureComponent {
       node: child
     })));
   }
-
   render() {
     const {
       node,
@@ -145,7 +126,8 @@ class TreeNode extends PureComponent {
     } = this.props;
     const decorators = this.decorators();
     const animations = this.animations();
-    const { ...restAnimationInfo
+    const {
+      ...restAnimationInfo
     } = animations.drawer;
     return /*#__PURE__*/React.createElement(Li, {
       style: style.base
@@ -159,11 +141,10 @@ class TreeNode extends PureComponent {
       onRightClickHeader: separateToggleEvent ? onRightClickHeader : null,
       onClickToggle: separateToggleEvent ? () => this.onClickToggle() : null
     }), /*#__PURE__*/React.createElement(Drawer, {
-      restAnimationInfo: { ...restAnimationInfo
+      restAnimationInfo: {
+        ...restAnimationInfo
       }
     }, node.toggled ? this.renderChildren(decorators, animations) : null));
   }
-
 }
-
 export default TreeNode;

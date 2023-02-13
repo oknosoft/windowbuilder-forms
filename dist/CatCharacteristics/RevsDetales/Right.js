@@ -8,11 +8,9 @@ export const PropFormatter = ({
   const res = value ? value.presentation : '';
   return res || null;
 };
-
 const EmptyRowsView = classes => () => /*#__PURE__*/React.createElement("div", {
   className: classes.empty
 }, "Укажите строку версии продукции (слева)");
-
 const columns_prop = [{
   key: 'cnstr',
   name: 'Слой',
@@ -39,7 +37,6 @@ export default function Right({
   const _obj = tab === 1 && $p.cat.characteristics.create({
     specification
   }, false, true);
-
   return /*#__PURE__*/React.createElement("div", {
     style: {
       height: 'calc(100% - 32px)'

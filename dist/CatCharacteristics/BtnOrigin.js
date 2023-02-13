@@ -1,3 +1,4 @@
+var _FindIcon;
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,18 +10,16 @@ const useStyles = makeStyles(theme => ({
     marginLeft: theme.spacing(1)
   }
 }));
-
-var _ref = /*#__PURE__*/React.createElement(FindIcon, null);
-
 export default function BtnOrigin(props) {
   const classes = useStyles();
   return /*#__PURE__*/React.createElement(Tip, {
     title: "Показать элемент технологического справочника"
   }, /*#__PURE__*/React.createElement(Button, {
     classes: classes,
-    variant: "contained" //color="primary"
+    variant: "contained"
+    //color="primary"
     ,
-    startIcon: _ref,
+    startIcon: _FindIcon || (_FindIcon = /*#__PURE__*/React.createElement(FindIcon, null)),
     onClick: props.handleOpen
   }, "Происхождение"));
 }

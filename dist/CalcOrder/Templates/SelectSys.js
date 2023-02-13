@@ -1,3 +1,4 @@
+var _Typography;
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Switch from '@material-ui/core/Switch';
@@ -39,10 +40,8 @@ const {
 } = $p;
 const _obj = templates._select_template;
 const empty_hierarchy = vh.get();
-
 const sys_rows = () => {
   const [cond] = _obj.permitted_sys();
-
   const sys = job_prm.builder && job_prm.builder.branch_filter && job_prm.builder.branch_filter.sys;
   const rows = [];
   production_params.forEach(v => {
@@ -51,61 +50,45 @@ const sys_rows = () => {
     })) {
       return;
     }
-
     if (sys && sys.length && !sys.some(bs => {
       return v === bs || v._hierarchy(bs);
     })) {
       return;
     }
-
     rows.push(v);
   });
   return rows;
 };
-
-var _ref = /*#__PURE__*/React.createElement(Typography, {
-  variant: "body2",
-  color: "primary"
-}, "Можно перезаполнить параметры по системе, либо сохранить параметры, заданные в изделии-шаблоне");
-
 export default function SelectSys({
   handleNext,
   lock
 }) {
   const [cond] = _obj.permitted_sys();
-
   if (!lock) {
     lock = cond && cond.path.inh.length === 1;
   }
-
   if (!lock && job_prm.builder.templates_lock_sys && job_prm.builder.templates_lock_sys.includes(_obj.calc_order)) {
     lock = true;
   }
-
   if (lock && _obj.refill) {
     _obj.refill = false;
   }
-
   const [refill, set_refill] = React.useState(_obj.refill);
   const [sys, set_sys] = React.useState(_obj.sys);
   const [group, set_group] = React.useState(_obj.sys._extra('sys_hierarchy') || empty_hierarchy);
-
   const refillChange = ({
     target
   }) => {
     _obj.refill = target.checked;
     set_refill(target.checked);
   };
-
   const groupChange = (e, v) => {
     set_group(vh.get(v));
   };
-
   const sysChange = v => {
     _obj.sys = v;
     set_sys(v);
   };
-
   const classes = useStyles();
   const rows = sys_rows();
   return [/*#__PURE__*/React.createElement(Grid, {
@@ -129,7 +112,10 @@ export default function SelectSys({
     item: true,
     xs: 9,
     sm: 10
-  }, _ref, /*#__PURE__*/React.createElement(TextField, {
+  }, _Typography || (_Typography = /*#__PURE__*/React.createElement(Typography, {
+    variant: "body2",
+    color: "primary"
+  }, "Можно перезаполнить параметры по системе, либо сохранить параметры, заданные в изделии-шаблоне")), /*#__PURE__*/React.createElement(TextField, {
     InputProps: {
       readOnly: true
     },

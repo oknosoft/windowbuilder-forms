@@ -7,7 +7,6 @@ const Polygon = styled('polygon', {
 })(({
   style
 }) => style);
-
 const Toggle = ({
   style,
   node,
@@ -32,5 +31,4 @@ const Toggle = ({
     stroke: "black"
   }))));
 };
-
 export default Toggle;

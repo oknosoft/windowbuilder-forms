@@ -1,5 +1,4 @@
 import { withStyles } from '@material-ui/core/styles';
-
 const styles = ({
   transitions,
   palette,
@@ -51,5 +50,4 @@ const styles = ({
     paddingRight: spacing()
   }
 });
-
 export default withStyles(styles);

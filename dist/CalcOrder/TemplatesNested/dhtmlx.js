@@ -5,7 +5,6 @@ export default function ({
   const {
     dialogs
   } = ui;
-
   dialogs.templates_nested = function () {
     return dialogs.alert({
       title: 'Шаблон вложения',

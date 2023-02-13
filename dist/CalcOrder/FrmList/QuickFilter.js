@@ -1,3 +1,4 @@
+var _i, _AutorenewIcon;
 import React from 'react';
 import PropTypes from 'prop-types';
 import IconButton from '@material-ui/core/IconButton';
@@ -16,7 +17,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper
   }
 }));
-
 const showReftesh = ({
   _mgr,
   frm_key,
@@ -25,21 +25,12 @@ const showReftesh = ({
   if (frm_key !== 'templates') {
     frm_key = `frm_${_mgr.class_name.replace('.', '_')}_${frm_key}`;
     const mode = scheme.source_mode(frm_key);
-
     if (mode === 'ram') {
       return true;
     }
   }
-
   return false;
 };
-
-var _ref = /*#__PURE__*/React.createElement("i", {
-  className: "fa fa-filter fa-fw"
-});
-
-var _ref2 = /*#__PURE__*/React.createElement(AutorenewIcon, null);
-
 export default function QuickFilter({
   scheme,
   _mgr,
@@ -50,7 +41,6 @@ export default function QuickFilter({
   const [loading, setLoading] = React.useState(false);
   const open = Boolean(anchorEl);
   const id = open ? 'popper-filter' : undefined;
-
   const handleClick = event => {
     if (anchorEl) {
       setAnchorEl(null);
@@ -59,7 +49,6 @@ export default function QuickFilter({
       setAnchorEl(event.currentTarget);
     }
   };
-
   const handleDirectLoad = () => {
     const selector = {
       startkey: [_mgr.class_name, ...moment(scheme.date_till).format('YYYY-MM-DD').split('-').map(Number)],
@@ -69,12 +58,10 @@ export default function QuickFilter({
       limit: 100000
     };
     setLoading(true);
-
     _mgr.direct_load({
       selector
     }).then(() => setLoading(false)).catch(() => setLoading(false));
   };
-
   const classes = useStyles();
   const show_refresh = showReftesh({
     _mgr,
@@ -89,7 +76,9 @@ export default function QuickFilter({
   }, /*#__PURE__*/React.createElement(IconButton, {
     "aria-describedby": id,
     onClick: handleClick
-  }, _ref)), /*#__PURE__*/React.createElement(Popper, {
+  }, _i || (_i = /*#__PURE__*/React.createElement("i", {
+    className: "fa fa-filter fa-fw"
+  })))), /*#__PURE__*/React.createElement(Popper, {
     id: id,
     open: open,
     anchorEl: anchorEl,
@@ -106,7 +95,7 @@ export default function QuickFilter({
   }), /*#__PURE__*/React.createElement(DialogActions, null, _mgr.direct_load && show_refresh ? /*#__PURE__*/React.createElement(Button, {
     variant: "contained",
     onClick: handleDirectLoad,
-    startIcon: _ref2
+    startIcon: _AutorenewIcon || (_AutorenewIcon = /*#__PURE__*/React.createElement(AutorenewIcon, null))
   }, "Прочитать с сервера") : null, /*#__PURE__*/React.createElement(Button, {
     variant: "contained",
     onClick: handleClick,

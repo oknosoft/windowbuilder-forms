@@ -5,20 +5,18 @@
  *
  * Created by Evgeniy Malyarov on 27.09.2018.
  */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Dialog from 'metadata-react/App/Dialog';
 import List from '@material-ui/core/List';
 import Progress from './Progress';
-
 class ProgressDialog extends Component {
   constructor(...args) {
     super(...args);
-
     this.handleCancel = () => {};
   }
-
   render() {
     const {
       props: {
@@ -42,7 +40,5 @@ class ProgressDialog extends Component {
       status: status
     }))));
   }
-
 }
-
 export default ProgressDialog;

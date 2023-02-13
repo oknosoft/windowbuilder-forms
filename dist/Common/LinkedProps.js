@@ -5,10 +5,10 @@
  *
  * Created 09.03.2020.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import PropField from 'metadata-react/DataField/PropField';
-
 class LinkedProps extends React.Component {
   render() {
     const {
@@ -18,11 +18,9 @@ class LinkedProps extends React.Component {
       layer,
       project
     } = this.props;
-
     const {
       fields
     } = ts._owner._metadata(ts._name);
-
     const res = [];
     const grid = {
       selection: {
@@ -46,13 +44,10 @@ class LinkedProps extends React.Component {
       const {
         param
       } = prow;
-
       if (param === properties.auto_align) {
         return;
       }
-
       const _meta = utils._clone(fields.value);
-
       _meta.synonym = param.name || param.caption;
       const {
         types
@@ -64,51 +59,44 @@ class LinkedProps extends React.Component {
       };
       const bool = types.includes('boolean') && (typeof prow.value === 'boolean' || types.length === 1);
       let key = `${prow.row}-${prow.param.valueOf()}`;
-
       if (sys) {
         key += sys.valueOf();
       }
-
       let hide = false;
-
       if (!(project || layer).params_links(stub)) {
         const links = param.params_links({
           grid,
           obj: prow,
           layer
-        }); // вычисляемые скрываем всегда
-
-        hide = !param.show_calculated && param.is_calculated; // если для параметра есть связи - сокрытие по связям
-
+        });
+        // вычисляемые скрываем всегда
+        hide = !param.show_calculated && param.is_calculated;
+        // если для параметра есть связи - сокрытие по связям
         if (!hide) {
           if (links.length) {
             hide = links.some(link => link.hide);
           } else {
             hide = prow.hide;
           }
-        } // проверим вхождение значения в доступные и при необходимости изменим
+        }
 
-
+        // проверим вхождение значения в доступные и при необходимости изменим
         if (links.length) {
           links.forEach(link => {
             key += link.valueOf();
           });
           const values = [];
-
           if (param.linked_values(links, prow, values)) {
             notify.add(prow);
           }
-
           if (!bool && values.length) {
             if (values.length < 50) {
               stub.oselect = true;
             }
-
             if (!_meta.choice_params) {
               _meta.choice_params = [];
-            } // дополняем отбор
-
-
+            }
+            // дополняем отбор
             _meta.choice_params.push({
               name: 'ref',
               path: {
@@ -118,16 +106,13 @@ class LinkedProps extends React.Component {
           }
         }
       }
-
       if (prow.hide !== hide) {
         prow.hide = hide;
         notify.add(prow);
       }
-
       if (hide) {
         return;
       }
-
       res.push({
         key,
         prow,
@@ -149,7 +134,5 @@ class LinkedProps extends React.Component {
       ctrl_type: ctrl_type
     }));
   }
-
 }
-
 export default LinkedProps;

@@ -5,6 +5,7 @@
  *
  * Created by Evgeniy Malyarov on 19.05.2020.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import TabularSection from 'metadata-react/TabularSection';
@@ -13,15 +14,12 @@ import DataObj from 'metadata-react/FrmObj/DataObj';
 import withStyles from 'metadata-react/styles/paper600';
 import BtnOrigin from './BtnOrigin';
 const FrmObj = withStyles(DataObj);
-
 class Spec extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this.handleClose = () => this.setState({
       open: false
     });
-
     this.handleOpen = () => {
       const {
         spec_ref,
@@ -29,22 +27,18 @@ class Spec extends React.Component {
           _obj
         }
       } = this;
-
       if (spec_ref) {
         const {
           _tabular,
           selected
         } = spec_ref.state;
-
         if (selected && selected.hasOwnProperty('rowIdx')) {
           this.row = spec_ref.rowGetter(selected.rowIdx);
           this.fld = 'origin';
-
           if (typeof this.row.origin === 'number') {
             this.row = _obj.cnn_elmnts.get(this.row.origin - 1);
             this.fld = 'cnn';
           }
-
           if (this.row[this.fld]) {
             this.setState({
               open: true
@@ -53,7 +47,6 @@ class Spec extends React.Component {
         }
       }
     };
-
     this.filter = collection => {
       const res = [];
       const {
@@ -66,11 +59,9 @@ class Spec extends React.Component {
       });
       return res;
     };
-
     this.state = {
       open: false
     };
-
     if (props.scheme) {
       this.scheme = props.scheme;
     } else {
@@ -84,7 +75,6 @@ class Spec extends React.Component {
       });
     }
   }
-
   render() {
     const {
       state: {
@@ -114,8 +104,8 @@ class Spec extends React.Component {
       open: true,
       noSpace: true,
       title: origin.presentation || 'Ссылка оборвана',
-      onClose: this.handleClose //initFullScreen
-
+      onClose: this.handleClose
+      //initFullScreen
     }, /*#__PURE__*/React.createElement(FrmObj, {
       _mgr: origin._manager,
       _acl: "r",
@@ -127,7 +117,5 @@ class Spec extends React.Component {
       handlers: {}
     }))];
   }
-
 }
-
 export default Spec;

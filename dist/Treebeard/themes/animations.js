@@ -11,7 +11,8 @@ export default {
     },
     duration: duration
   }),
-  drawer: () => ({
+  drawer: ( /* props */
+  ) => ({
     enter: {
       animation: 'slideDown',
       duration: 300

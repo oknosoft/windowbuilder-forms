@@ -1,3 +1,4 @@
+var _Typography, _NextWeekIcon, _WorkIcon, _CircularProgress;
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
@@ -37,7 +38,6 @@ scheme_settings.find_rows({
     schemas.templates = scheme;
   }
 });
-
 const styles = theme => ({
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -47,21 +47,6 @@ const styles = theme => ({
     flex: 1
   }
 });
-
-var _ref = /*#__PURE__*/React.createElement(Typography, {
-  key: "descr",
-  variant: "body2",
-  color: "primary"
-}, "Изделия-шаблоны, живут в специальных заказах со статусом ", /*#__PURE__*/React.createElement("i", null, "Шаблон"), ".", /*#__PURE__*/React.createElement("br", null), "По умолчанию, выбор происходит из последнего открытого заказа-шаблона. При желании, изделие можно заполнить по образу любого изделия из любого заказа - не обязательно шаблона.");
-
-var _ref2 = /*#__PURE__*/React.createElement(NextWeekIcon, null);
-
-var _ref3 = /*#__PURE__*/React.createElement(WorkIcon, null);
-
-var _ref4 = /*#__PURE__*/React.createElement(CircularProgress, {
-  color: "inherit"
-});
-
 class SelectOrder extends React.Component {
   constructor(...args) {
     super(...args);
@@ -69,7 +54,6 @@ class SelectOrder extends React.Component {
       backdrop: false,
       handleFilterChange: null
     };
-
     this.registerFilterChange = handleFilterChange => {
       if (this.state.handleFilterChange !== handleFilterChange) {
         this.setState({
@@ -78,7 +62,6 @@ class SelectOrder extends React.Component {
       }
     };
   }
-
   render() {
     const {
       props: {
@@ -101,21 +84,22 @@ class SelectOrder extends React.Component {
       calc_order
     } = _obj;
     const text = `${calc_order.number_doc} (${calc_order.note})`;
-
     const reset_list = () => {
       this.setState({
         backdrop: false
       });
       set_list('');
     };
-
     const setBackdrop = () => {
       this.setState({
         backdrop: true
       });
     };
-
-    return [_ref, !list && /*#__PURE__*/React.createElement(Toolbar, {
+    return [_Typography || (_Typography = /*#__PURE__*/React.createElement(Typography, {
+      key: "descr",
+      variant: "body2",
+      color: "primary"
+    }, "Изделия-шаблоны, живут в специальных заказах со статусом ", /*#__PURE__*/React.createElement("i", null, "Шаблон"), ".", /*#__PURE__*/React.createElement("br", null), "По умолчанию, выбор происходит из последнего открытого заказа-шаблона. При желании, изделие можно заполнить по образу любого изделия из любого заказа - не обязательно шаблона.")), !list && /*#__PURE__*/React.createElement(Toolbar, {
       key: "bar",
       disableGutters: true,
       variant: "dense"
@@ -128,11 +112,11 @@ class SelectOrder extends React.Component {
       title: "Выбрать шаблон"
     }, /*#__PURE__*/React.createElement(IconButton, {
       onClick: () => set_list('templates')
-    }, _ref2)), /*#__PURE__*/React.createElement(Tip, {
+    }, _NextWeekIcon || (_NextWeekIcon = /*#__PURE__*/React.createElement(NextWeekIcon, null)))), /*#__PURE__*/React.createElement(Tip, {
       title: "Выбрать из полного списка заказов"
     }, /*#__PURE__*/React.createElement(IconButton, {
       onClick: () => set_list('list')
-    }, _ref3))), Boolean(list) && /*#__PURE__*/React.createElement(DirectList, {
+    }, _WorkIcon || (_WorkIcon = /*#__PURE__*/React.createElement(WorkIcon, null))))), Boolean(list) && /*#__PURE__*/React.createElement(DirectList, {
       key: "list",
       frm_key: list,
       selectionMode: true,
@@ -147,13 +131,11 @@ class SelectOrder extends React.Component {
       handlers: {
         handleSelect(doc) {
           setBackdrop();
-
           _mgr.create(doc).then(doc => {
             _obj.calc_order = doc;
             return list === 'templates' ? doc.load_templates() : doc.load_linked_refs();
           }).then(reset_list).then(handleNext).catch(reset_list);
         },
-
         handleNavigate,
         handleIfaceState
       },
@@ -174,9 +156,9 @@ class SelectOrder extends React.Component {
       key: "backdrop",
       className: classes.backdrop,
       open: backdrop
-    }, "Загрузка продукций...", _ref4)];
+    }, "Загрузка продукций...", _CircularProgress || (_CircularProgress = /*#__PURE__*/React.createElement(CircularProgress, {
+      color: "inherit"
+    })))];
   }
-
 }
-
 export default withStyles(styles)(SelectOrder);

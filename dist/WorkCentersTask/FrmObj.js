@@ -1,5 +1,5 @@
+var _Helmet, _Tab, _Tab2, _Tab3, _Tab4, _Tab5, _Tab6, _IconClose, _LoadingMessage, _IconButton, _IconEvent, _IconButton2, _IconRotate, _LoadingMessage2;
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 /**
  * Форма документа Задание на производство
  *
@@ -7,6 +7,7 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
  *
  * Created by Evgeniy Malyarov on 24.09.2018.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tab from '@material-ui/core/Tab';
@@ -36,7 +37,6 @@ const schemas = {
   cutting: '4fe15a0f-a6c2-442e-d8bb-7204c3085c4e',
   cuts_out: '8fca797a-4e1c-4f8b-b0aa-1965b5e5e7db'
 };
-
 function Space({
   classes,
   children
@@ -46,70 +46,15 @@ function Space({
     className: classes.fullFlex
   }), ...children];
 }
-
-var _ref = /*#__PURE__*/React.createElement(Helmet, {
-  key: "helmet",
-  title: htitle
-}, /*#__PURE__*/React.createElement("meta", {
-  name: "description",
-  content: description
-}));
-
-var _ref2 = /*#__PURE__*/React.createElement(Tab, {
-  label: "Шапка"
-});
-
-var _ref3 = /*#__PURE__*/React.createElement(Tab, {
-  label: "План"
-});
-
-var _ref4 = /*#__PURE__*/React.createElement(Tab, {
-  label: "Материалы"
-});
-
-var _ref5 = /*#__PURE__*/React.createElement(Tab, {
-  label: "Обрезь вход"
-});
-
-var _ref6 = /*#__PURE__*/React.createElement(Tab, {
-  label: "Раскрой"
-});
-
-var _ref7 = /*#__PURE__*/React.createElement(Tab, {
-  label: "Обрезь выход"
-});
-
-var _ref8 = /*#__PURE__*/React.createElement(IconClose, null);
-
-var _ref9 = /*#__PURE__*/React.createElement(LoadingMessage, null);
-
-var _ref10 = /*#__PURE__*/React.createElement(IconButton, {
-  key: "a_sep1",
-  disabled: true
-}, "|");
-
-var _ref11 = /*#__PURE__*/React.createElement(IconEvent, null);
-
-var _ref12 = /*#__PURE__*/React.createElement(IconButton, {
-  key: "a_sep1",
-  disabled: true
-}, "|");
-
-var _ref13 = /*#__PURE__*/React.createElement(IconRotate, null);
-
-var _ref14 = /*#__PURE__*/React.createElement(LoadingMessage, null);
-
 class FrmObj extends DataObj {
   constructor(props, context) {
     super(props, context);
-
     this.handleOrder = row => {
       const {
         _obj
       } = this.state;
       _obj && _obj.fill_by_orders([row]).then(() => this.forceUpdate());
     };
-
     this.handlePlan = () => {
       this.props.handleIfaceState({
         component: '',
@@ -121,14 +66,12 @@ class FrmObj extends DataObj {
         }
       });
     };
-
     this.handleFillCutting = opts => {
       const {
         _obj
       } = this.state;
       _obj && _obj.fill_cutting(opts).then(() => this.forceUpdate());
     };
-
     this.handleOptimize = (opts = {}) => {
       const {
         _obj
@@ -142,17 +85,13 @@ class FrmObj extends DataObj {
         run: false
       }));
     };
-
     this.handleOnStep = status => {
       const {
         nom,
         characteristic
       } = status.cut_row;
-
       const statuses = $p.utils._clone(this.state.statuses);
-
       let row;
-
       if (!statuses.some(elm => {
         if (elm.nom === nom && elm.characteristic === characteristic) {
           row = elm;
@@ -165,13 +104,11 @@ class FrmObj extends DataObj {
         };
         statuses.push(row);
       }
-
       Object.assign(row, status);
       this.setState({
         statuses
       });
     };
-
     Object.assign(this.state, {
       index: 0,
       schemas_ready: typeof schemas.planning === 'object',
@@ -179,13 +116,11 @@ class FrmObj extends DataObj {
       run: false
     });
   }
-
   componentDidMount() {
     const {
       _mgr,
       match
     } = this.props;
-
     _mgr.get(match.params.ref, 'promise').then(_obj => {
       this.setState({
         _obj
@@ -194,9 +129,7 @@ class FrmObj extends DataObj {
     }).then(({
       planning
     }) => planning.count() && this.forceUpdate());
-
     _mgr.on('update', this.onDataChange);
-
     if (!this.state.schemas_ready) {
       const {
         scheme_settings
@@ -208,14 +141,12 @@ class FrmObj extends DataObj {
         for (const ts in schemas) {
           schemas[ts] = scheme_settings.get(schemas[ts]);
         }
-
         this.setState({
           schemas_ready: true
         });
       });
     }
   }
-
   renderFields(_obj, classes) {
     return /*#__PURE__*/React.createElement(FormGroup, {
       key: "props",
@@ -248,7 +179,6 @@ class FrmObj extends DataObj {
       fullWidth: true
     }));
   }
-
   render() {
     const {
       props: {
@@ -273,13 +203,31 @@ class FrmObj extends DataObj {
       deletable: false
     }, _handlers);
     const h = height - 48;
-    return _obj ? [_ref, /*#__PURE__*/React.createElement(Tabs, {
+    return _obj ? [_Helmet || (_Helmet = /*#__PURE__*/React.createElement(Helmet, {
+      key: "helmet",
+      title: htitle
+    }, /*#__PURE__*/React.createElement("meta", {
+      name: "description",
+      content: description
+    }))), /*#__PURE__*/React.createElement(Tabs, {
       key: "tabs",
       value: index,
       onChange: (event, index) => this.setState({
         index
       })
-    }, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, /*#__PURE__*/React.createElement(Space, {
+    }, _Tab || (_Tab = /*#__PURE__*/React.createElement(Tab, {
+      label: "Шапка"
+    })), _Tab2 || (_Tab2 = /*#__PURE__*/React.createElement(Tab, {
+      label: "План"
+    })), _Tab3 || (_Tab3 = /*#__PURE__*/React.createElement(Tab, {
+      label: "Материалы"
+    })), _Tab4 || (_Tab4 = /*#__PURE__*/React.createElement(Tab, {
+      label: "Обрезь вход"
+    })), _Tab5 || (_Tab5 = /*#__PURE__*/React.createElement(Tab, {
+      label: "Раскрой"
+    })), _Tab6 || (_Tab6 = /*#__PURE__*/React.createElement(Tab, {
+      label: "Обрезь выход"
+    })), /*#__PURE__*/React.createElement(Space, {
       classes: classes
     }, /*#__PURE__*/React.createElement(MenuPrint, {
       key: "fprint",
@@ -288,23 +236,26 @@ class FrmObj extends DataObj {
       key: "fclose",
       title: "Закрыть форму",
       onClick: _handlers.handleClose
-    }, _ref8))), index === 0 && /*#__PURE__*/React.createElement(DataObjToolbar, _extends({
+    }, _IconClose || (_IconClose = /*#__PURE__*/React.createElement(IconClose, null))))), index === 0 && /*#__PURE__*/React.createElement(DataObjToolbar, _extends({
       key: "toolbar"
-    }, toolbar_props)), index === 0 && this.renderFields(_obj, classes), index !== 0 && !schemas_ready && _ref9, index === 1 && schemas_ready && /*#__PURE__*/React.createElement(TabularSection, {
+    }, toolbar_props)), index === 0 && this.renderFields(_obj, classes), index !== 0 && !schemas_ready && (_LoadingMessage || (_LoadingMessage = /*#__PURE__*/React.createElement(LoadingMessage, null))), index === 1 && schemas_ready && /*#__PURE__*/React.createElement(TabularSection, {
       key: "planning",
       _obj: _obj,
       _tabular: "planning",
       minHeight: h,
       scheme: schemas.planning,
       denyReorder: true,
-      btns: [_ref10, /*#__PURE__*/React.createElement(SelectOrder, {
+      btns: [_IconButton || (_IconButton = /*#__PURE__*/React.createElement(IconButton, {
+        key: "a_sep1",
+        disabled: true
+      }, "|")), /*#__PURE__*/React.createElement(SelectOrder, {
         key: "a_ord",
         handleSelect: this.handleOrder
       }), /*#__PURE__*/React.createElement(IconButton, {
         key: "a_plan",
         title: "Заполнить по плану",
         onClick: this.handlePlan
-      }, _ref11)]
+      }, _IconEvent || (_IconEvent = /*#__PURE__*/React.createElement(IconEvent, null)))]
     }), index === 2 && schemas_ready && /*#__PURE__*/React.createElement(TabularSection, {
       key: "demand",
       _obj: _obj,
@@ -326,14 +277,17 @@ class FrmObj extends DataObj {
       minHeight: h,
       scheme: schemas.cutting,
       denyReorder: true,
-      btns: [_ref12, /*#__PURE__*/React.createElement(MenuFillCutting, {
+      btns: [_IconButton2 || (_IconButton2 = /*#__PURE__*/React.createElement(IconButton, {
+        key: "a_sep1",
+        disabled: true
+      }, "|")), /*#__PURE__*/React.createElement(MenuFillCutting, {
         key: "a_fill_cut",
         handleFillCutting: this.handleFillCutting
       }), /*#__PURE__*/React.createElement(IconButton, {
         key: "a_run",
         title: "Оптимизировать раскрой",
         onClick: this.handleOptimize
-      }, _ref13)]
+      }, _IconRotate || (_IconRotate = /*#__PURE__*/React.createElement(IconRotate, null)))]
     }), index === 5 && schemas_ready && /*#__PURE__*/React.createElement(TabularSection, {
       key: "cuts_out",
       _obj: _obj,
@@ -344,11 +298,9 @@ class FrmObj extends DataObj {
     }), run && /*#__PURE__*/React.createElement(ProgressDialog, {
       key: "statuses",
       statuses: statuses
-    })] : _ref14;
+    })] : _LoadingMessage2 || (_LoadingMessage2 = /*#__PURE__*/React.createElement(LoadingMessage, null));
   }
-
 }
-
 FrmObj.propTypes = {
   _mgr: PropTypes.object,
   // DataManager, с которым будет связан компонент
@@ -356,10 +308,12 @@ FrmObj.propTypes = {
   // Права на чтение-изменение
   _meta: PropTypes.object,
   // Здесь можно переопределить метаданные
+
   read_only: PropTypes.object,
   // Элемент только для чтения
-  handlers: PropTypes.object.isRequired // обработчики редактирования объекта
 
+  handlers: PropTypes.object.isRequired // обработчики редактирования объекта
 };
+
 FrmObj.rname = 'FrmObj';
 export default withStyles(FrmObj);

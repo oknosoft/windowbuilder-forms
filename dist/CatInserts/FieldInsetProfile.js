@@ -1,5 +1,4 @@
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 /**
  *
  *
@@ -7,6 +6,7 @@ function _extends() { _extends = Object.assign ? Object.assign.bind() : function
  *
  * Created by Evgeniy Malyarov on 06.03.2022.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,17 +16,14 @@ import Typography from '@material-ui/core/Typography';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import withStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
 const _fld = 'inset';
-
 const onKeyDown = evt => {
   const {
     key
   } = evt;
-
   if (['ArrowUp', 'ArrowDown'].includes(key)) {
     $p.ui.prevent(evt);
   }
 };
-
 function FieldInsetProfile({
   elm,
   classes,
@@ -36,35 +33,29 @@ function FieldInsetProfile({
   disabled,
   ...props
 }) {
-  const ext = extClasses(classes); // получим список доступных
+  const ext = extClasses(classes);
 
+  // получим список доступных
   const layer = elm?.layer || project?.activeLayer;
-
   if (!layer) {
     return null;
   }
-
   const {
     sys
   } = layer;
   const list = sys.inserts(elm_type || elm.elm_type, false, elm);
   const value = elm[_fld];
   let error = !list.includes(value);
-
   if (error) {
     list.push(value);
   }
-
   if (error && disabled) {
     error = false;
   }
-
   const synonym = `Вставка`;
-
   const onChange = (e, value) => {
     elm[_fld] = value;
   };
-
   return /*#__PURE__*/React.createElement(Autocomplete, {
     blurOnSelect: true,
     disableListWrap: true,
@@ -97,5 +88,4 @@ function FieldInsetProfile({
     onKeyDown: onKeyDown
   });
 }
-
 export default withStyles(FieldInsetProfile);

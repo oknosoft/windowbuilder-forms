@@ -1,3 +1,4 @@
+var _UpIcon, _DownIcon;
 /**
  * ### Галлерея эскизов изделий текущего заказа
  *
@@ -5,6 +6,7 @@
  *
  * Created by Evgeniy Malyarov on 14.05.2019.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Fab from '@material-ui/core/Fab';
@@ -12,7 +14,6 @@ import UpIcon from '@material-ui/icons/KeyboardArrowUp';
 import DownIcon from '@material-ui/icons/KeyboardArrowDown';
 import { withStyles } from '@material-ui/styles';
 import cn from 'classnames';
-
 const styles = theme => ({
   root: {
     width: '100%',
@@ -27,11 +28,6 @@ const styles = theme => ({
     right: theme.spacing(2)
   }
 });
-
-var _ref = /*#__PURE__*/React.createElement(UpIcon, null);
-
-var _ref2 = /*#__PURE__*/React.createElement(DownIcon, null);
-
 class Svgs extends React.Component {
   constructor(...args) {
     super(...args);
@@ -39,7 +35,6 @@ class Svgs extends React.Component {
       selected: ''
     };
   }
-
   render() {
     const {
       classes,
@@ -65,14 +60,12 @@ class Svgs extends React.Component {
         top: hidden ? -16 : 0
       },
       title: hidden ? 'Показать эскизы' : 'Скрыть эскизы'
-    }, hidden ? _ref : _ref2), !hidden && imgs.map(({
+    }, hidden ? _UpIcon || (_UpIcon = /*#__PURE__*/React.createElement(UpIcon, null)) : _DownIcon || (_DownIcon = /*#__PURE__*/React.createElement(DownIcon, null))), !hidden && imgs.map(({
       ref,
       svg
     }) => {
       const ondblclick = () => handleNavigate(`/builder/${ref}`);
-
       const __html = svg ? $p.utils.scale_svg(svg, 88, 22) : '';
-
       return /*#__PURE__*/React.createElement("div", {
         key: ref,
         className: cn({
@@ -89,9 +82,7 @@ class Svgs extends React.Component {
       });
     }));
   }
-
 }
-
 export default withStyles(styles, {
   withTheme: true
 })(Svgs);

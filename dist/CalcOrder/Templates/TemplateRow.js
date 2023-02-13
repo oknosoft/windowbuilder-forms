@@ -4,6 +4,7 @@
  * @module TemplateRow
  *
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
@@ -11,7 +12,6 @@ import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/List';
 import Checkbox from '@material-ui/core/Checkbox';
 import withStyles from '../FrmObj/styles';
-
 function TemplateRow({
   row,
   classes,
@@ -65,5 +65,4 @@ function TemplateRow({
     value: "primary"
   }))));
 }
-
 export default withStyles(TemplateRow);

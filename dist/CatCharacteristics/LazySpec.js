@@ -5,5 +5,4 @@ export default class SpecFragment extends Lazy {
       Component: module.default
     }));
   }
-
 }

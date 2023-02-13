@@ -5,6 +5,7 @@
  *
  * Created by Evgeniy Malyarov on 14.01.2022.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
@@ -28,7 +29,6 @@ const {
   }
 } = $p;
 const compare = utils.sort('name');
-
 function FieldEndConnection({
   elm1,
   elm2,
@@ -38,49 +38,39 @@ function FieldEndConnection({
   onClick,
   ...props
 }) {
-  const ext = extClasses(classes); // получим список доступных
+  const ext = extClasses(classes);
 
+  // получим список доступных
   const cnn_point = elm1.rays[node];
-
   if (!elm2) {
     elm2 = cnn_point.profile;
   }
-
   if (!_fld) {
     _fld = node === 'b' ? 'cnn1' : 'cnn2';
   }
-
   const list = cnns.nom_cnn(elm1, elm2, elm2 ? acn.a : acn.i, false, undefined, cnn_point);
   const other = cnn_point.find_other();
-
   if (other && other.profile === elm2) {
     _fld += 'o';
   }
-
   const value = elm1[_fld];
   const error = !list.includes(value);
-
   if (error) {
     list.push(value);
   }
-
   list.sort(compare);
   let p2;
-
   if (elm2 instanceof Filling) {
     p2 = 't';
   } else {
     p2 = elm2 ? elm2.b.is_nearest(cnn_point.point, true) ? 'b' : elm2.e.is_nearest(cnn_point.point, true) ? 'e' : 't' : 'Пустота';
   }
-
   const synonym = `Соедин ${elm1.elm}${node} -> ${elm2 ? elm2.elm : ''}${p2}`;
-
   const onChange = ({
     target
   }) => {
     elm1[_fld] = target.value;
   };
-
   return /*#__PURE__*/React.createElement(FormControl, {
     classes: ext.control,
     error: error,
@@ -101,5 +91,4 @@ function FieldEndConnection({
     className: v.cnn_type.css
   }), v.toString()))));
 }
-
 export default withStyles(FieldEndConnection);

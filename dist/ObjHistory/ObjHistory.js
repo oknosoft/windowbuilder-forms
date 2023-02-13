@@ -5,14 +5,13 @@
  *
  * Created by Evgeniy Malyarov on 15.10.2020.
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import RevsDetales from './RevsDetales';
-
 class ObjHistory extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this.changeObj = ({
       obj,
       _mgr,
@@ -25,7 +24,6 @@ class ObjHistory extends React.Component {
         loaded: false
       }, this.componentDidMount.bind(this));
     };
-
     this.resetObj = () => {
       const {
         obj,
@@ -39,7 +37,6 @@ class ObjHistory extends React.Component {
         loaded: false
       }, this.componentDidMount.bind(this));
     };
-
     this.state = {
       loaded: false,
       rows: [],
@@ -49,30 +46,26 @@ class ObjHistory extends React.Component {
       db: props.db
     };
   }
-
   componentDidMount() {
     // читаем историю из couchdb
+
     // отбрасываем лишние реквизиты
     let {
       obj,
       _mgr,
       db
     } = this.state;
-
     if (!db) {
       db = _mgr.adapter.db(_mgr);
     }
-
     db.get(`${_mgr.class_name}|${obj.ref}`, {
       revs_info: true
     }).then(async res => {
       if (this.unmounted) {
         return;
       }
-
       const rows = [res];
       const docs = [];
-
       for (const {
         rev,
         status
@@ -84,14 +77,12 @@ class ObjHistory extends React.Component {
           });
         }
       }
-
       if (docs.length) {
         const {
           results
         } = await db.bulkGet({
           docs
         });
-
         for (const {
           docs
         } of results) {
@@ -100,7 +91,6 @@ class ObjHistory extends React.Component {
           }
         }
       }
-
       this.setState({
         loaded: true,
         rows
@@ -112,11 +102,9 @@ class ObjHistory extends React.Component {
       });
     });
   }
-
   componentWillUnmount() {
     this.unmounted = true;
   }
-
   render() {
     const {
       state: {
@@ -130,15 +118,12 @@ class ObjHistory extends React.Component {
     } = this;
     const Detales = _mgr.RevsDetales || RevsDetales;
     const isRoot = props.obj === obj;
-
     if (err) {
       return `err: ${err}`;
     }
-
     if (!loaded) {
       return 'loading...';
     }
-
     return /*#__PURE__*/React.createElement(Detales, {
       rows: rows,
       obj: obj,
@@ -150,7 +135,5 @@ class ObjHistory extends React.Component {
       setToolBtns: props.setToolBtns
     });
   }
-
 }
-
 export default ObjHistory;

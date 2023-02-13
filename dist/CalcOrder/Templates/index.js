@@ -7,5 +7,4 @@ export default class Templates extends Lazy {
       }));
     });
   }
-
 }

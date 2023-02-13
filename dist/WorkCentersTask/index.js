@@ -6,5 +6,4 @@ export default class FrmObj extends Lazy {
       Component: withIface(module.default)
     }));
   }
-
 }

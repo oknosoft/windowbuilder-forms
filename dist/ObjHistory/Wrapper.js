@@ -1,5 +1,4 @@
 function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
@@ -15,15 +14,12 @@ export default function (props) {
     },
     handlers
   } = props;
-
   const obj = _mgr.get(ref);
-
   const [close, setClose] = React.useState({
     handler: null,
     text: ''
   });
   const [toolbtns, setToolBtns] = React.useState(null);
-
   function handleCancel() {
     const stop = close.handler ? close.handler({
       _mgr,
@@ -37,7 +33,6 @@ export default function (props) {
       value: null
     });
   }
-
   ;
   return /*#__PURE__*/React.createElement(Dialog, {
     open: true,

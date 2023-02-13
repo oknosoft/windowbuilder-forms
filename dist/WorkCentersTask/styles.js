@@ -4,8 +4,8 @@
  *
  * Created by Evgeniy Malyarov on 14.03.2018.
  */
-import { withStyles } from '@material-ui/styles';
 
+import { withStyles } from '@material-ui/styles';
 const styles = theme => ({
   root: {
     width: '80vw',
@@ -33,5 +33,4 @@ const styles = theme => ({
     width: '100%'
   }
 });
-
 export default withStyles(styles);

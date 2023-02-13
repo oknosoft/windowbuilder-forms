@@ -1,6 +1,8 @@
+var _MenuItem, _MenuItem2, _MenuItem3;
 /**
  * Поле ввода перевёрнутости слоя
  */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
@@ -9,19 +11,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import withStyles, { extClasses } from 'metadata-react/DataField/stylesPropertyGrid';
-
-var _ref = /*#__PURE__*/React.createElement(MenuItem, {
-  value: 0
-}, "Авто");
-
-var _ref2 = /*#__PURE__*/React.createElement(MenuItem, {
-  value: 1
-}, "Перевёрнут");
-
-var _ref3 = /*#__PURE__*/React.createElement(MenuItem, {
-  value: -1
-}, "Обычный");
-
 function FieldFlipped({
   classes,
   _obj,
@@ -32,13 +21,11 @@ function FieldFlipped({
 }) {
   const ext = extClasses(classes);
   _fld = 'flipped';
-
   const onChange = ({
     target
   }) => {
     _obj[_fld] = target.value;
   };
-
   return /*#__PURE__*/React.createElement(FormControl, {
     classes: ext.control,
     onClick: onClick,
@@ -51,7 +38,12 @@ function FieldFlipped({
     input: /*#__PURE__*/React.createElement(Input, {
       classes: ext.input
     })
-  }, _ref, _ref2, _ref3));
+  }, _MenuItem || (_MenuItem = /*#__PURE__*/React.createElement(MenuItem, {
+    value: 0
+  }, "Авто")), _MenuItem2 || (_MenuItem2 = /*#__PURE__*/React.createElement(MenuItem, {
+    value: 1
+  }, "Перевёрнут")), _MenuItem3 || (_MenuItem3 = /*#__PURE__*/React.createElement(MenuItem, {
+    value: -1
+  }, "Обычный"))));
 }
-
 export default withStyles(FieldFlipped);
