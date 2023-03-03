@@ -59,6 +59,7 @@ export default function FieldClr({
     utils,
     CatCharacteristicsInsertsRow
   } = $p;
+  const classes = useStyles();
 
   // если не задан отбор и это строка вставок, формируем отбор по вставке
   if (_obj instanceof CatCharacteristicsInsertsRow && (!_meta.choice_params || !_meta.choice_params.length)) {
@@ -91,7 +92,6 @@ export default function FieldClr({
   }
   const proxy = clr_proxy(_obj, _fld, handleValueChange);
   const value = proxy.clr;
-  const classes = useStyles();
   const type = {
     is_ref: true,
     types: ['cat.clrs']
