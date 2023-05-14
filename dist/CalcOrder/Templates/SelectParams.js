@@ -53,15 +53,21 @@ class SelectParams extends React.Component {
       cat
     } = $p;
     const selection = {};
-    clr._manager.selection_exclude_service(_meta, sys, _obj);
-    _meta.choice_params.forEach(({
-      name,
-      path
-    }) => {
-      selection[name] = path;
-    });
-    if (clr.empty() || !utils._selection(clr, selection)) {
-      _obj.clr = sys.default_clr.empty() ? cat.clrs.predefined('Белый') : sys.default_clr;
+    const clr_group = cat.clrs.selection_exclude_service(_meta, sys, _obj);
+    if (_meta.choice_params.length > 2) {
+      _meta.choice_params.forEach(({
+        name,
+        path
+      }) => {
+        selection[name] = path;
+      });
+    }
+    const clrs = [...clr_group.clrs()];
+    if (clr.empty() || !clr_group.contains(clr, clrs) || !utils._selection(clr, selection)) {
+      const {
+        default_clr
+      } = sys;
+      _obj.clr = default_clr.empty() || !clr_group.contains(default_clr, clrs) ? clrs.length ? clrs[0] : cat.clrs.predefined('Белый') : default_clr;
     }
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(PropField, {
       key: `prm-clr`,
