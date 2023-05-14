@@ -36,7 +36,7 @@ export default function LinkedProp({
   });
   if (drow) {
     if (!hide) {
-      hide = hide.hide || _obj.hide;
+      hide = drow.hide || _obj.hide;
     }
     if (drow?.list) {
       try {

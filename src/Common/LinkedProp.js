@@ -25,7 +25,7 @@ export default function LinkedProp({_obj, _fld='value', param, fields, cnstr, in
   const drow = inset?.product_params?.find({param});
   if(drow) {
     if(!hide){
-      hide = hide.hide || _obj.hide;
+      hide = drow.hide || _obj.hide;
     }
     if(drow?.list) {
       try{
