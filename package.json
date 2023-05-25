@@ -7,7 +7,7 @@
     "url": "https://github.com/unpete/windowbuilder-forms.git"
   },
   "engines": {
-    "node": "^16.13",
+    "node": ">=16.13",
     "yarn": "^1.22"
   },
   "keywords": [
@@ -29,8 +29,8 @@
   "devDependencies": {
     "@babel/cli": "^7.21",
     "@babel/core": "^7.21",
-    "@babel/plugin-transform-react-constant-elements": "^7.20",
-    "@babel/preset-env": "^7.20",
+    "@babel/plugin-transform-react-constant-elements": "^7.21",
+    "@babel/preset-env": "^7.21",
     "@babel/preset-react": "^7.18",
     "@babel/runtime": "^7.21",
     "babel-plugin-import": "^1.13",
