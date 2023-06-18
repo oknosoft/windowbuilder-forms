@@ -85,6 +85,7 @@ class FrmObj extends DataObj {
         run: false
       }));
     };
+    // вызывается из раскроя
     this.handleOnStep = status => {
       const {
         nom,
