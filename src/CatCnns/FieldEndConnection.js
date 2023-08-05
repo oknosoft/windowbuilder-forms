@@ -17,7 +17,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import withStyles, {extClasses} from 'metadata-react/DataField/stylesPropertyGrid';
 
-const {enm: {cnn_types: {acn}}, cat: {cnns}, utils, Editor: {Filling}} = $p;
+const {enm: {cnn_types}, cat: {cnns}, utils, Editor: {Filling}} = $p;
+const {acn} = cnn_types;
 const compare = utils.sort('name');
 
 function FieldEndConnection({elm1, elm2, node, _fld, classes, onClick, ...props}) {
@@ -29,20 +30,56 @@ function FieldEndConnection({elm1, elm2, node, _fld, classes, onClick, ...props}
   if(!elm2) {
     elm2 = cnn_point.profile;
   }
+  if(!elm1.isInserted() || (elm2 && !elm2.isInserted())) {
+    return null;
+  }
   if(!_fld) {
     _fld = node === 'b' ? 'cnn1' : 'cnn2';
   }
-  const list = cnns.nom_cnn(elm1, elm2, elm2 ? acn.a : acn.i, false, undefined, cnn_point);
-
+  const types = [...(elm2 ? acn.a : acn.i)];
   const other = cnn_point.find_other();
+  if(other && !types.includes(cnn_types.i)) {
+    types.push(cnn_types.i)
+  }
+  const list = cnns.nom_cnn(elm1, elm2, types, false, undefined, cnn_point);
+
   if(other && other.profile === elm2) {
     _fld += 'o';
   }
 
   const value = elm1[_fld];
-  const error = !list.includes(value);
+  let error = value.empty() || !list.includes(value);
   if(error) {
-    list.push(value);
+    if(elm1.rnum) {
+      if(value.empty()) {
+        error = false;
+        const cnn_default = list.length && list[0];
+        const auto = {
+          valueOf() {
+            return this.ref;
+          },
+          get ref() {
+            return utils.blank.guid;
+          },
+          get name() {
+            return cnn_default ? `Авто (${cnn_default.name})` : 'Не найдено';
+          },
+          get presentation() {
+            return this.name;
+          },
+          toString() {
+            return this.name;
+          },
+          get cnn_type() {
+            return cnn_default?.cnn_type || cnn_types.get;
+          }
+        }
+        list.push(auto);
+      }
+    }
+    else {
+      list.push(value);
+    }
   }
   list.sort(compare);
 
