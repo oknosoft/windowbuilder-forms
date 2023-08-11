@@ -30,6 +30,9 @@ export default function LinkedProps({ts, cnstr, inset, layer, project}) {
 
     const _meta = utils._clone(fields.value);
     _meta.synonym = param.name || param.caption;
+    if(param.mandatory) {
+      _meta.mandatory = true;
+    }
 
     const {types} = param.type;
     const stub = {
