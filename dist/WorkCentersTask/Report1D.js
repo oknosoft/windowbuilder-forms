@@ -63,21 +63,25 @@ function NomTable({
   const {
     debit_credit_kinds
   } = $p.enm;
+  const _top = 10e6;
 
   // бежим по свёрнутой табчасти раскроя
-  const fragments = _obj.fragments();
+  const fragments = _obj.fragments(true);
   fragments.forEach((characteristics, nom) => {
     for (const [characteristic] of characteristics) {
       const crows = _obj.cutting.find_rows({
+        _top,
         nom,
         characteristic
       });
       const cuts_in = _obj.cuts.find_rows({
+        _top,
         record_kind: debit_credit_kinds.credit,
         nom,
         characteristic
       });
       const cuts_out = _obj.cuts.find_rows({
+        _top,
         record_kind: debit_credit_kinds.debit,
         nom,
         characteristic

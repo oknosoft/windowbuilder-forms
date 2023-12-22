@@ -39,7 +39,7 @@ function FieldEndConnection({elm1, elm2, node, _fld, classes, onClick, ...props}
   const types = [...(elm2 ? acn.a : acn.i)];
   const other = cnn_point.find_other();
   if(other && !types.includes(cnn_types.i)) {
-    types.push(cnn_types.i)
+    types.push(cnn_types.i);
   }
   const list = cnns.nom_cnn(elm1, elm2, types, false, undefined, cnn_point);
 

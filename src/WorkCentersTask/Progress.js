@@ -36,9 +36,13 @@ class Progress extends Component {
     const {status, classes} = this.props;
     const completed = status.progress * 100;
     const buffer = completed + Math.random() * 6;
+    let primary = `${status.nom.name}${status.characteristic.empty() ? '' : ' ' + status.characteristic.name}`;
+    if(status.parts > 1) {
+      primary += ` (${status.part + 1} из ${status.parts})`;
+    }
 
     return <div className={classes.bottom}>
-      <ListItemText primary={`${status.nom.name}${status.characteristic.empty() ? '' : ' ' + status.characteristic.name}`}/>
+      <ListItemText primary={primary}/>
       <LinearProgress color="secondary" variant="buffer" value={completed} valueBuffer={buffer}/>
       <ListItemText secondary={stat(status)} className={classes.noPadding}/>
     </div>;

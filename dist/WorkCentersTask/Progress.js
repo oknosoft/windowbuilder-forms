@@ -41,10 +41,14 @@ class Progress extends Component {
     } = this.props;
     const completed = status.progress * 100;
     const buffer = completed + Math.random() * 6;
+    let primary = `${status.nom.name}${status.characteristic.empty() ? '' : ' ' + status.characteristic.name}`;
+    if (status.parts > 1) {
+      primary += ` (${status.part + 1} из ${status.parts})`;
+    }
     return /*#__PURE__*/React.createElement("div", {
       className: classes.bottom
     }, /*#__PURE__*/React.createElement(ListItemText, {
-      primary: `${status.nom.name}${status.characteristic.empty() ? '' : ' ' + status.characteristic.name}`
+      primary: primary
     }), /*#__PURE__*/React.createElement(LinearProgress, {
       color: "secondary",
       variant: "buffer",

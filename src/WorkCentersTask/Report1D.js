@@ -45,14 +45,15 @@ function Head({_obj, classes}) {
 function NomTable({_obj, classes}) {
   const res = [];
   const {debit_credit_kinds} = $p.enm;
+  const _top = 10e6;
 
   // бежим по свёрнутой табчасти раскроя
-  const fragments = _obj.fragments();
+  const fragments = _obj.fragments(true);
   fragments.forEach((characteristics, nom) => {
     for(const [characteristic] of characteristics) {
-      const crows = _obj.cutting.find_rows({nom, characteristic});
-      const cuts_in = _obj.cuts.find_rows({record_kind: debit_credit_kinds.credit, nom, characteristic});
-      const cuts_out = _obj.cuts.find_rows({record_kind: debit_credit_kinds.debit, nom, characteristic});
+      const crows = _obj.cutting.find_rows({_top, nom, characteristic});
+      const cuts_in = _obj.cuts.find_rows({_top, record_kind: debit_credit_kinds.credit, nom, characteristic});
+      const cuts_out = _obj.cuts.find_rows({_top, record_kind: debit_credit_kinds.debit, nom, characteristic});
 
       const products_len = crows.reduce((sum, row) => sum + row.len, 0);
       const workpieces_len = cuts_in.reduce((sum, row) => sum + row.len, 0);
