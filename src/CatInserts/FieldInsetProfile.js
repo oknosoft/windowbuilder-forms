@@ -25,18 +25,19 @@ const onKeyDown = (evt) => {
   }
 };
 
-function FieldInsetProfile({elm, classes, project, elm_type, onClick, disabled, ...props}) {
+function FieldInsetProfile({elm, project, classes, elm_type, onClick, disabled, ...props}) {
 
   const ext = extClasses(classes);
 
   // получим список доступных
-  const layer = elm?.layer || project?.activeLayer;
+  const elayer = elm?.layer;
+  const layer = elayer || project?.activeLayer;
   if(!layer) {
     return null;
   }
 
   const {sys} = layer;
-  const list = sys.inserts(elm_type || elm.elm_type, false, elm);
+  const list = sys.inserts(elm_type || elm.elm_type, false, elayer ? elm : {layer, project, ox: project.ox});
 
   const value = elm[_fld];
   let error = !list.includes(value);
