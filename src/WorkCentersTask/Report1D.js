@@ -48,7 +48,7 @@ function NomTable({_obj, classes}) {
   const _top = 10e6;
 
   // бежим по свёрнутой табчасти раскроя
-  const fragments = _obj.fragments(true);
+  const fragments = _obj.fragments1D(true);
   fragments.forEach((characteristics, nom) => {
     for(const [characteristic] of characteristics) {
       const crows = _obj.cutting.find_rows({_top, nom, characteristic});
