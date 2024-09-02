@@ -125,7 +125,7 @@ function groupedRows({ts, cnstr, inset, layer, sys}) {
       }
     }
     if(!grouped[grp]) {
-      grouped[grp] = {name: sys_prm_grp_names[grp - 1] || '', rows: []}
+      grouped[grp] = {name: sys_prm_grp_names?.[grp - 1] || '', rows: []}
     }
     grouped[grp].rows.push(prow);
   }

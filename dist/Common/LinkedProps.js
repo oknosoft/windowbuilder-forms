@@ -168,7 +168,7 @@ function groupedRows({
     }
     if (!grouped[grp]) {
       grouped[grp] = {
-        name: sys_prm_grp_names[grp - 1] || '',
+        name: sys_prm_grp_names?.[grp - 1] || '',
         rows: []
       };
     }
