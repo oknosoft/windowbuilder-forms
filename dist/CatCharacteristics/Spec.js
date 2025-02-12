@@ -10,10 +10,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TabularSection from 'metadata-react/TabularSection';
 import Dialog from 'metadata-react/App/Dialog';
-import DataObj from 'metadata-react/FrmObj/DataObj';
-import withStyles from 'metadata-react/styles/paper600';
+import FrmOrigin from './FrmOrigin';
 import BtnOrigin from './BtnOrigin';
-const FrmObj = withStyles(DataObj);
 class Spec extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -103,18 +101,12 @@ class Spec extends React.Component {
     }), open && /*#__PURE__*/React.createElement(Dialog, {
       open: true,
       noSpace: true,
-      title: origin.presentation || 'Ссылка оборвана',
+      title: typeof origin === 'string' && origin.startsWith('[') ? 'Стек вызовов' : origin.presentation || 'Ссылка оборвана',
       onClose: this.handleClose
       //initFullScreen
-    }, /*#__PURE__*/React.createElement(FrmObj, {
-      _mgr: origin._manager,
-      _acl: "r",
-      match: {
-        params: {
-          ref: origin.ref
-        }
-      },
-      handlers: {}
+    }, /*#__PURE__*/React.createElement(FrmOrigin, {
+      origin: origin,
+      owner: this
     }))];
   }
 }

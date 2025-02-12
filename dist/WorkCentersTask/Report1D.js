@@ -1,5 +1,5 @@
 var _TableCell, _TableCell2, _TableCell3;
-function _extends() { _extends = Object.assign ? Object.assign.bind() : function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 import React from 'react';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
@@ -115,7 +115,7 @@ function NomTable({
           knifewidth
         }
       };
-      res.push( /*#__PURE__*/React.createElement("div", {
+      res.push(/*#__PURE__*/React.createElement("div", {
         key: `${nom.ref}-${characteristic.ref}`,
         className: classes.nom
       }, /*#__PURE__*/React.createElement(Typography, {

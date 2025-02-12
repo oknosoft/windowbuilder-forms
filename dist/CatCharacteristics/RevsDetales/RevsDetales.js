@@ -14,7 +14,7 @@ class RevsDetales extends Proto {
       this.setState({
         tab
       });
-      this.props.setToolBtns( /*#__PURE__*/React.createElement(ToolBtns, {
+      this.props.setToolBtns(/*#__PURE__*/React.createElement(ToolBtns, {
         setTab: this.setTab,
         tab: tab
       }));
@@ -89,7 +89,7 @@ class RevsDetales extends Proto {
         text: 'Вернуться в заказ'
       });
     }
-    props.setToolBtns( /*#__PURE__*/React.createElement(ToolBtns, {
+    props.setToolBtns(/*#__PURE__*/React.createElement(ToolBtns, {
       setTab: this.setTab,
       tab: 0
     }));

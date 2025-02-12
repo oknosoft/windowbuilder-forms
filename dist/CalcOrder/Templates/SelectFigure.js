@@ -29,7 +29,7 @@ export default function SelectFigure({
       return;
     }
     // это изделие построителя
-    coordinates.count() && res.push( /*#__PURE__*/React.createElement(TemplateRow, {
+    coordinates.count() && res.push(/*#__PURE__*/React.createElement(TemplateRow, {
       key: `tr-${row.row}`,
       row: row,
       handleSelect: handleSelect(row.characteristic),

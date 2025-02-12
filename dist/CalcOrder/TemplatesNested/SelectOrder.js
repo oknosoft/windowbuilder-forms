@@ -1,4 +1,4 @@
-var _Typography, _InputLabel;
+var _Fragment, _InputLabel;
 /**
  * Выбор заказа шаблонов вложенного изделия
  */
@@ -16,7 +16,7 @@ export default function SelectOrder({
   templates_nested
 }) {
   if (!templates_nested || !templates_nested.length) {
-    return /*#__PURE__*/React.createElement(React.Fragment, null, _Typography || (_Typography = /*#__PURE__*/React.createElement(Typography, null, "Не заполнена константа ", /*#__PURE__*/React.createElement("b", null, "templates_nested"))));
+    return _Fragment || (_Fragment = /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(Typography, null, "Не заполнена константа ", /*#__PURE__*/React.createElement("b", null, "templates_nested"))));
   }
   if (templates_nested.length === 1) {
     if (_obj.calc_order != templates_nested[0]) {
