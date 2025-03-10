@@ -66,7 +66,7 @@ class FakePrmRow {
   }
   set value(v) {
     const {_raw: {cnstr, param, inset, ts}, _rows} = this;
-    const row0 = _rows.find((v) => v.cnstr === 0);
+    const row0 = ts.params.find({cnstr: 0, param}) || _rows.find((v) => v.cnstr === 0);
     const value = this._raw.param.fetch_type(v);
     if(this._raw.cnstr) {
       let rowc = _rows.find((v) => v.cnstr === cnstr);
@@ -90,6 +90,10 @@ class FakePrmRow {
       row0.value = value;
     }
     this._raw.value = value;
+  }
+
+  get is_tabular() {
+    return true;
   }
 }
 
