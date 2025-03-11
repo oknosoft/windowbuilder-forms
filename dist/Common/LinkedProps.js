@@ -67,7 +67,7 @@ class FakePrmRow {
       },
       _rows
     } = this;
-    const row0 = ts.params.find({
+    const row0 = ts.params?.find?.({
       cnstr: 0,
       param
     }) || _rows.find(v => v.cnstr === 0);
