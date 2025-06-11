@@ -18,7 +18,7 @@ function CompositeOrigin(composite, owner) {
 
   function Detail(raw) {
     const [type, ref, rNum] = raw.split('|');
-    const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : (type.startsWith('f') ? 'furn' : 'cnns')];
+    const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : (type.startsWith('f') ? 'furns' : 'cnns')];
     const origin = mgr.get(ref);
     const row = origin.specification.get(rNum - 1);
     return <ListItem button onClick={() => handleClick(owner, origin)}>
