@@ -27,13 +27,19 @@ function FieldFurn({classes, _obj, _meta, ...props}) {
     const all = furns.length ? furns : furn._manager;
 
     // получим список доступных
+    let weight;
     for(const furn of all) {
       if(furn.is_folder || furn.is_set || _obj.open_restrictions_err({furn, cache, bool})) {
         continue;
       }
       const weight_max = furn.furn_set.flap_weight_max;
-      if(weight_max && weight_max < _ox.elm_weight(-cnstr)) {
-        continue;
+      if(weight_max) {
+        if(!weight) {
+          weight = _ox.elm_weight(-cnstr);
+        }
+        if(weight_max < weight) {
+          continue;
+        }
       }
       list.push(furn);
     }
