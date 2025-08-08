@@ -142,7 +142,7 @@ function groupedRows({ts, cnstr, inset, layer, sys}) {
 }
 
 function children({rows, layer, project, fields, sys, grid, _owner}) {
-  const {utils, job_prm: {properties}} = $p;
+  const {utils, job_prm: {properties, builder}} = $p;
   const res = [];
   const notify = new Set();
   const is_template = _owner?.calc_order?.obj_delivery_state?.is('Шаблон');
@@ -169,57 +169,60 @@ function children({rows, layer, project, fields, sys, grid, _owner}) {
       key += sys.valueOf();
     }
 
-    let hide = false;
-    const values = [];
+    // вычисляемые скрываем всегда
+    let hide =  !param.show_calculated && param.is_calculated;
 
-    if(!(project || layer).params_links(stub)) {
+    if(!builder.ign_tech_restrictions) {
+      const values = [];
 
-      const links = param.params_links({grid, obj: prow, layer});
-      // вычисляемые скрываем всегда
-      hide = !param.show_calculated && param.is_calculated;
-      // если для параметра есть связи - сокрытие по связям
-      if(!hide){
-        if(links.length) {
-          hide = links.some((link) => link.hide);
-        }
-        else {
-          hide = prow.hide;
-        }
-      }
+      if(!(project || layer).params_links(stub)) {
 
-      // проверим вхождение значения в доступные и при необходимости изменим
-      if (links.length) {
-        links.forEach((link) => {
-          key += link.valueOf();
-        });
-        if(param.linked_values(links, prow, values)) {
-          notify.add(prow);
-        }
-        if(!bool && values.length) {
-          if(values.length < 50) {
-            stub.oselect = true;
+        const links = param.params_links({grid, obj: prow, layer});
+        // если для параметра есть связи - сокрытие по связям
+        if(!hide){
+          if(links.length) {
+            hide = links.some((link) => link.hide);
           }
-          if(!_meta.choice_params) {
-            _meta.choice_params = [];
+          else {
+            hide = prow.hide;
           }
-          // дополняем отбор
-          _meta.choice_params.push({
-            name: 'ref',
-            path: {in: values.map((v) => v.value)}
+        }
+
+        // проверим вхождение значения в доступные и при необходимости изменим
+        if (links.length) {
+          links.forEach((link) => {
+            key += link.valueOf();
           });
+          if(param.linked_values(links, prow, values)) {
+            notify.add(prow);
+          }
+          if(!bool && values.length) {
+            if(values.length < 50) {
+              stub.oselect = true;
+            }
+            if(!_meta.choice_params) {
+              _meta.choice_params = [];
+            }
+            // дополняем отбор
+            _meta.choice_params.push({
+              name: 'ref',
+              path: {in: values.map((v) => v.value)}
+            });
+          }
         }
+      }
+
+      if(values.some(v => v.value.css)) {
+        stub.cssselect = values.map((v) => v.value);
+      }
+
+      if (prow.hide !== hide) {
+        prow.hide = hide;
+        notify.add(prow);
       }
     }
 
-    if(values.some(v => v.value.css)) {
-      stub.cssselect = values.map((v) => v.value);
-    }
-
-    if (prow.hide !== hide) {
-      prow.hide = hide;
-      notify.add(prow);
-    }
-    if(hide) {
+    if(prow.hide || hide) {
       continue;
     }
 

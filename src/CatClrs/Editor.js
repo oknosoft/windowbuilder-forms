@@ -46,23 +46,32 @@ function clr_proxy(_obj, _fld, handleValueChange) {
 
 export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, ...other}) {
 
-  const {cat: {clrs}, utils, CatCharacteristicsInsertsRow} = $p;
+  const {cat: {clrs}, utils, CatCharacteristicsInsertsRow, job_prm: {builder}} = $p;
   const classes = useStyles();
 
-  // если не задан отбор и это строка вставок, формируем отбор по вставке
-  if(_obj instanceof CatCharacteristicsInsertsRow && (!_meta.choice_params || !_meta.choice_params.length)) {
-    _meta = utils._clone(_meta);
-    clrs.selection_exclude_service(_meta, _obj.inset, {ox: _obj._owner._owner});
+  if(builder.ign_tech_restrictions) {
+    if(_meta.choice_params?.length || _meta.choice_links) {
+      _meta = utils._clone(_meta);
+      delete _meta.choice_params;
+      delete _meta.choice_links;
+    }
   }
+  else {
+    // если не задан отбор и это строка вставок, формируем отбор по вставке
+    if(_obj instanceof CatCharacteristicsInsertsRow && (!_meta.choice_params || !_meta.choice_params.length)) {
+      _meta = utils._clone(_meta);
+      clrs.selection_exclude_service(_meta, _obj.inset, {ox: _obj._owner._owner});
+    }
 
-  // для одиночного значения, редактор не показываем
-  if(_meta.single_value || other.read_only) {
-    const read_only = other.read_only || _meta.single_value === _obj[_fld];
-    return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
-  }
-  // если сказано скрыть составные - показываем редактор с единственным полем
-  if(_meta.hide_composite || !_meta.type.str_len) {
-    return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other}/>;
+    // для одиночного значения, редактор не показываем
+    if(_meta.single_value || other.read_only) {
+      const read_only = other.read_only || _meta.single_value === _obj[_fld];
+      return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other} read_only={read_only}/>;
+    }
+    // если сказано скрыть составные - показываем редактор с единственным полем
+    if(_meta.hide_composite || !_meta.type.str_len) {
+      return <FieldSelect _meta={_meta} _obj={_obj} _fld={_fld} handleValueChange={handleValueChange} {...other}/>;
+    }
   }
 
   const proxy = clr_proxy(_obj, _fld, handleValueChange);
