@@ -31,10 +31,22 @@ function FieldFurn({
   const read_only = sys.furn_level > level;
   if (!read_only) {
     // учтём связи параметров
-    const furns = sys.furns(_ox, _obj).map(({
+    const {
+      cat,
+      job_prm: {
+        builder
+      }
+    } = $p;
+    const furns = builder.ign_tech_restrictions ? cat.furns.find_rows({
+      is_set: false,
+      _top: 3000
+    }) : sys.furns(_ox, _obj).map(({
       furn
     }) => furn);
-    const all = furns.length ? furns : furn._manager;
+    const all = furns.length ? furns : cat.furns.find_rows({
+      is_set: false,
+      _top: 3000
+    });
 
     // получим список доступных
     let weight;
