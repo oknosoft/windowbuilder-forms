@@ -19,15 +19,15 @@ function handleClick(owner, origin) {
 function CompositeOrigin(composite, owner) {
   function Detail(raw) {
     const [type, ref, rNum] = raw.split('|');
-    const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : type.startsWith('f') ? 'furns' : 'cnns'];
+    const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : type.startsWith('f') ? 'furns' : type === 'isl' ? 'insert_bind' : 'cnns'];
     const origin = mgr.get(ref);
-    const row = origin.specification.get(rNum - 1);
+    const row = origin.specification?.get?.(rNum - 1);
     return /*#__PURE__*/React.createElement(ListItem, {
       button: true,
       onClick: () => handleClick(owner, origin)
-    }, /*#__PURE__*/React.createElement(ListItemAvatar, null, /*#__PURE__*/React.createElement(Avatar, null, type[0].toUpperCase())), /*#__PURE__*/React.createElement(ListItemText, {
+    }, /*#__PURE__*/React.createElement(ListItemAvatar, null, /*#__PURE__*/React.createElement(Avatar, null, type === 'isl' ? 'B' : type[0].toUpperCase())), /*#__PURE__*/React.createElement(ListItemText, {
       primary: origin.name,
-      secondary: `Строка №${rNum}, ${row.nom.name}`
+      secondary: row ? `Строка №${rNum}, ${row.nom.name}` : 'Привязка вставок'
     }));
   }
   return /*#__PURE__*/React.createElement(List, null, composite.map(Detail));

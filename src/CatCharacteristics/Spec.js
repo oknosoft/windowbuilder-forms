@@ -55,8 +55,9 @@ class Spec extends React.Component {
   filter = (collection) => {
     const res = [];
     const {elm} = this.props;
+    const cond = [elm, 11000 + elm];
     collection.forEach((row) => {
-      if(!elm || row.elm === elm) {
+      if(!elm || cond.includes(row.elm)) {
         res.push(row);
       }
     });

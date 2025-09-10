@@ -18,14 +18,15 @@ function CompositeOrigin(composite, owner) {
 
   function Detail(raw) {
     const [type, ref, rNum] = raw.split('|');
-    const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : (type.startsWith('f') ? 'furns' : 'cnns')];
+    const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : (type.startsWith('f') ? 'furns' :
+      (type === 'isl' ? 'insert_bind' : 'cnns'))];
     const origin = mgr.get(ref);
-    const row = origin.specification.get(rNum - 1);
+    const row = origin.specification?.get?.(rNum - 1);
     return <ListItem button onClick={() => handleClick(owner, origin)}>
       <ListItemAvatar>
-        <Avatar>{type[0].toUpperCase()}</Avatar>
+        <Avatar>{type === 'isl' ? 'B' : type[0].toUpperCase()}</Avatar>
       </ListItemAvatar>
-      <ListItemText primary={origin.name} secondary={`Строка №${rNum}, ${row.nom.name}`} />
+      <ListItemText primary={origin.name} secondary={row ? `Строка №${rNum}, ${row.nom.name}` : 'Привязка вставок'} />
     </ListItem>;
   }
 
