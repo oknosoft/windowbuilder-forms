@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import qs from 'qs';
 import { steps, stepContent } from './stepContent';
 import CloseBtn from 'metadata-react/App/CloseButton';
+import StepLabelText from './StepLabel';
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%'
@@ -45,16 +46,16 @@ function TemplatesFrame(props) {
   } = prm();
   let [activeStep, setActiveStep] = React.useState(1);
   const [list, set_list] = React.useState('');
+  const {
+    cat: {
+      templates
+    },
+    ui: {
+      dialogs
+    },
+    utils
+  } = $p;
   const handleNext = () => {
-    const {
-      cat: {
-        templates
-      },
-      ui: {
-        dialogs
-      },
-      utils
-    } = $p;
     if (activeStep === 0 && templates._select_template.calc_order.empty()) {
       return dialogs.alert({
         text: `Не выбран заказ-шаблон`,
@@ -132,9 +133,12 @@ function TemplatesFrame(props) {
       label: classes.flex
     },
     onClick: () => setActiveStep(index)
-  }, /*#__PURE__*/React.createElement("div", {
-    className: classes.full
-  }, label), index === 0 && /*#__PURE__*/React.createElement(CloseBtn, {
+  }, /*#__PURE__*/React.createElement(StepLabelText, {
+    classes: classes,
+    index: index,
+    templates: templates,
+    label: label
+  }), index === 0 && /*#__PURE__*/React.createElement(CloseBtn, {
     handleClose: () => {
       activeStep = 0;
       handleBack();

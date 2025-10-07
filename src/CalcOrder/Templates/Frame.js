@@ -10,6 +10,7 @@ import qs from 'qs';
 
 import {steps, stepContent} from './stepContent';
 import CloseBtn from 'metadata-react/App/CloseButton';
+import StepLabelText from './StepLabel';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -44,9 +45,9 @@ function TemplatesFrame(props) {
   let {order, ref, action = 'refill'} = prm();
   let [activeStep, setActiveStep] = React.useState(1);
   const [list, set_list] = React.useState('');
+  const {cat: {templates}, ui: {dialogs}, utils} = $p;
 
   const handleNext = () => {
-    const {cat: {templates}, ui: {dialogs}, utils} = $p;
     if(activeStep === 0 && templates._select_template.calc_order.empty()) {
       return dialogs.alert({text: `Не выбран заказ-шаблон`, title: 'Пустой заказ'});
     }
@@ -104,7 +105,7 @@ function TemplatesFrame(props) {
             classes={{root: classes.pointer, label: classes.flex}}
             onClick={() => setActiveStep(index)}
           >
-            <div className={classes.full}>{label}</div>
+            <StepLabelText classes={classes} index={index} templates={templates} label={label}/>
             {index === 0 && <CloseBtn handleClose={() => {
               activeStep = 0;
               handleBack();
