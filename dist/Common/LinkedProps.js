@@ -289,7 +289,8 @@ function children({
       prow,
       _meta,
       ctrl_type: stub.oselect ? 'oselect' : bool ? 'ch' : void 0,
-      cssselect: stub.cssselect
+      cssselect: stub.cssselect,
+      Component: param.Component
     };
     if (param.inheritance === 5) {
       elm.read_only = !_owner.obj_delivery_state?.is('Шаблон');
@@ -302,7 +303,8 @@ function children({
     _meta,
     ctrl_type,
     cssselect,
-    read_only
+    read_only,
+    Component
   }) => cssselect ? /*#__PURE__*/React.createElement(PropField, {
     key: `prm-${utils.crc32(key)}`,
     _obj: prow,
@@ -311,6 +313,13 @@ function children({
     read_only: read_only,
     options: cssselect,
     Component: CssField
+  }) : Component ? /*#__PURE__*/React.createElement(Component, {
+    key: `prm-${utils.crc32(key)}`,
+    _obj: prow,
+    _fld: "value",
+    _meta: _meta,
+    read_only: read_only,
+    ctrl_type: ctrl_type
   }) : /*#__PURE__*/React.createElement(PropField, {
     key: `prm-${utils.crc32(key)}`,
     _obj: prow,

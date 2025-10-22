@@ -232,6 +232,7 @@ function children({rows, layer, project, fields, sys, grid, _owner}) {
       _meta,
       ctrl_type: stub.oselect ? 'oselect' : (bool ? 'ch' : void 0),
       cssselect: stub.cssselect,
+      Component: param.Component,
     };
     if(param.inheritance === 5) {
       elm.read_only = !_owner.obj_delivery_state?.is('Шаблон');
@@ -239,7 +240,7 @@ function children({rows, layer, project, fields, sys, grid, _owner}) {
 
     res.push(elm);
   }
-  return res.map(({key, prow, _meta, ctrl_type, cssselect, read_only}) => cssselect ?
+  return res.map(({key, prow, _meta, ctrl_type, cssselect, read_only, Component}) => cssselect ?
     <PropField
       key={`prm-${utils.crc32(key)}`}
       _obj={prow}
@@ -250,14 +251,24 @@ function children({rows, layer, project, fields, sys, grid, _owner}) {
       Component={CssField}
     />
     :
-    <PropField
-      key={`prm-${utils.crc32(key)}`}
-      _obj={prow}
-      _fld="value"
-      _meta={_meta}
-      read_only={read_only}
-      ctrl_type={ctrl_type}
-    />);
+    (Component ?
+      <Component
+        key={`prm-${utils.crc32(key)}`}
+        _obj={prow}
+        _fld="value"
+        _meta={_meta}
+        read_only={read_only}
+        ctrl_type={ctrl_type}
+      /> :
+      <PropField
+        key={`prm-${utils.crc32(key)}`}
+        _obj={prow}
+        _fld="value"
+        _meta={_meta}
+        read_only={read_only}
+        ctrl_type={ctrl_type}
+    />)
+    );
 }
 
 export default function LinkedProps({ts, cnstr, inset, layer, project}) {
