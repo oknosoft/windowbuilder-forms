@@ -103,8 +103,8 @@ export default function SelectSys({
   }, /*#__PURE__*/React.createElement("div", {
     dangerouslySetInnerHTML: {
       __html: _obj.base_block.svg ? utils.scale_svg(_obj.base_block.svg, {
-        width: 90,
-        height: 90,
+        width: 330,
+        height: 140,
         zoom: 0.2
       }, 0) : 'нет эскиза'
     }

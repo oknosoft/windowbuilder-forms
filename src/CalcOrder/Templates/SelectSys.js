@@ -90,7 +90,7 @@ export default function SelectSys({handleNext, lock}) {
     <Grid key="block" container spacing={1} className={classes.label}>
       <Grid item xs={3} sm={2}>
         <div dangerouslySetInnerHTML={{
-          __html: _obj.base_block.svg ? utils.scale_svg(_obj.base_block.svg, {width: 90, height: 90, zoom: 0.2}, 0) : 'нет эскиза'
+          __html: _obj.base_block.svg ? utils.scale_svg(_obj.base_block.svg, {width: 330, height: 140, zoom: 0.2}, 0) : 'нет эскиза'
         }}/>
       </Grid>
       <Grid item xs={9} sm={10}>

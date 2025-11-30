@@ -29,7 +29,7 @@ function TemplateRow({row, classes, handleSelect, handleNext, selected}) {
     >
       <Grid container className={classes.left}>
         <Grid item xs={4} sm={3}>
-          <div dangerouslySetInnerHTML={{__html: ox.svg ? scale_svg(ox.svg, {width: 90, height: 90, zoom: 0.2}, 0) : 'нет эскиза'}}/>
+          <div dangerouslySetInnerHTML={{__html: ox.svg ? scale_svg(ox.svg, {width: 330, height: 140, zoom: 0.2}, 0) : 'нет эскиза'}}/>
         </Grid>
         <Grid item xs={7} sm={8}>
           <Typography variant="h6">{row.note || 'Без названия'}</Typography>

@@ -43,8 +43,8 @@ function TemplateRow({
   }, /*#__PURE__*/React.createElement("div", {
     dangerouslySetInnerHTML: {
       __html: ox.svg ? scale_svg(ox.svg, {
-        width: 90,
-        height: 90,
+        width: 330,
+        height: 140,
         zoom: 0.2
       }, 0) : 'нет эскиза'
     }
