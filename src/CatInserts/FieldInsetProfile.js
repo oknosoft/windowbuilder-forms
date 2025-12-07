@@ -28,6 +28,7 @@ const onKeyDown = (evt) => {
 function FieldInsetProfile({elm, project, classes, elm_type, onClick, disabled, ...props}) {
 
   const ext = extClasses(classes);
+  const [index, setIndex] = React.useState(0);
 
   // получим список доступных
   const elayer = elm?.layer;
@@ -37,7 +38,8 @@ function FieldInsetProfile({elm, project, classes, elm_type, onClick, disabled, 
   }
 
   const {sys} = layer;
-  const list = sys.inserts(elm_type || elm.elm_type, false, elayer ? elm : {layer, project, ox: project.ox});
+  const list = React.useMemo(() =>
+    sys.inserts(elm_type || elm.elm_type, false, elayer ? elm : {layer, project, ox: project.ox}), [elm, layer, elm_type]);
 
   const value = elm[_fld];
   let error = !list.includes(value);
@@ -52,6 +54,7 @@ function FieldInsetProfile({elm, project, classes, elm_type, onClick, disabled, 
 
   const onChange = (e, value) => {
     elm[_fld] = value;
+    setIndex(index + 1);
   };
 
   return <Autocomplete
