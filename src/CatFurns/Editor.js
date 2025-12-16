@@ -24,8 +24,9 @@ function FieldFurn({classes, _obj, _meta, ...props}) {
   if(!read_only) {
     // учтём связи параметров
     const {cat, job_prm: {builder}} = $p;
-    const furns = builder.ign_tech_restrictions ?
-      cat.furns.find_rows({is_set: false, _top: 3000}) : sys.furns(_ox, _obj).map(({furn}) => furn);
+    const furns = (builder.ign_tech_restrictions ?
+      cat.furns.find_rows({is_set: false, _top: 3000}) : sys.furns(_ox, _obj).map(({furn}) => furn))
+      .filter(v => !v.is_new());
     const all = furns.length ? furns : cat.furns.find_rows({is_set: false, _top: 3000});
 
     // получим список доступных

@@ -37,12 +37,12 @@ function FieldFurn({
         builder
       }
     } = $p;
-    const furns = builder.ign_tech_restrictions ? cat.furns.find_rows({
+    const furns = (builder.ign_tech_restrictions ? cat.furns.find_rows({
       is_set: false,
       _top: 3000
     }) : sys.furns(_ox, _obj).map(({
       furn
-    }) => furn);
+    }) => furn)).filter(v => !v.is_new());
     const all = furns.length ? furns : cat.furns.find_rows({
       is_set: false,
       _top: 3000
