@@ -21,6 +21,9 @@ function CompositeOrigin(composite, owner) {
     const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : (type.startsWith('f') ? 'furns' :
       (type === 'isl' ? 'insert_bind' : 'cnns'))];
     const origin = mgr.get(ref);
+    if(origin.is_new()) {
+      return null;
+    }
     const row = origin.specification?.get?.(rNum - 1);
     return <ListItem button onClick={() => handleClick(owner, origin)}>
       <ListItemAvatar>
