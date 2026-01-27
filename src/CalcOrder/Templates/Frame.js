@@ -61,7 +61,7 @@ function TemplatesFrame(props) {
       if(!order) {
         return dialogs.alert({text: `Не задан заказ назначения в url`, title: 'Пустой заказ'});
       }
-      if(!utils.is_guid(ref)) {
+      if(!utils.is_guid(ref, true)) {
         action = 'new';
         ref = utils.generate_guid();
       }
@@ -90,7 +90,7 @@ function TemplatesFrame(props) {
     if(!order) {
       return dialogs.alert({text: `Не задан заказ назначения в url`, title: 'Пустой заказ'});
     }
-    if(!utils.is_guid(ref)) {
+    if(!utils.is_guid(ref, true)) {
       action = 'new';
       ref = utils.generate_guid();
     }
