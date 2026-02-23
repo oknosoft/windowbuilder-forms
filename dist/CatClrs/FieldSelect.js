@@ -237,7 +237,7 @@ class FieldSelect extends AbstractField {
     if (read_only || disabled) {
       other.disabled = true;
     }
-    return /*#__PURE__*/React.createElement(Autocomplete, {
+    return /*#__PURE__*/React.createElement(Autocomplete, _extends({
       autoHighlight: true,
       disableClearable: true,
       value: this.masked_value(),
@@ -249,7 +249,7 @@ class FieldSelect extends AbstractField {
       ,
       renderOption: renderOption,
       renderInput: renderInput
-    });
+    }, other));
   }
 }
 function PropFieldSelect({

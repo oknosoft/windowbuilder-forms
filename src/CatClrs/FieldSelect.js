@@ -176,6 +176,7 @@ class FieldSelect extends AbstractField {
       //onInputChange={this.filter}
       renderOption={renderOption}
       renderInput={renderInput}
+      {...other}
     />;
   }
 }
