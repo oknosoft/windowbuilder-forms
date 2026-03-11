@@ -16,34 +16,42 @@ const Header = ({
   onClick,
   onClickCheck,
   onRightClick
-}) => /*#__PURE__*/React.createElement("div", {
-  style: node.children ? style.base : Object.assign({
+}) => {
+  const base = node.children ? {
+    ...style.base
+  } : Object.assign({
     marginLeft: 16
-  }, style.base),
-  onClick: onClick,
-  onContextMenu: e => {
-    if (onRightClick && e.button === 2) {
-      prevent(e);
-      onRightClick(node, e);
-    }
+  }, style.base);
+  if (node.width) {
+    base.width = node.width;
   }
-  // onMouseUp={prevent}
-  // onMouseDown={prevent}
-}, /*#__PURE__*/React.createElement("div", {
-  style: style.title,
-  className: `dsn-hover`
-}, node.hasOwnProperty('checked') ? /*#__PURE__*/React.createElement(Checkbox, {
-  checked: node.checked,
-  size: "small",
-  color: "primary",
-  onChange: ({
-    target
-  }) => {
-    node.checked = target.checked;
-    onClickCheck?.(node);
-  },
-  classes: useStyles()
-}) : /*#__PURE__*/React.createElement("div", {
-  className: `dsn-treeview-icon ${node.icon}`
-}), node.name));
+  return /*#__PURE__*/React.createElement("div", {
+    style: base,
+    onClick: onClick,
+    onContextMenu: e => {
+      if (onRightClick && e.button === 2) {
+        prevent(e);
+        onRightClick(node, e);
+      }
+    }
+    // onMouseUp={prevent}
+    // onMouseDown={prevent}
+  }, /*#__PURE__*/React.createElement("div", {
+    style: style.title,
+    className: `dsn-hover`
+  }, node.hasOwnProperty('checked') ? /*#__PURE__*/React.createElement(Checkbox, {
+    checked: node.checked,
+    size: "small",
+    color: "primary",
+    onChange: ({
+      target
+    }) => {
+      node.checked = target.checked;
+      onClickCheck?.(node);
+    },
+    classes: useStyles()
+  }) : node.icon ? /*#__PURE__*/React.createElement("div", {
+    className: `dsn-treeview-icon ${node.icon}`
+  }) : null, node.name));
+};
 export default Header;

@@ -13,9 +13,13 @@ function prevent(e) {
   e.preventDefault();
 }
 
-const Header = ({node, style, onClick, onClickCheck, onRightClick}) => (
-  <div
-    style={node.children ? style.base : Object.assign({marginLeft: 16}, style.base)}
+const Header = ({node, style, onClick, onClickCheck, onRightClick}) => {
+  const base = node.children ? {...style.base} : Object.assign({marginLeft: 16}, style.base);
+  if (node.width) {
+    base.width = node.width;
+  }
+  return <div
+    style={base}
     onClick={onClick}
     onContextMenu={(e) => {
       if (onRightClick && e.button === 2) {
@@ -39,12 +43,12 @@ const Header = ({node, style, onClick, onClickCheck, onRightClick}) => (
           classes={useStyles()}
         />
         :
-        <div className={`dsn-treeview-icon ${node.icon}`}/>
+        (node.icon ? <div className={`dsn-treeview-icon ${node.icon}`}/> : null)
       }
       {node.name}
     </div>
   </div>
-);
+};
 
 Header.propTypes = {
   style: PropTypes.object,
