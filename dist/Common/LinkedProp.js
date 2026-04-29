@@ -48,6 +48,23 @@ export default function LinkedProp({
     } else {
       delete _meta.list;
     }
+    if (!hide) {
+      const lnk_props = {
+        obj: _obj
+      };
+      if (cnstr !== undefined) {
+        lnk_props.grid = {
+          selection: {
+            cnstr,
+            inset
+          }
+        };
+      }
+      const links = param.params_links(lnk_props);
+      if (links.length) {
+        hide = links.some(link => link.hide);
+      }
+    }
   } else {
     // если нет умолчаний во вставке, используем связи
     const lnk_props = {
