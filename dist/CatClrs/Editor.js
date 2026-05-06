@@ -50,6 +50,7 @@ export default function FieldClr({
   _fld,
   clr_group,
   handleValueChange,
+  fullControl,
   ...other
 }) {
   const {
@@ -179,11 +180,11 @@ export default function FieldClr({
     _meta: meta_in,
     _obj: proxy,
     _fld: "clr_in",
-    handleValueChange: handleValueChange
+    handleValueChange: fullControl && handleValueChange
   }, other)), /*#__PURE__*/React.createElement(FieldSelect, _extends({
     _meta: meta_out,
     _obj: proxy,
     _fld: "clr_out",
-    handleValueChange: handleValueChange
+    handleValueChange: fullControl && handleValueChange
   }, other))));
 }

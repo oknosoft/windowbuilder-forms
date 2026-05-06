@@ -44,7 +44,7 @@ function clr_proxy(_obj, _fld, handleValueChange) {
   };
 }
 
-export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, ...other}) {
+export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChange, fullControl, ...other}) {
 
   const {cat: {clrs}, utils, CatCharacteristicsInsertsRow, job_prm: {builder}} = $p;
   const classes = useStyles();
@@ -117,8 +117,8 @@ export default function FieldClr({_meta, _obj, _fld, clr_group, handleValueChang
     </AccordionSummary>
     <AccordionDetails classes={{root: classes.details}}>
       <FieldSelect _meta={meta_clr} _obj={proxy} _fld="clr" handleValueChange={handleValueChange} {...other}/>
-      <FieldSelect _meta={meta_in} _obj={proxy} _fld="clr_in" handleValueChange={handleValueChange} {...other}/>
-      <FieldSelect _meta={meta_out} _obj={proxy} _fld="clr_out" handleValueChange={handleValueChange} {...other}/>
+      <FieldSelect _meta={meta_in} _obj={proxy} _fld="clr_in" handleValueChange={fullControl && handleValueChange} {...other}/>
+      <FieldSelect _meta={meta_out} _obj={proxy} _fld="clr_out" handleValueChange={fullControl && handleValueChange} {...other}/>
     </AccordionDetails>
   </Accordion>;
 
