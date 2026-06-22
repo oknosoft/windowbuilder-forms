@@ -1,3 +1,4 @@
+import React from 'react';
 import Lazy from 'metadata-react/DumbLoader/Lazy';
 export default class Templates extends Lazy {
   componentDidMount() {
@@ -7,4 +8,10 @@ export default class Templates extends Lazy {
       }));
     });
   }
+}
+const FrameInline = /*#__PURE__*/React.lazy(() => import('./FrameInline'));
+export function TemplatesFrameInline(props) {
+  return /*#__PURE__*/React.createElement(React.Suspense, {
+    fallback: "Загрузка..."
+  }, /*#__PURE__*/React.createElement(FrameInline, props));
 }
