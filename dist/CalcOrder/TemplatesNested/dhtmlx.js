@@ -11,13 +11,13 @@ export default function ({
       title: 'Шаблон вложения',
       hide_btn: true,
       initFullScreen: true,
-      timeout: 180000,
+      timeout: 220000,
       Component: TemplatesFrame
     });
   };
   dialogs.templates_inline = function templates_inline(layer) {
-    return $p.cat.templates._select_template.init(true).then(() => dialogs.alert({
-      timeout: 180000,
+    return dialogs.alert({
+      timeout: 220000,
       title: `Укажите шаблон для слоя`,
       Component: TemplatesFrameInline,
       props: {
@@ -26,6 +26,6 @@ export default function ({
       initFullScreen: true,
       hide_btn: true,
       noSpace: true
-    }));
+    });
   };
 }
