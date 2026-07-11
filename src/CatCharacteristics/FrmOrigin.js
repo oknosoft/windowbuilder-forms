@@ -18,6 +18,18 @@ function CompositeOrigin(composite, owner) {
 
   function Detail(raw) {
     const [type, ref, rNum] = raw.split('|');
+    if(type.startsWith('n')) {
+      const origin = $p.cat.nom.get(ref);
+      if(origin.is_new()) {
+        return null;
+      }
+      return <ListItem button>
+        <ListItemAvatar>
+          <Avatar>N</Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={origin.name} secondary={rNum ? `Ряд №${rNum}` : ''} />
+      </ListItem>;
+    }
     const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : (type.startsWith('f') ? 'furns' :
       (type === 'isl' ? 'insert_bind' : 'cnns'))];
     const origin = mgr.get(ref);

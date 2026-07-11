@@ -1,3 +1,4 @@
+var _ListItemAvatar;
 import React from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -19,6 +20,18 @@ function handleClick(owner, origin) {
 function CompositeOrigin(composite, owner) {
   function Detail(raw) {
     const [type, ref, rNum] = raw.split('|');
+    if (type.startsWith('n')) {
+      const origin = $p.cat.nom.get(ref);
+      if (origin.is_new()) {
+        return null;
+      }
+      return /*#__PURE__*/React.createElement(ListItem, {
+        button: true
+      }, _ListItemAvatar || (_ListItemAvatar = /*#__PURE__*/React.createElement(ListItemAvatar, null, /*#__PURE__*/React.createElement(Avatar, null, "N"))), /*#__PURE__*/React.createElement(ListItemText, {
+        primary: origin.name,
+        secondary: rNum ? `Ряд №${rNum}` : ''
+      }));
+    }
     const mgr = $p.cat[type.startsWith('ins') ? 'inserts' : type.startsWith('f') ? 'furns' : type === 'isl' ? 'insert_bind' : 'cnns'];
     const origin = mgr.get(ref);
     if (origin.is_new()) {
