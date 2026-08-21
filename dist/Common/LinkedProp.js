@@ -38,14 +38,12 @@ export default function LinkedProp({
     if (!hide) {
       hide = drow.hide || _obj.hide;
     }
-    if (drow?.list) {
-      try {
-        _meta.list = JSON.parse(drow.list);
-        oselect = true;
-      } catch (e) {
-        delete _meta.list;
-      }
-    } else {
+  }
+  if (drow?.list) {
+    try {
+      _meta.list = JSON.parse(drow.list);
+      oselect = true;
+    } catch (e) {
       delete _meta.list;
     }
     if (!hide) {
@@ -66,6 +64,8 @@ export default function LinkedProp({
       }
     }
   } else {
+    delete _meta.list;
+
     // если нет умолчаний во вставке, используем связи
     const lnk_props = {
       obj: _obj

@@ -27,16 +27,14 @@ export default function LinkedProp({_obj, _fld='value', param, fields, cnstr, in
     if(!hide){
       hide = drow.hide || _obj.hide;
     }
-    if(drow?.list) {
-      try{
-        _meta.list = JSON.parse(drow.list);
-        oselect = true;
-      }
-      catch (e) {
-        delete _meta.list;
-      }
+  }
+
+  if(drow?.list) {
+    try{
+      _meta.list = JSON.parse(drow.list);
+      oselect = true;
     }
-    else {
+    catch (e) {
       delete _meta.list;
     }
     if(!hide){
@@ -51,6 +49,8 @@ export default function LinkedProp({_obj, _fld='value', param, fields, cnstr, in
     }
   }
   else {
+    delete _meta.list;
+
     // если нет умолчаний во вставке, используем связи
     const lnk_props = {obj: _obj};
     if(cnstr !== undefined) {
